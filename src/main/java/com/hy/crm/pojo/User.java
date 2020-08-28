@@ -2,9 +2,11 @@ package com.hy.crm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -14,6 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author zzx
  * @since 2020-08-28
  */
+@Service
 @ApiModel(value="User对象", description="用户表")
 public class User implements Serializable {
 
@@ -34,6 +37,9 @@ public class User implements Serializable {
 
     @ApiModelProperty(value = "角色")
     private String role;
+
+    @ApiModelProperty(value = "用户头像")
+    private String image;
 
     public Integer getUserid() {
         return userid;
@@ -71,6 +77,14 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -79,6 +93,7 @@ public class User implements Serializable {
             ", password=" + password +
             ", deptname=" + deptname +
             ", role=" + role +
+             ", image=" + image +
         "}";
     }
 }
