@@ -2,9 +2,10 @@ package com.hy.crm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -72,7 +73,7 @@ public class Aftersale implements Serializable {
     private String customerfeedback;
 
     @ApiModelProperty(value = "服务人员")
-    private Integer servicespeople;
+    private String servicespeople;
 
     @ApiModelProperty(value = "服务评分")
     private String servicesscore;
@@ -199,13 +200,15 @@ public class Aftersale implements Serializable {
     public void setCustomerfeedback(String customerfeedback) {
         this.customerfeedback = customerfeedback;
     }
-    public Integer getServicespeople() {
+
+    public String getServicespeople() {
         return servicespeople;
     }
 
-    public void setServicespeople(Integer servicespeople) {
+    public void setServicespeople(String servicespeople) {
         this.servicespeople = servicespeople;
     }
+
     public String getServicesscore() {
         return servicesscore;
     }
