@@ -30,4 +30,9 @@ public class CustomerController {
     public List<Customer> queryCustomer(){
        return service.list();
     }
+    @GetMapping("/queryCustomerById.do")
+    @ResponseBody
+    public Customer queryCustomerById(Integer customerid){
+        return service.getById(customerid);
+    }
 }
