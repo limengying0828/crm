@@ -22,8 +22,8 @@ public class Business implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "商机编号")
-    @TableId(value = "business", type = IdType.AUTO)
-    private Integer business;
+    @TableId(value = "businessid", type = IdType.AUTO)
+    private Integer businessid;
 
     @ApiModelProperty(value = "客户编号")
     private Integer customerid;
@@ -197,12 +197,12 @@ public class Business implements Serializable {
         this.contractpriority = contractpriority;
     }
 
-    public Integer getBusiness() {
-        return business;
+    public Integer getBusinessid() {
+        return businessid;
     }
 
-    public void setBusiness(Integer business) {
-        this.business = business;
+    public void setBusinessid(Integer businessid) {
+        this.businessid = businessid;
     }
 
     @Override
