@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>售后服务</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <script src="../../../js/jquery-3.4.1.js"></script>
+    <script src="../../../layui/layui.js"></script>
+</head>
+<body>
+<i class="layui-icon layui-icon-service" style="font-size: 50px;margin-top: 100px;"><font size="5" color="#00bfff">售后服务</font></i>
+<div id="bigDiv" style="width:1500px">
+    <div style="float:left;">
+        <div class="site-text">
+            <form class="layui-form layui-form-pane">
+                <div class="layui-form-item layui-form-text" style="width:200px;height: 250px;">
+                    <label class="layui-form-label"><font size="3" color="black">分类</font></label>
+                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:250px;">
+                        <ul>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">处理中的服务</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">已结束的服务</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">已撤除的服务</font></a></i></li>
+                        </ul>
+                        <div style="width: 200px"><font color="silver"> ----------------------------------------</font></div>
+                        <ul>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">本周新增</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">上周新增</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">本月新增</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">本月新增</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">上月新增</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">上季度新增</font></a></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="float: left;margin-left: 20px;">
+        <form class="layui-form">
+            <div class="layui-inline" >
+                <label class="layui-form-label">主题</label>
+                <div class="layui-input-inline">
+
+                    <select id="deptno" name="deptno" lay-verify="otherReq" >
+                        <option value="">请选择</option>
+                        <option value="theme">按主题</option>
+                        <option value="typeservices">按服务类型</option>
+                        <option value="begintime">按开始时间</option>
+                        <option value="username">按服务人员</option>
+                        <option value="servicesscore">按服务评分</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="key" required  lay-verify="otherReq" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo"><i class="layui-icon layui-icon-search" > </i></button>
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 30px;"></div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn layui-btn-primary"><i class="layui-icon layui-icon-add-circle" >新增售后服务</i></button>
+                </div>
+            </div>
+        </form>
+
+        <table id="selectTab" lay-filter="test"></table>
+    </div>
+</div>
+<script>
+    layui.use(['table','form'], function(){
+        var table = layui.table;
+        var form=layui.form;
+        var $=layui.jquery;
+        //第一个实例
+        table.render({
+            elem: '#selectTab'
+            ,toolbar:"#addBar"
+            ,height: 500
+            ,page:true
+            ,limit:5
+            ,url: '#' //数据接口
+            ,cols: [[ //表头
+                ,{field: 'empno', title: '主题', width:270, sort: true, fixed: 'left'/*,templet:'<div>{{d.employee.empno}}</div>'*/}
+                ,{field: 'empname', title: '服务类型', width:180}
+                ,{field: 'sex', title: '开始时间', width:150, sort: true}
+                ,{field: 'age', title: '服务人员', width:150}
+                ,{field: 'birthday', title: '服务评分', width: 120}
+            ]]
+        });
+    });
+</script>
+</body>
+</html>

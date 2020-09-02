@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的桌面</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <script src="../../../js/jquery-3.4.1.js"></script>
+    <script src="../../../layui/layui.js"></script>
+    <script src="../../../js/echarts.min.js"></script>
+    <script>
+        $(function () {
+            var myCharts1 = echarts.init(document.getElementById('main'));
+            var option1 = {
+                title: {
+                    text: '不同状态商机成交金额',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['已丢单', '已搁置', '进行中', '已成交']
+                },
+                series: [
+                    {
+                        name: '成交额',
+                        type: 'pie',
+                        radius: '50%',
+                        center: ['50%', '60%'],
+                        data: [
+                            {value: 310, name: '已丢单'},
+                            {value: 234, name: '已搁置'},
+                            {value: 135, name: '进行中'},
+                            {value: 1548, name: '已成交'}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            myCharts1.setOption(option1);
+        })
+    </script>
+</head>
+
+<body>
+<i class="layui-icon layui-icon-windows" style="font-size: 50px;margin-top: 100px;"><font size="5" color="#00bfff">我的桌面</font></i>
+<div class="site-text">
+    <div style="width:1250px;">
+        <div style="float: left">
+            <form class="layui-form layui-form-pane">
+                <div class="layui-form-item layui-form-text" style="width:400px;height: 600px;">
+                    <label class="layui-form-label"><font size="3" color="black">待处理事务</font></label>
+                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:360px;">
+                        <a href="#"><font style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;哈哈哈哈哈</font></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div style="float: left">
+            <form class="layui-form layui-form-pane">
+                <div class="layui-form-item layui-form-text" style="width:820px;height: 500px;margin-left: 20px;">
+                    <label class="layui-form-label"><font size="3" color="black">客户关系</font></label>
+                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height: 60px">
+                        <div>
+                            <div style="width: 70px;float: left;margin-left: 80px;">
+                                <ul>
+                                    <li><font size="2"color="black">全部客户</font></li><br/>
+                                    <li><font size="4"color="#8b0000">&nbsp;&nbsp;&nbsp;12</font></li>
+                                </ul>
+                            </div>
+                            <div style="width: 70px;float: left;margin-left: 160px;">
+                                <ul>
+                                    <li><font size="2"color="black">全部商机</font></li><br/>
+                                    <li><font size="4"color="#8b0000">&nbsp;&nbsp;&nbsp;12</font></li>
+                                </ul>
+                            </div>
+                            <div style="width: 70px;float: left;margin-left: 240px;">
+                                <ul>
+                                    <li><font size="2"color="black">全部合同</font></li><br/>
+                                    <li><font size="4"color="#8b0000">&nbsp;&nbsp;&nbsp;12</font></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;width: 820px;height: 300px">
+                        <div class="weadmin-body">
+                            <div id="main" style="width: 100%;height:340px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
