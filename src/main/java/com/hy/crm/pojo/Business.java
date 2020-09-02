@@ -1,11 +1,12 @@
 package com.hy.crm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -21,7 +22,10 @@ public class Business implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "商机编号")
-    @TableId(value = "customerid", type = IdType.AUTO)
+    @TableId(value = "business", type = IdType.AUTO)
+    private Integer business;
+
+    @ApiModelProperty(value = "客户编号")
     private Integer customerid;
 
     @ApiModelProperty(value = "商机名称")
@@ -191,6 +195,14 @@ public class Business implements Serializable {
 
     public void setContractpriority(Integer contractpriority) {
         this.contractpriority = contractpriority;
+    }
+
+    public Integer getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Integer business) {
+        this.business = business;
     }
 
     @Override
