@@ -1,8 +1,9 @@
 package com.hy.crm.pojo;
 
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -48,10 +49,10 @@ public class Contract implements Serializable {
     private String sidelinkman;
 
     @ApiModelProperty(value = "对方联系人")
-    private Integer officephone;
+    private String officephone;
 
     @ApiModelProperty(value = "移动电话")
-    private Integer telephone;
+    private String telephone;
 
     @ApiModelProperty(value = "邮件/QQ")
     private String email;
@@ -138,20 +139,23 @@ public class Contract implements Serializable {
     public void setSidelinkman(String sidelinkman) {
         this.sidelinkman = sidelinkman;
     }
-    public Integer getOfficephone() {
+
+    public String getOfficephone() {
         return officephone;
     }
 
-    public void setOfficephone(Integer officephone) {
+    public void setOfficephone(String officephone) {
         this.officephone = officephone;
     }
-    public Integer getTelephone() {
+
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
     public String getEmail() {
         return email;
     }
