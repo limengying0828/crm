@@ -1,7 +1,10 @@
 package com.hy.crm.mapper;
 
-import com.hy.crm.pojo.Aftersale;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hy.crm.bo.lmy.ContractSaleBo;
+import com.hy.crm.pojo.Aftersale;
+import com.hy.crm.sqlclass.AfterSaleSql;
+import org.apache.ibatis.annotations.SelectProvider;
 
 /**
  * <p>
@@ -12,5 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-08-28
  */
 public interface AftersaleMapper extends BaseMapper<Aftersale> {
+    @SelectProvider(type = AfterSaleSql.class,method = "queryContractSaleByUserName")
+    public ContractSaleBo queryContractSaleBo(String contractid);
 
 }

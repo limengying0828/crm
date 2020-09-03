@@ -2,9 +2,10 @@ package com.hy.crm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -24,7 +25,7 @@ public class Contractprocess implements Serializable {
     private Integer conprocessid;
 
     @ApiModelProperty(value = "合同编号")
-    private Integer contractid;
+    private String contractid;
 
     @ApiModelProperty(value = "处理人编号")
     private Integer userid;
@@ -42,13 +43,15 @@ public class Contractprocess implements Serializable {
     public void setConprocessid(Integer conprocessid) {
         this.conprocessid = conprocessid;
     }
-    public Integer getContractid() {
+
+    public String getContractid() {
         return contractid;
     }
 
-    public void setContractid(Integer contractid) {
+    public void setContractid(String contractid) {
         this.contractid = contractid;
     }
+
     public Integer getUserid() {
         return userid;
     }

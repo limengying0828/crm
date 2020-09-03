@@ -1,7 +1,8 @@
 package com.hy.crm.service;
 
-import com.hy.crm.pojo.Aftersale;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hy.crm.bo.lmy.ContractSaleBo;
+import com.hy.crm.pojo.Aftersale;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-08-28
  */
 public interface IAftersaleService extends IService<Aftersale> {
-
+     ContractSaleBo queryContractSale(String contractid);
 }
