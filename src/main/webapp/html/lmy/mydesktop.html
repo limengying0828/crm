@@ -10,6 +10,14 @@
     <script src="../../../js/echarts.min.js"></script>
     <script>
         $(function () {
+            $.ajax({
+                type:'get',
+                url: '/customer/queryCustomer.do',
+                datatype: 'json',
+                success:function(data){
+                     $("#customerAll").text(data.length);
+                }
+            });
             var myCharts1 = echarts.init(document.getElementById('main'));
             var option1 = {
                 title: {
@@ -75,7 +83,7 @@
                             <div style="width: 70px;float: left;margin-left: 80px;">
                                 <ul>
                                     <li><font size="2"color="black">全部客户</font></li><br/>
-                                    <li><font size="4"color="#8b0000">&nbsp;&nbsp;&nbsp;12</font></li>
+                                    <li><font size="4"color="#8b0000">&nbsp;&nbsp;&nbsp;<span id="customerAll"></span></font></li>
                                 </ul>
                             </div>
                             <div style="width: 70px;float: left;margin-left: 160px;">

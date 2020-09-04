@@ -10,7 +10,7 @@
 </head>
 <script type="text/javascript">
     addAfterSale=function () {
-        location.href="addaftersale.html";
+        window.open("addaftersale.html");
     }
 </script>
 <body>
@@ -19,22 +19,22 @@
     <div style="float:left;">
         <div class="site-text">
             <form class="layui-form layui-form-pane">
-                <div class="layui-form-item layui-form-text" style="width:200px;height: 250px;">
+                <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
                     <label class="layui-form-label"><font size="3" color="black">分类</font></label>
-                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:250px;">
+                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:380px;">
                         <ul>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">处理中的服务</font></a></i></li>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">已结束的服务</font></a></i></li>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">已撤除的服务</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="solved('处理中')"><font color="#6495ed" size="3">处理中的服务</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="solved"></button></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="over('已结束')"><font color="#6495ed" size="3">已结束的服务</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="over"></button></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="out('已撤除')"><font color="#6495ed" size="3">已撤除的服务</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="out"></button></a></i></li><br/>
                         </ul>
                         <div style="width: 200px"><font color="silver"> ----------------------------------------</font></div>
                         <ul>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">本周新增</font></a></i></li>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">上周新增</font></a></i></li>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">本月新增</font></a></i></li>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">本月新增</font></a></i></li>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">上月新增</font></a></i></li>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#"><font color="#6495ed" size="3">上季度新增</font></a></i></li>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="week('本周')"><font color="#6495ed" size="3">本周新增</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="week"></button></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="lastWeek('上周')"><font color="#6495ed" size="3">上周新增</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="lastWeek"></button></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="myMonth('本月')"><font color="#6495ed" size="3">本月新增</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="month"></button></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="lastMonth('上月')"><font color="#6495ed" size="3">上月新增</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="lastMonth"></button></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="quarter('本季度')"><font color="#6495ed" size="3">本季度新增</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="quarter"></button></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="lastQuarter('上季度')"><font color="#6495ed" size="3">上季度新增</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-xs"  id="lastQuarter"></button></a></i></li><br/>
                         </ul>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <label class="layui-form-label">主题</label>
                 <div class="layui-input-inline">
 
-                    <select id="deptno" name="deptno" lay-verify="otherReq" >
+                    <select id="classification" name="classification" lay-verify="otherReq" >
                         <option value="">请选择</option>
                         <option value="theme">按主题</option>
                         <option value="typeservices">按服务类型</option>
@@ -64,7 +64,7 @@
             </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo"><i class="layui-icon layui-icon-search" > </i></button>
+                    <button class="layui-btn" lay-submit lay-filter="search"><i class="layui-icon layui-icon-search" > </i></button>
                 </div>
             </div>
             <div class="layui-inline" style="width: 30px;"></div>
@@ -83,22 +83,187 @@
         var table = layui.table;
         var form=layui.form;
         var $=layui.jquery;
+        $(function () {
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=处理中&limit=5',
+                datatype: 'json',
+                success:function(data){
+                  $("#solved").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=已结束&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#over").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=已撤除&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#out").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=本周&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#week").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=上周&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#lastWeek").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=本月&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#month").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=上月&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#lastMonth").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=本季度&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#quarter").text(data.count);
+                }
+            });
+            $.ajax({
+                type:'get',
+                url: '/aftersale/queryAfterSale.do?status=上季度&limit=5',
+                datatype: 'json',
+                success:function(data){
+                    $("#lastQuarter").text(data.count);
+                }
+            });
+        });
         //第一个实例
         table.render({
             elem: '#selectTab'
-            ,toolbar:"#addBar"
             ,height: 500
             ,page:true
             ,limit:5
-            ,url: '#' //数据接口
+            ,url: '/aftersale/queryAfterSale.do' //数据接口
             ,cols: [[ //表头
-                ,{field: 'empno', title: '主题', width:270, sort: true, fixed: 'left'/*,templet:'<div>{{d.employee.empno}}</div>'*/}
-                ,{field: 'empname', title: '服务类型', width:180}
-                ,{field: 'sex', title: '开始时间', width:150, sort: true}
-                ,{field: 'age', title: '服务人员', width:150}
-                ,{field: 'birthday', title: '服务评分', width: 120}
+                ,{field: 'theme', title: '主题', width:290,templet:'<div><a href="#" style="color: #1E9FFF">{{d.theme}}</a></div>'}
+                ,{field: 'typeservices', title: '服务类型', width:180}
+                ,{field: 'begintime', title: '开始时间', width:150, sort: true}
+                ,{field: 'servicespeople', title: '服务人员', width:150}
+                ,{field: 'servicesscore', title: '服务评分', width: 120}
             ]]
         });
+
+        form.on('submit(search)', function(data){
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:data.field//设定异步数据接口的额外参数
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+
+        window.solved=function (data) {
+            console.log(data)
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data
+                }//设定异步数据接口的额外参数
+            });
+        }
+
+        window.over=function (data) {
+            console.log(data)
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data
+                }//设定异步数据接口的额外参数
+            });
+        }
+
+        window.out=function (data) {
+            console.log(data)
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data
+                }//设定异步数据接口的额外参数
+            });
+        }
+
+        window.week=function (data1) {
+            console.log(data1)
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data1
+                }//设定异步数据接口的额外参数
+            });
+        }
+
+        window.lastWeek=function (dat) {
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:dat
+                }//设定异步数据接口的额外参数
+            });
+        }
+
+        window.myMonth=function (data) {
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data
+                }//设定异步数据接口的额外参数
+            });
+        }
+        window.lastMonth=function (data) {
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data
+                }//设定异步数据接口的额外参数
+            });
+        }
+
+        window.quarter=function (data) {
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data
+                }//设定异步数据接口的额外参数
+            });
+        }
+        window.lastQuarter=function (data) {
+            table.reload('selectTab', {
+                url: '/aftersale/queryAfterSale.do'
+                ,where:{
+                    status:data
+                }//设定异步数据接口的额外参数
+            });
+        }
+
     });
 </script>
 </body>

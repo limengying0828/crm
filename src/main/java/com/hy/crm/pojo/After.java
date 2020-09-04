@@ -2,9 +2,10 @@ package com.hy.crm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -34,6 +35,9 @@ public class After implements Serializable {
 
     @ApiModelProperty(value = "处理内容（转服务人员处理，本次服务完成）")
     private String disposecontent;
+
+    @ApiModelProperty(value = "处理状态")
+    private String status;
 
     public Integer getAfterid() {
         return afterid;
@@ -69,6 +73,14 @@ public class After implements Serializable {
 
     public void setDisposecontent(String disposecontent) {
         this.disposecontent = disposecontent;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

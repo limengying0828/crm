@@ -1,6 +1,7 @@
 package com.hy.crm.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hy.crm.bo.lmy.AfterSaleProcessBo;
 import com.hy.crm.bo.lmy.ContractSaleBo;
 import com.hy.crm.pojo.Aftersale;
 
@@ -16,6 +17,6 @@ import java.util.List;
  */
 public interface IAftersaleService extends IService<Aftersale> {
      ContractSaleBo queryContractSale(String contractid);
-     List<Aftersale> queryAfterSale(String type,String key,Integer page,Integer limit);
-
+     List<AfterSaleProcessBo> queryAfterSale(String classification, String key, Integer page, Integer limit, String status);
+     Integer queryCount(String classification, String key,String status);
 }
