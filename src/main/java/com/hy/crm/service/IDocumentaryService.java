@@ -16,8 +16,22 @@ import java.util.List;
  */
 public interface IDocumentaryService extends IService<Documentary> {
 
+    /**
+     * 查询所有跟单信息
+     * @param documentaryBo
+     * @param m
+     * @param n
+     * @return
+     */
     public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo, Integer m,Integer n);
 
 
     public List<DocumentaryBo> select();
+
+    /**
+     * 通过跟单主题查询跟单信息
+     * @param theme
+     * @return
+     */
+    public DocumentaryBo selectTheme(String theme);
 }

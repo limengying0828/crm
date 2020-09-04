@@ -29,4 +29,7 @@ public interface DocumentaryMapper extends BaseMapper<Documentary> {
 
     @Select("select * from documentary d,user u where d.userid=u.userid")
     public List<DocumentaryBo> query();
+
+    @Select("select * from documentary d,user u where d.theme ='房地产跟单' and d.userid=u.userid")
+    public DocumentaryBo selectTheme(String theme);
 }

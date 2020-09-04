@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>查询所有跟单</title>
@@ -69,17 +70,17 @@
             ,dataType:'JSONP'
             ,cols: [[
                 {field:'documentarytime', width:150, title: '跟单时间', sort: true}
-                ,{field:'theme', width:150, title: '跟单主题',templet:'<a href=""></a>'}
+                ,{field:'theme', width:150, title: '跟单主题',templet:'<div><a href="/html/pml/documentary/updateDocumentary.html">{{d.theme}}</a></div>'}/*d代表当前行*/
                 ,{field:'username', width:150, title: '跟单人', sort: true}
                 ,{field:'detail', width:150, title: '详细内容'}
                 ,{field:'attachment', title: '附件', minWidth: 150}
             ]]
-            ,page: true
-            ,limits:[1,3,5,10]
+            ,page: false
         });
 
 
         form.on('submit(formDemo)', function(data){
+            console.log(data.field);
             table.reload('test', {
                 url: '/documentary/queryAll.do'
                 ,where: {
@@ -90,12 +91,6 @@
             });
             return false;
         });
-
-        /*form.on('submit(formDemo)', function(data){
-            layer.msg("添加按钮");
-            return false;
-        });*/
-
 
     });
 </script>

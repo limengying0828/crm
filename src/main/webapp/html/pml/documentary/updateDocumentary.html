@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增商机</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/layui/layui.js"></script>
+</head>
+<body>
+
+<div>
+    <button type="button" class="layui-btn layui-btn-warm layui-btn-radius" style="right: 200px">
+        <i class="layui-icon">&#xe65a;</i>
+        <a href="/html/pml/documentary/queryDocumentary.html">返回</a>
+    </button>
+</div>
+
+<div id="select">
+</div>
+
+<form class="layui-form" action="" method="post">
+    <center>
+        <table width="100%">
+            <!--<tr bgcolor="#fafad2">
+                <td>跟单主题</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" style="width: 290px;">
+                            <input type="text" name="theme" id="theme" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="50px" style="background-color: goldenrod"><h1>历史跟单记录</h1></td>
+            </tr>
+
+            <tr>
+                <td>跟单时间:</td>
+                <td>
+                    <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input type="text" name="documentarytime" id="documentarytime"   class="layui-input" >
+                    </div>
+                    </div>
+                </td>
+
+                <td>跟单分类</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="documentaryclass" id="documentaryclass" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+
+                <td>跟单人</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="username" id="username" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>详细内容</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="detail" id="detail" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>附件</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="attachment" id="attachment" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>-->
+
+
+
+            <tr>
+                <td height="50px"><h1>修改跟单记录</h1></td>
+            </tr>
+
+            <tr>
+                <td>跟单时间</td>
+                <td>
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+                        </div>
+                    </div>
+                </td>
+                <td align="center">跟单分类</td>
+                <td align="center">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" style="width: 290px;">
+                            <select name="industry"  lay-verify="required">
+                                <option value="请选择">请选择</option>
+                                <option value="电话沟通">电话沟通</option>
+                                <option value="邮件联系">邮件联系</option>
+                                <option value="网上交流">网上交流</option>
+                                <option value="上面拜访">上面拜访</option>
+                                <option value="产品送样">产品送样</option>
+                                <option value="客户招待">客户招待</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+                <td>跟单人</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>详细内容</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>相关附件</td>
+                <td>
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="uploadTest"><i class="layui-icon"></i>上传文件</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table><br><br>
+
+        <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
+            <div class="layui-input-block">
+                <p>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-normal">保存</button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">取消</button>
+                </p>
+            </div>
+        </div>
+    </center>
+
+</form>
+
+
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layer', 'upload', 'laydate','jquery'], function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $=layui.jquery;
+        var laydate = layui.laydate;
+
+        //时间
+        laydate.render({
+            elem: '#date1'
+        });
+
+
+        //常规用法
+        laydate.render({
+            elem: '#begintime'
+        });
+        laydate.render({
+            elem: '#overtime'
+        });
+
+        $(function () {
+            $.ajax({
+                type:'get',
+                url: '/documentary/selectTheme.do',
+                datatype: 'json',
+                success:function(data){
+                    var str="";
+                    for (var i = 0; i < data.length; i++) {
+                        str+=" <div class=\"layui-form-item\">\n" +
+                            "            <div class=\"layui-form-item layui-inline\">\n" +
+                            "                <label class=\"layui-form-label\">*跟单时间:</label>\n" +
+                            "                <div class=\"layui-input-block\">\n" +
+                            "                    <input type=\"text\"  id=\"date1\" disabled=\"disabled\" style=\"border:none;\"  value="+data[i].documentarytime+" autocomplete=\"off\" class=\"layui-input\">\n" +
+                            "                </div>\n" +
+                            "            </div>\n" +
+                            "            <div class=\"layui-form-item layui-inline\">\n" +
+                            "                <label class=\"layui-form-label\">*跟单分类:</label>\n" +
+                            "                <div class=\"layui-input-block\">\n" +
+                            "                    <input type=\"text\" disabled=\"disabled\" style=\"border:none;\"  value="+data[i].documentaryclass+" autocomplete=\"off\" class=\"layui-input\">\n" +
+                            "                </div>\n" +
+                            "            </div>\n" +
+                            "            <div class=\"layui-form-item layui-inline\">\n" +
+                            "                <label class=\"layui-form-label\">跟单人:</label>\n" +
+                            "                <div class=\"layui-input-block\">\n" +
+                            "                    <input type=\"text\"  disabled=\"disabled\" style=\"border:none; size:100\" value="+data[i].username+" autocomplete=\"off\" class=\"layui-input\">\n" +
+                            "                </div>\n" +
+                            "            </div>\n" +
+                            "        </div>\n" +
+                            "        <div class=\"layui-form-item\">\n" +
+                            "            <div class=\"layui-form-item layui-inline\">\n" +
+                            "                <label class=\"layui-form-label\">详细内容:</label>\n" +
+                            "                <div class=\"layui-input-block\">\n" +
+                            "                    <input type=\"text\" disabled=\"disabled\" style=\"border:none;\" value="+data[i].detail+" autocomplete=\"off\" class=\"layui-input\">\n" +
+                            "                </div>\n" +
+                            "            </div>\n" +
+                            "        </div>\n" +
+                            "        <div class=\"layui-form-item\">\n" +
+                            "            <div class=\"layui-form-item layui-inline\">\n" +
+                            "                <label class=\"layui-form-label\">附件:</label>\n" +
+                            "                <div class=\"layui-input-block\">\n" +
+                            "                    <input type=\"text\" disabled=\"disabled\" style=\"border:none;\" value="+data[i].attachment+" autocomplete=\"off\" class=\"layui-input\">\n" +
+                            "                </div>\n" +
+                            "            </div>\n" +
+                            "        </div> " +
+                            "        <hr>";
+                    }
+                    $("#select").html(str);
+                }
+            });
+        })
+    });
+</script>
+</body>
+</html>

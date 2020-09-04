@@ -43,10 +43,10 @@ public class DocumentaryController {
         if (StringUtils.isEmpty(documentaryBo)){
             page=0;
         }
-        if (!StringUtils.isEmpty(documentaryBo)){
+        /*if (!StringUtils.isEmpty(documentaryBo)){
             page=0;
             limit=10;
-        }
+        }*/
         List<DocumentaryBo> list =iDocumentaryService.queryAll(documentaryBo,page,limit);
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
@@ -74,5 +74,16 @@ public class DocumentaryController {
     public String savaDocumentary(Documentary documentary){
         iDocumentaryService.save(documentary);
         return "redirect:/html/pml/documentary/queryDocumentary.html";
+    }
+
+    /**
+     * 根据跟单主题查询跟单信息
+     * @param theme
+     * @return
+     */
+    @GetMapping("/selectTheme.do")
+    @ResponseBody
+    public DocumentaryBo selectTheme(String theme){
+        return iDocumentaryService.selectTheme(theme);
     }
 }
