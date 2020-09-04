@@ -72,6 +72,8 @@ public class ContractController {
      * 查询所有合同信息
      * @return
      */
+    @GetMapping("/queryAll.do")
+    @ResponseBody
     public List<Contract> queryAll(){
         return contractService.list();
     }
