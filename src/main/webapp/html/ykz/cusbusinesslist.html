@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户查看商机列表</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script type="text/javascript">
+        var a1=function(){
+            window.location.href="/html/ykz/customer.html"
+        }
+
+        var a2=function(){
+            window.location.href=""
+        }
+    </script>
+</head>
+<body>
+<form class="layui-form" action="" method="post">
+    <center>
+        <table width="1120px">
+            <tr>
+                <td><font size="5">商机列表</font></td>
+                <td></td>
+                <td></td>
+                <td align="right">
+                    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a1()" value="< 返回 " style="font-size: 20px;font-weight: bold;width:100px;height:40px;">
+                    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a2()" value="刷新 " style="font-size: 20px;font-weight: bold;width:100px;height:40px;">
+                </td>
+            </tr>
+            <tr>
+                <td height="20px"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>商机全称</td>
+                <td>
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name="businessname"  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>商机阶段</td>
+                <td align="right">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="todaystate"  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>商机负责人</td>
+                <td>
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name=""  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>所属部门</td>
+                <td align="right">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name=""  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>预计成交金额</td>
+                <td>
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name="makemoney"  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>预计结单日期</td>
+                <td align="right">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input type="text" name="" required lay-verify="date" style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table><br><br>
+        <div class="layui-form-item" style="width: 80%">
+            <div class="layui-input-block">
+                <button style="width: 120px" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">查找商机</button>
+                <button type="reset" style="width: 120px" class="layui-btn layui-btn-primary" >重置</button>
+            </div>
+        </div>
+    </center>
+
+</form>
+
+<center>
+    <table id="demo" lay-filter="test"></table>
+</center>
+
+
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['table', 'form', 'layer', 'upload', 'laydate'], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $=layui.jquery;
+        var laydate = layui.laydate;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 400
+            , width: 1120
+            , toolbar: '#barDemo1'
+            , url: '/customer/customerAll.do' //数据接口
+            , page: true //开启分页
+            , limits: [1, 2, 5, 6, 8, 10, 15, 20]
+            , limit: 10
+            , cols: [[
+                {type: '', title: "序号", width: 80}/*,templet:'<div><a href="" style="color: #0000FF">{{d.}}</a></div>'*/
+                , {field: '', title: '商机名称', width: 270 }
+                , {field: '', title: '商机阶段', width: 150 , sort: true}
+                , {field: '', title: '预计成交金额', width: 170, sort: true}
+                , {field: '', title: '商机负责人', width: 150 , sort: true}
+                , {field: '', title: '最后跟单', width: 160 , sort: true }
+                , {field: '', title: '讨论版', width: 140, sort: true }
+            ]]
+        });
+
+        //监听提交   模糊查询
+        form.on('submit(formDemo)', function (data) {
+            table.reload('demo', {
+                url: '',
+                where: { //设定异步数据接口的额外参数，任意设
+                    condition: data.field.condition
+                    , keyword: data.field.keyword
+                }
+                , page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            }); //只重载数据
+            return false;
+        });
+
+        //时间
+        laydate.render({
+            elem: '#date1'
+        });
+
+    });
+</script>
+</body>
+</html>

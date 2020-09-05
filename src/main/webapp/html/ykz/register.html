@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/html/ykz/css/style.css"><!--背景图样式-->
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/html/ykz/css/login.css" /><!--忘记密码和记住密码的样式-->
+
+</head>
+<script type="text/javascript">
+
+</script>
+<body>
+
+<div class="perspective">
+    <div class="ball"></div>
+    <div class="glass1"></div>
+    <div class="g1-shadow"></div>
+    <div class="glass2"></div>
+    <div class="g2-shadow"></div>
+    <div class="glass3"></div>
+    <div class="g3-shadow"></div>
+</div>
+
+<center>
+    <h1 class="layui-header">CRM客户关系管理系统注册</h1>
+    <form class="layui-form" action="/user/registerUser.do" method="post">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">账号</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" style="width: 290px;" required lay-verify="username" placeholder="请输入账户"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" style="width: 290px;" required lay-verify="pass"  placeholder="请输入密码"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <input type="hidden" name="image" id="picture">
+        <div class="layui-upload">
+            <label class="layui-form-label">头像</label>
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <div class="layui-inline">
+                <label class="layui-form-label"></label>
+                <img class="layui-upload-img" id="demo1" style="height: 41px;width: 85px">
+                <p id="demoText"></p>
+            </div>
+        </div><br>
+
+        <div id="autore">
+            <img src="/user/VerifyCodeServlet.do">&nbsp;&nbsp;
+            <!--<a href="">看不清? 换一张</a>-->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">验证码</label>
+            <div class="layui-input-block">
+                <input type="text" name="verimage" style="width: 290px;"  placeholder="请输入验证码"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">注册</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</center>
+<script src="/layui/layui.js"></script>
+
+<script>
+    layui.use(['form', 'layer', 'upload', 'laydate'], function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $=layui.jquery;
+        var laydate = layui.laydate;
+
+        form.verify({
+            username: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                    return '用户名不能有特殊字符';
+                }
+            }
+            //我们既支持上述函数式的方式，也支持下述数组的形式
+            //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+            ,pass: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test2' //指定元素
+        });
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/user/userPicture.do' //改成您自己的上传接口
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                $('#picture').val(res.fileName);
+            }
+        });
+    });
+</script>
+
+<script type="text/html" id="img">
+    <div><img src="{{ d.picture }}" style="width: 40px; height: 30px;"></div>
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合同列表</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script type="text/javascript">
+        var a1=function(){
+            window.location.href="/html/ykz/customer.html"
+        }
+
+        var a2=function(){
+            window.location.href=""
+        }
+    </script>
+</head>
+<body>
+
+<center>
+    <table width="1120px">
+        <tr>
+            <td><font size="5">合同列表</font></td>
+            <td></td>
+            <td></td>
+            <td align="right">
+                <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a1()" value="< 返回 " style="font-size: 20px;font-weight: bold;width:100px;height:40px;">
+                <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a2()" value="刷新 " style="font-size: 20px;font-weight: bold;width:100px;height:40px;">
+            </td>
+        </tr>
+        <tr>
+            <td height="20px"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</center>
+
+<center>
+    <form class="layui-form" style="width: 1300px" method="get">
+
+        <div class="layui-inline" style="float:left;">
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="width: 200px;">
+                    <select name="condition">
+                        <option value=""></option>
+                        <option value="">合同名称</option>
+                        <option value="">合同编号</option>
+                        <option value="">合同所属部门</option>
+                        <option value="">合同金额</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <input type="text" name="keyword" style="width: 300px;height: 40px;" placeholder="请输入关键字" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">查找</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </form>
+</center>
+
+<center>
+    <table id="demo" lay-filter="test"></table>
+</center>
+
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['table', 'form', 'layer', 'upload', 'laydate'], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $=layui.jquery;
+        var laydate = layui.laydate;
+
+        table.render({
+            elem: '#demo'
+            , height: 400
+            , width: 1120
+            , toolbar: '#barDemo1'
+            , url: '/customer/customerAll.do' //数据接口
+            , page: true //开启分页
+            , limits: [1, 2, 5, 6, 8, 10, 15, 20]
+            , limit: 10
+            , cols: [[/*,templet:'<div><a href="/customer/queryall.do?customerid={{d.customerid}}" style="color: #0000FF">{{d.customername}}</a></div>'*/
+                {type: 'numbers', title: "序号", width: 80}
+                , {field: '', title: '合同全称', width: 270 }
+                , {field: '', title: '合同编号', width: 150 , sort: true}
+                , {field: '', title: '合同金额', width: 160, sort: true}
+                , {field: '', title: '汇款额', width: 150 , sort: true}
+                , {field: '', title: '开票额', width: 160 , sort: true}
+                , {field: '', title: '签约日期', width: 140, sort: true}
+            ]]
+        });
+
+        //监听提交   模糊查询
+        form.on('submit(formDemo)', function (data) {
+            table.reload('demo', {
+                url: '',
+                where: { //设定异步数据接口的额外参数，任意设
+                    condition: data.field.condition
+                    , keyword: data.field.keyword
+                }
+                , page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            }); //只重载数据
+            return false;
+        });
+
+        //时间
+        laydate.render({
+            elem: '#date1'
+        });
+
+    });
+</script>
+</body>
+</html>

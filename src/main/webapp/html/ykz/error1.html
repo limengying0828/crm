@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>错误</title>
+    <link rel="stylesheet" href="/html/ykz/css/style.css"><!--背景图样式-->
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/html/ykz/css/login.css" /><!--忘记密码和记住密码的样式-->
+
+    <script>
+        function countDown(){
+            //获取初始时间
+            var time = document.getElementById("Time");
+
+            //获取到id为time标签中的数字时间
+            if(time.innerHTML == 0){
+                //等于0时清除计时，并跳转该指定页面
+                window.location.href="/html/ykz/register.html";
+            }else{
+                time.innerHTML = time.innerHTML-1;
+            }
+        }
+        //1000毫秒调用一次
+        window.setInterval("countDown()",1000);
+    </script>
+    <style>
+        #Time,#p{
+            font-size: 150px;
+            text-align: center;
+        }
+        #Font,#p{
+            font-size: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<script type="text/javascript">
+
+</script>
+<body>
+
+<div class="perspective">
+    <div class="ball"></div>
+    <div class="glass1"></div>
+    <div class="g1-shadow"></div>
+    <div class="glass2"></div>
+    <div class="g2-shadow"></div>
+    <div class="glass3"></div>
+    <div class="g3-shadow"></div>
+</div>
+
+<!--<input type="text" style="width: 200px;height: 45px;color: #FD482C" th:value="${msg}"/>-->
+ <center>
+     <div style="display: inline-block;width: 100%;float: right;">
+         <i><input th:value="${msg}" type="" name="title" required lay-verify="required"  autocomplete="off" class="layui-input" disabled="disabled" style="text-align:center;"></i>
+         <center><i class="layui-icon layui-icon-404" style="font-size: 130px; color: #ff5722;"></i></center>
+     </div>
+     <font color="yellow"><p id="Time" >3</p ></font>
+     <p id="Font">将跳转至注册页面</p >
+ </center>
+
+<script src="/layui/layui.js"></script>
+</body>
+</html>

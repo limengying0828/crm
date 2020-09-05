@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>客户信息统计</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+
+    <script type="text/javascript">
+        var a1=function(){
+            window.location.href="/html/ykz/customeradd.html"
+        }
+
+        var a2=function(){
+            window.location.href=""
+        }
+
+    </script>
+</head>
+<body>
+<div style="width: 80%;float: left" >
+    <form class="layui-form" style="width: 1300px" method="get">
+        <div class="layui-inline" style="float:left;">
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="width: 200px;">
+                    <select name="condition">
+                        <option value=""></option>
+                        <option value="customername">客户名称</option>
+                        <option value="customersource">客户来源</option>
+                        <option value="city">所在城市</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <input type="text" name="keyword" style="width: 300px;height: 40px;" placeholder="请输入关键字" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">查找</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </form>
+    </center>
+</div>
+<div style="margin-left: 1000px;margin-top: 0px;">
+    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a1()" value="新增客户" style="font-size: 20px;font-weight: bold;width:140px;height:50px;">
+    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a2()" value="刷新" style="font-size: 20px;font-weight: bold;width:100px;height:50px;">
+</div>
+<center>
+    <table align="center" id="demo" lay-filter="test"></table>
+</center>
+
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['table', 'form'], function () {
+        var table = layui.table;
+        var form = layui.form;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 680
+            , width: 1500
+            , toolbar: '#barDemo1'
+            , url: '/customer/customerAll.do' //数据接口
+            , page: true //开启分页
+            , limits: [1, 2, 5, 6, 8, 10, 15, 20]
+            , limit: 10
+            , cols: [[
+                 {type: 'numbers', title: "序号", width: 80}
+                , {field: 'customername', title: '客户名称', width: 270 ,templet:'<div><a href="/customer/queryall.do?customerid={{d.customerid}}" style="color: #0000FF">{{d.customername}}</a></div>'}
+                , {field: 'businessNumber', title: '商机数', width: 150 , sort: true,templet:'<div><a href="/html/ykz/cusbusinesslist.html" style="color: #0000FF">{{d.businessNumber}}</a></div>'}
+                , {field: 'expectedTransactionAmount', title: '预计成交金额', width: 170, sort: true}
+                , {field: 'contractNumber', title: '合同数', width: 150 , sort: true,templet:'<div><a href="/html/ykz/cuscontractlist.html" style="color: #0000FF">{{d.contractNumber}}</a></div>'}
+                , {field: 'contractmoney', title: '合同金额', width: 160 , sort: true}
+                , {field: 'returned', title: '回款额', width: 160, sort: true}
+                , {field: 'aftersaleNumbre', title: '售后服务数', width: 150, sort: true,templet:'<div><a href="/html/ykz/cusaftersalelist.html" style="color: #0000FF">{{d.aftersaleNumbre}}</a></div>'}
+                , {field: 'average', title: '服务均分', width: 150, sort: true}
+            ]]
+        });
+
+        //监听提交   模糊查询
+        form.on('submit(formDemo)', function (data) {
+            table.reload('demo', {
+                url: '/customer/customerAll.do',
+                where: { //设定异步数据接口的额外参数，任意设
+                    condition: data.field.condition
+                    , keyword: data.field.keyword
+                }
+                , page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            }); //只重载数据
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

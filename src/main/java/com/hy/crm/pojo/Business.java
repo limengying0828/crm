@@ -35,7 +35,7 @@ public class Business implements Serializable {
     private String customersource;
 
     @ApiModelProperty(value = "预计成交金额")
-    private String makemoney;
+    private Float makemoney;
 
     @ApiModelProperty(value = "预计结单日期")
     private String overdate;
@@ -98,13 +98,15 @@ public class Business implements Serializable {
     public void setCustomersource(String customersource) {
         this.customersource = customersource;
     }
-    public String getMakemoney() {
+
+    public Float getMakemoney() {
         return makemoney;
     }
 
-    public void setMakemoney(String makemoney) {
+    public void setMakemoney(Float makemoney) {
         this.makemoney = makemoney;
     }
+
     public String getOverdate() {
         return overdate;
     }
