@@ -19,11 +19,11 @@ public interface IDocumentaryService extends IService<Documentary> {
     /**
      * 查询所有跟单信息
      * @param documentaryBo
-     * @param m
-     * @param n
+     * @param
+     * @param
      * @return
      */
-    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo, Integer m,Integer n);
+    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo);
 
 
     public List<DocumentaryBo> select();
@@ -33,5 +33,7 @@ public interface IDocumentaryService extends IService<Documentary> {
      * @param theme
      * @return
      */
-    public DocumentaryBo selectTheme(String theme);
+    public List<DocumentaryBo> selectTheme(String theme);
+
+    public DocumentaryBo selectUpdate(String theme);
 }

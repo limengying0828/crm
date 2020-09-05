@@ -31,7 +31,7 @@
     <div class="layui-form-item" style="width: 50%;">
         <label class="layui-form-label">跟单主题</label>
         <div class="layui-input-block">
-            <select name="businessname" id="businessname" lay-verify="required">
+            <select name="theme" id="opt" lay-verify="required">
             </select>
         </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="layui-inline">
         <label class="layui-form-label">跟单时间</label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="test" placeholder="HH:mm:ss">
+            <input type="text" class="layui-input" name="documentarytime" id="documentarytime" placeholder="HH:mm:ss">
         </div>
     </div>
 
@@ -62,7 +62,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">跟单人</label>
         <div class="layui-input-block">
-            <input type="text" style="width: 45%;" name="id" required  lay-verify="required" th:value="" th:text=""  autocomplete="off" class="layui-input">
+            <input type="text" style="width: 45%;" name="userid" required  lay-verify="required" th:value="" th:text=""  autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -70,6 +70,20 @@
         <label class="layui-form-label">详细内容</label>
         <div class="layui-input-block">
             <input type="text" style="width: 45%;" name="detail" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-upload">
+        <label class="layui-form-label">附件</label>
+        <button type="button" class="layui-btn" id="filename">
+            <i class="layui-icon">&#xe67c;</i>上传图片
+        </button>
+        <input type="hidden" name="attachment" id="p">
+    </div>
+    <div class="layui-upload">
+        <label class="layui-form-label">预览</label>
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" id="attachment" style="width: 100px;height: 100px">
         </div>
     </div>
 
@@ -82,23 +96,25 @@
 </form>
 
 <script>
-    layui.use(['form','laydate','layer','jquery'], function(){
+    layui.use(['form','laydate','layer','jquery','upload'], function(){
         var form = layui.form;
         var laydate = layui.laydate;
         var layer = layui.layer;
         var $ = layui.jquery;
+        var upload = layui.upload;
 
         $(function () {
-
-            alert("进入函数加载！");
             $.ajax({
                 type:'get',
                 url: '/business/seletName.do',
                 datatype: 'json',
-                success:function(data){
-                    for (var i = 0; i < data.length; i++) {
-                        $('#businessname').append(new Option(data[i].businessid, data[i].businessname))
+                success:function(obj){
+                    var s="";
+                    for (var i = 0; i < obj.length; i++) {
+                        s+="<option value="+obj[i].businessname+">"+obj[i].businessname+"</option>";
+                       // $('#businessname').append(new Option(obj[i].businessname, obj[i].businessname))
                     }
+                    $("#opt").html(s);
                 }
             });
 
@@ -150,6 +166,28 @@
                     $("#select").html(str);
                 }
             });
+
+
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#filename'
+                ,url: '/documentary/pictureUpload.do' //改成您自己的上传接口
+                ,before: function(obj){//展示图片
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#attachment').attr('src', result); //图片链接（base64）
+                    });
+                }
+                ,done: function(res){
+                    console.log(res)
+                    if(res.code == 0){
+                        $("#p").val(res.data);//获取图片地址赋给p文本框
+                        layer.msg("上传成功");
+                    }
+                }
+            });
+
+
         })
 
 
