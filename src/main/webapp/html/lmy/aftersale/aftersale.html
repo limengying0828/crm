@@ -165,7 +165,7 @@
             ,limit:5
             ,url: '/aftersale/queryAfterSale.do' //数据接口
             ,cols: [[ //表头
-                ,{field: 'theme', title: '主题', width:290,templet:'<div><a href="#" style="color: #1E9FFF">{{d.theme}}</a></div>'}
+                ,{field: 'theme', title: '主题', width:290,templet:'<div><a href="/aftersale/queryAfterSaleUserBo.do?saleid={{d.saleid}}" style="color: #1E9FFF" target="_blank" >{{d.theme}}</a></div>'}
                 ,{field: 'typeservices', title: '服务类型', width:180}
                 ,{field: 'begintime', title: '开始时间', width:150, sort: true}
                 ,{field: 'servicespeople', title: '服务人员', width:150}

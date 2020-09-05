@@ -1,12 +1,14 @@
 package com.hy.crm.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hy.crm.bo.lmy.AfterSaleProcessBo;
+import com.hy.crm.bo.lmy.AfterSaleUserBo;
 import com.hy.crm.bo.lmy.ContractSaleBo;
 import com.hy.crm.pojo.Aftersale;
 import com.hy.crm.sqlclass.AfterSaleSql;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -21,10 +23,19 @@ import java.util.List;
 public interface AftersaleMapper extends BaseMapper<Aftersale> {
     @SelectProvider(type = AfterSaleSql.class,method = "queryContractSaleByUserName")
     public ContractSaleBo queryContractSaleBo(String contractid);
+
     @SelectProvider(type = AfterSaleSql.class,method ="queryAfterSaleProcessBo")
-    public List<AfterSaleProcessBo> queryAfterSaleProcessBo(@Param("classification") String classification, @Param("key")String key, @Param("page")Integer page, @Param("limit")Integer limit,@Param("status") String status);
+    public List<Aftersale> queryAfterSaleProcessBo(@Param("classification") String classification, @Param("key")String key, @Param("page")Integer page, @Param("limit")Integer limit,@Param("status") String status);
+
     @SelectProvider(type = AfterSaleSql.class,method ="querySumCount")
     public Integer queryCount(@Param("classification") String classification, @Param("key")String key,@Param("status") String status);
+
+    @Select("select * from `user` u,aftersale af,customer c,contract con,contractprocess cp where u.userid=af.userid and c.customerid=af.customerid and con.customerid=c.customerid and cp.contractid=con.contractid and af.saleid=#{saleid}  ")
+    public AfterSaleUserBo queryAfterSaleUserBoByTheme(Integer saleid);
+
+    @Update("update aftersale set realstatus='已结束',overtime=#{overtime} where saleid=#{serviceid}")
+    public boolean updateAfterSaleStatus(Integer serviceid,String overtime);
+
 
 
 

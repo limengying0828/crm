@@ -81,6 +81,10 @@ public class Aftersale implements Serializable {
     @ApiModelProperty(value = "附件")
     private String attachment;
 
+    @ApiModelProperty(value = "真实状态")
+    private String realstatus;
+
+
     public Integer getSaleid() {
         return saleid;
     }
@@ -222,6 +226,14 @@ public class Aftersale implements Serializable {
 
     public void setAttachment(String attachment) {
         this.attachment = attachment;
+    }
+
+    public String getRealstatus() {
+        return realstatus;
+    }
+
+    public void setRealstatus(String realstatus) {
+        this.realstatus = realstatus;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hy.crm.controller;
 
 
+import com.hy.crm.bo.lmy.ExpectedMoneyBo;
 import com.hy.crm.pojo.Business;
 import com.hy.crm.service.IBusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,17 @@ public class BusinessController {
     @ResponseBody
     public List<Business> seletName(){
        return iBusinessService.list();
+    }
+
+    /**
+     * //主页面各种状态预计成交金额
+     * @return
+     */
+    @GetMapping("/queryMoney.do")
+    @ResponseBody
+    public List<ExpectedMoneyBo> queryMoney(){
+        return iBusinessService.queryMoney();
+
     }
 
 }

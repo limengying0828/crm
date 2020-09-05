@@ -1,7 +1,7 @@
 package com.hy.crm.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hy.crm.bo.lmy.AfterSaleProcessBo;
+import com.hy.crm.bo.lmy.AfterSaleUserBo;
 import com.hy.crm.bo.lmy.ContractSaleBo;
 import com.hy.crm.pojo.After;
 import com.hy.crm.pojo.Aftersale;
@@ -13,6 +13,7 @@ import com.hy.crm.utils.MsgUtils;
 import com.hy.crm.utils.MyMsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,6 +83,9 @@ public class AftersaleController {
         String theme=aftersale.getTheme();
         theme=customerService.getById(aftersale.getCustomerid()).getCustomername()+"-"+aftersale.getContractid()+"-"+theme;
         aftersale.setTheme(theme);
+        aftersale.setRealstatus("处理中");
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Boolean b=aftersaleService.save(aftersale);
         if(b){
             After after=new After();
@@ -89,8 +93,6 @@ public class AftersaleController {
             queryWrapper.eq("theme",aftersale.getTheme());
             after.setServiceid(aftersaleService.getOne(queryWrapper).getSaleid());
             after.setUserid(aftersale.getUserid());
-            Date date=new Date();
-            SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             after.setDisposetime(dateFormat.format(date));
             after.setDisposecontent("添加售后服务");
             after.setStatus("处理中");
@@ -108,13 +110,75 @@ public class AftersaleController {
     @RequestMapping("/queryAfterSale.do")
     @ResponseBody
     public MsgUtils queryAfterSale(Integer page,Integer limit, String classification, String key,String status){
-        List<AfterSaleProcessBo> list=aftersaleService.queryAfterSale(classification,key,page,limit,status);
+        List<Aftersale> list=aftersaleService.queryAfterSale(classification,key,page,limit,status);
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
         msgUtils.setCount(aftersaleService.queryCount(classification,key,status));
         msgUtils.setMsg("");
         msgUtils.setData(list);
         return msgUtils;
+    }
+
+    @GetMapping("/addAfterSaleOver.do")
+    @ResponseBody
+    public String addAfterSaleOver(Aftersale aftersale){
+        String theme=aftersale.getTheme();
+        theme=customerService.getById(aftersale.getCustomerid()).getCustomername()+"-"+aftersale.getContractid()+"-"+theme;
+        aftersale.setTheme(theme);
+        aftersale.setRealstatus("已结束");
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        aftersale.setOvertime(dateFormat.format(date));
+        Boolean b=aftersaleService.save(aftersale);
+        if(b){
+            After after=new After();
+            QueryWrapper queryWrapper=new QueryWrapper<>();
+            queryWrapper.eq("theme",aftersale.getTheme());
+            after.setServiceid(aftersaleService.getOne(queryWrapper).getSaleid());
+            after.setUserid(aftersale.getUserid());
+            after.setDisposetime(dateFormat.format(date));
+            after.setDisposecontent("本次服务完成");
+            after.setStatus("已结束");
+            Boolean bo=afterService.save(after);
+            if(bo){
+                return  "yes";
+            }else {
+                return "no";
+            }
+        }else {
+            return "no";
+        }
+    }
+    @GetMapping("/queryAfterSaleUserBo.do")
+    public String queryAfterSaleUserBo(Integer saleid, Model model){
+        AfterSaleUserBo afterSaleUserBo=aftersaleService.queryAfterSaleUserBoByTheme(saleid);
+        String str="【合同全称】:"+afterSaleUserBo.getCustomername()+"  【合同所属部门】:"+afterSaleUserBo.getDeptname()+"  【关联人员】:"
+                +afterSaleUserBo.getAssociatedpersons()+"  【签约日期】:  "+afterSaleUserBo.getSigningdate()+"  【生效日期】："+afterSaleUserBo.getTakedate()
+                +"  【合同状态】："+afterSaleUserBo.getTodaystate()+"  【服务期至】："+afterSaleUserBo.getServiceto();
+        model.addAttribute("afterSale",afterSaleUserBo);
+        model.addAttribute("info",str);
+        return "/lmy/aftersale/aftersaleinfo.html";
+    }
+
+    @PostMapping("/updateStatusById.do")
+    public String updateStatusByTheme(After after){
+        after.setUserid(1001);//需要动态获取session的id
+        after.setStatus("已结束");
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        after.setDisposetime(dateFormat.format(date));
+        after.setDisposecontent("本次服务完成");
+        boolean b=afterService.save(after);
+        if(b){
+            boolean bo=aftersaleService.updateAfterSaleStatus(after.getServiceid(),dateFormat.format(date));
+            if(bo){
+                return "/lmy/aftersale/aftersale.html";
+            }else{
+                return "no";
+            }
+        }else{
+            return "no";
+        }
     }
 
 }

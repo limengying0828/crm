@@ -1,7 +1,7 @@
 package com.hy.crm.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hy.crm.bo.lmy.AfterSaleProcessBo;
+import com.hy.crm.bo.lmy.AfterSaleUserBo;
 import com.hy.crm.bo.lmy.ContractSaleBo;
 import com.hy.crm.mapper.AftersaleMapper;
 import com.hy.crm.pojo.Aftersale;
@@ -29,12 +29,22 @@ public class AftersaleServiceImpl extends ServiceImpl<AftersaleMapper, Aftersale
     }
 
     @Override
-    public List<AfterSaleProcessBo> queryAfterSale(String classification, String key, Integer page, Integer limit, String status) {
+    public List<Aftersale> queryAfterSale(String classification, String key, Integer page, Integer limit, String status) {
        return aftersaleMapper.queryAfterSaleProcessBo(classification,key,page,limit,status);
     }
 
     @Override
     public Integer queryCount(String classification, String key, String status) {
         return aftersaleMapper.queryCount(classification,key,status);
+    }
+
+    @Override
+    public AfterSaleUserBo queryAfterSaleUserBoByTheme(Integer saleid) {
+        return  aftersaleMapper.queryAfterSaleUserBoByTheme(saleid);
+    }
+
+    @Override
+    public Boolean updateAfterSaleStatus(Integer serviceid,String overtime) {
+        return  aftersaleMapper.updateAfterSaleStatus(serviceid,overtime);
     }
 }

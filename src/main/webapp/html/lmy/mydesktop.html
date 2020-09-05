@@ -12,6 +12,66 @@
         $(function () {
             $.ajax({
                 type:'get',
+                url: '/business/queryMoney.do',
+                datatype: 'json',
+                success:function(bussinessMoneyList){
+                    var losingMoney=0;//丢单状态预计金额
+                    var susscessMoney=0;//成交预计预计金额
+                    var shelveMoney=0;//搁置状态预计预计金额
+                    var goMoney=0;//进行中预计预计金额
+                    for (var i = 0; i <bussinessMoneyList.length ; i++) {
+                        if(bussinessMoneyList[i].todaystate== '丢单'){
+                            losingMoney=bussinessMoneyList[i].sumMoney;
+                        }else if(bussinessMoneyList[i].todaystate=='搁置'){
+                            shelveMoney=bussinessMoneyList[i].sumMoney;
+                        }else if(bussinessMoneyList[i].todaystate=='成交'){
+                            susscessMoney=bussinessMoneyList[i].sumMoney;
+                        }else{
+                            goMoney+=bussinessMoneyList[i].sumMoney;
+                        }
+                    }
+                    var myCharts1 = echarts.init(document.getElementById('main'));
+                    var option1 = {
+                        title: {
+                            text: '不同状态商机预计成交金额',
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{a} <br/>{b} : {c} ({d}%)'
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            left: 'left',
+                            data: ['已丢单', '已搁置', '进行中', '已成交']
+                        },
+                        series: [
+                            {
+                                name: '成交额',
+                                type: 'pie',
+                                radius: '50%',
+                                center: ['50%', '60%'],
+                                data: [
+                                    {value: losingMoney, name: '已丢单'},
+                                    {value: shelveMoney, name: '已搁置'},
+                                    {value: goMoney, name: '进行中'},
+                                    {value: susscessMoney, name: '已成交'}
+                                ],
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                    myCharts1.setOption(option1);
+                }
+            });
+            $.ajax({
+                type:'get',
                 url: '/customer/queryCustomer.do',
                 datatype: 'json',
                 success:function(data){
@@ -27,44 +87,16 @@
                     $("#businessAll").text(data.length);
                 }
             });
-            var myCharts1 = echarts.init(document.getElementById('main'));
-            var option1 = {
-                title: {
-                    text: '不同状态商机成交金额',
-                    left: 'center'
-                },
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{a} <br/>{b} : {c} ({d}%)'
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: ['已丢单', '已搁置', '进行中', '已成交']
-                },
-                series: [
-                    {
-                        name: '成交额',
-                        type: 'pie',
-                        radius: '50%',
-                        center: ['50%', '60%'],
-                        data: [
-                            {value: 310, name: '已丢单'},
-                            {value: 234, name: '已搁置'},
-                            {value: 135, name: '进行中'},
-                            {value: 1548, name: '已成交'}
-                        ],
-                        emphasis: {
-                            itemStyle: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            };
-            myCharts1.setOption(option1);
+
+            $.ajax({
+                type:'get',
+                url: '/contract/queryAll.do',
+                datatype: 'json',
+                success:function(data){
+                    $("#contractAll").text(data.length);
+                }
+            });
+
         })
     </script>
 </head>
@@ -104,7 +136,7 @@
                             <div style="width: 70px;float: left;margin-left: 240px;">
                                 <ul>
                                     <li><font size="2"color="black">全部合同</font></li><br/>
-                                    <li><font size="4"color="#8b0000">&nbsp;&nbsp;&nbsp;12</font></li>
+                                    <li><font size="4"color="#8b0000">&nbsp;&nbsp;&nbsp;<span id="contractAll"></span></font></li>
                                 </ul>
                             </div>
                         </div>
