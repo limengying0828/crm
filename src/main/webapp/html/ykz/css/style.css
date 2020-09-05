@@ -1,0 +1,355 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    background: -webkit-gradient(linear, left bottom, left top, from(white), color-stop(41%, white), color-stop(69%, #d5d5d5), to(#c2c2c2));
+    background: linear-gradient(0deg, white 0%, white 41%, #d5d5d5 69%, #c2c2c2 100%);
+    overflow: hidden;
+}
+
+div {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.perspective {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 5em;
+    height: 5em;
+    font-size: 10px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-perspective: 300px;
+    perspective: 300px;
+}
+
+.ball {
+    position: absolute;
+    top: 8em;
+    left: -30em;
+    width: 12em;
+    height: 4em;
+    background: radial-gradient(#000 5%, #666 30%, transparent 70%);
+    -webkit-animation: roll 5s linear  infinite alternate, shadow 5s linear infinite alternate;
+    animation: roll 5s linear  infinite alternate, shadow 5s linear infinite alternate;
+}
+.ball::before {
+    content: '';
+    position: absolute;
+    top: -8em;
+    left: 1em;
+    height: 10em;
+    width: 10em;
+    background: white;
+    background-image: url("https://www.transparenttextures.com/patterns/starring.png");
+    border-radius: 50%;
+    background-size: cover;
+    -webkit-animation: bg 5s linear infinite alternate, roll2 5s linear infinite alternate;
+    animation: bg 5s linear infinite alternate, roll2 5s linear infinite alternate;
+}
+.ball::after {
+    content: '';
+    position: absolute;
+    top: -8em;
+    left: 1em;
+    height: 10em;
+    width: 10em;
+    background: white;
+    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.5) 10%, rgba(0, 18, 255, 0.5) 100%);
+    border-radius: 50%;
+    -webkit-animation: roll2 5s ease-in-out infinite alternate;
+    animation: roll2 5s ease-in-out infinite alternate;
+}
+
+.glass1 {
+    position: absolute;
+    top: 0em;
+    left: -40em;
+    width: 30em;
+    height: 10em;
+    border-radius: 10px;
+    border: solid 2px rgba(0, 236, 255, 0.3);
+    background: #00ecff;
+    background: linear-gradient(45deg, rgba(0, 236, 255, 0.2133447129) 0%, rgba(255, 255, 255, 0.501860119) 33%, rgba(255, 255, 255, 0.4794511555) 53%, rgba(0, 236, 255, 0.2105435924) 100%);
+    box-shadow: 0 0 5px white inset;
+    -webkit-transform: rotateY(-25deg) translateZ(2em);
+    transform: rotateY(-25deg) translateZ(2em);
+}
+
+.glass2 {
+    position: absolute;
+    top: -27em;
+    left: -10em;
+    width: 30em;
+    height: 10em;
+    border-radius: 10px;
+    border: solid 2px rgba(0, 236, 255, 0.3);
+    background: #00ecff;
+    background: linear-gradient(45deg, rgba(0, 236, 255, 0.2133447129) 0%, rgba(255, 255, 255, 0.501860119) 33%, rgba(255, 255, 255, 0.4794511555) 53%, rgba(0, 236, 255, 0.2105435924) 100%);
+    box-shadow: 0 0 5px white inset;
+    -webkit-transform: translateZ(-26em);
+    transform: translateZ(-26em);
+}
+.glass2.left {
+    position: absolute;
+    width: 34em;
+    height: 10em;
+    background: grey;
+}
+
+.glass3 {
+    position: absolute;
+    top: 0em;
+    left: 20em;
+    width: 30em;
+    height: 10em;
+    border-radius: 10px;
+    border: solid 2px rgba(0, 236, 255, 0.3);
+    background: #00ecff;
+    background: linear-gradient(45deg, rgba(0, 236, 255, 0.2133447129) 0%, rgba(255, 255, 255, 0.501860119) 33%, rgba(255, 255, 255, 0.4794511555) 53%, rgba(0, 236, 255, 0.2105435924) 100%);
+    box-shadow: 0 0 5px white inset;
+    -webkit-transform: rotateY(25deg) translateZ(3em);
+    transform: rotateY(25deg) translateZ(3em);
+}
+
+.g1-shadow {
+    position: absolute;
+    top: 7em;
+    left: -26em;
+    width: 19em;
+    height: 8em;
+    border-radius: 10px;
+    border: solid 2px grey;
+    background: rgba(150, 150, 150, 0.4);
+    -webkit-transform: rotate(13deg) skew(-73deg) translateZ(-4em);
+    transform: rotate(13deg) skew(-73deg) translateZ(-4em);
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+    z-index: -1;
+}
+
+.g2-shadow {
+    position: absolute;
+    top: -22em;
+    left: 4em;
+    width: 40em;
+    height: 4em;
+    border-radius: 10px;
+    border: solid 2px grey;
+    background: rgba(150, 150, 150, 0.4);
+    -webkit-transform: rotate(-8deg) skew(82deg) translateZ(-26em);
+    transform: rotate(-8deg) skew(82deg) translateZ(-26em);
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+    z-index: -1;
+}
+
+.g3-shadow {
+    position: absolute;
+    top: 7em;
+    left: 53.5em;
+    width: 10em;
+    height: 3em;
+    border-radius: 10px;
+    border: solid 2px grey;
+    background: rgba(150, 150, 150, 0.4);
+    -webkit-transform: rotate(-19deg) skew(85deg) translateZ(-4em);
+    transform: rotate(-19deg) skew(85deg) translateZ(-4em);
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+    z-index: -1;
+}
+
+@-webkit-keyframes roll {
+    0% {
+        -webkit-transform: rotateZ(0deg) translate3d(0, 0, 0);
+        transform: rotateZ(0deg) translate3d(0, 0, 0);
+    }
+    10% {
+        -webkit-transform: rotateZ(0deg) translate3d(6em, -5em, -5em);
+        transform: rotateZ(0deg) translate3d(6em, -5em, -5em);
+    }
+    20% {
+        -webkit-transform: rotateZ(0deg) translate3d(12em, -10em, -10em);
+        transform: rotateZ(0deg) translate3d(12em, -10em, -10em);
+    }
+    30% {
+        -webkit-transform: rotateZ(0deg) translate3d(18em, -15em, -15em);
+        transform: rotateZ(0deg) translate3d(18em, -15em, -15em);
+    }
+    40% {
+        -webkit-transform: rotateZ(0deg) translate3d(24em, -20em, -20em);
+        transform: rotateZ(0deg) translate3d(24em, -20em, -20em);
+    }
+    50% {
+        -webkit-transform: rotateZ(0deg) translate3d(30em, -25em, -25em);
+        transform: rotateZ(0deg) translate3d(30em, -25em, -25em);
+    }
+    60% {
+        -webkit-transform: rotateZ(0deg) translate3d(36em, -20em, -20em);
+        transform: rotateZ(0deg) translate3d(36em, -20em, -20em);
+    }
+    70% {
+        -webkit-transform: rotateZ(0deg) translate3d(42em, -15em, -15em);
+        transform: rotateZ(0deg) translate3d(42em, -15em, -15em);
+    }
+    80% {
+        -webkit-transform: rotateZ(0deg) translate3d(48em, -10em, -10em);
+        transform: rotateZ(0deg) translate3d(48em, -10em, -10em);
+    }
+    90% {
+        -webkit-transform: rotateZ(0deg) translate3d(54em, -5em, -5em);
+        transform: rotateZ(0deg) translate3d(54em, -5em, -5em);
+    }
+    100% {
+        -webkit-transform: rotateZ(0deg) translate3d(60em, 0, 0);
+        transform: rotateZ(0deg) translate3d(60em, 0, 0);
+    }
+}
+
+@keyframes roll {
+    0% {
+        -webkit-transform: rotateZ(0deg) translate3d(0, 0, 0);
+        transform: rotateZ(0deg) translate3d(0, 0, 0);
+    }
+    10% {
+        -webkit-transform: rotateZ(0deg) translate3d(6em, -5em, -5em);
+        transform: rotateZ(0deg) translate3d(6em, -5em, -5em);
+    }
+    20% {
+        -webkit-transform: rotateZ(0deg) translate3d(12em, -10em, -10em);
+        transform: rotateZ(0deg) translate3d(12em, -10em, -10em);
+    }
+    30% {
+        -webkit-transform: rotateZ(0deg) translate3d(18em, -15em, -15em);
+        transform: rotateZ(0deg) translate3d(18em, -15em, -15em);
+    }
+    40% {
+        -webkit-transform: rotateZ(0deg) translate3d(24em, -20em, -20em);
+        transform: rotateZ(0deg) translate3d(24em, -20em, -20em);
+    }
+    50% {
+        -webkit-transform: rotateZ(0deg) translate3d(30em, -25em, -25em);
+        transform: rotateZ(0deg) translate3d(30em, -25em, -25em);
+    }
+    60% {
+        -webkit-transform: rotateZ(0deg) translate3d(36em, -20em, -20em);
+        transform: rotateZ(0deg) translate3d(36em, -20em, -20em);
+    }
+    70% {
+        -webkit-transform: rotateZ(0deg) translate3d(42em, -15em, -15em);
+        transform: rotateZ(0deg) translate3d(42em, -15em, -15em);
+    }
+    80% {
+        -webkit-transform: rotateZ(0deg) translate3d(48em, -10em, -10em);
+        transform: rotateZ(0deg) translate3d(48em, -10em, -10em);
+    }
+    90% {
+        -webkit-transform: rotateZ(0deg) translate3d(54em, -5em, -5em);
+        transform: rotateZ(0deg) translate3d(54em, -5em, -5em);
+    }
+    100% {
+        -webkit-transform: rotateZ(0deg) translate3d(60em, 0, 0);
+        transform: rotateZ(0deg) translate3d(60em, 0, 0);
+    }
+}
+@-webkit-keyframes bg {
+    0% {
+        background-position: 50px 0px;
+    }
+    10% {
+        background-position: 120px -150px;
+    }
+    20% {
+        background-position: 170px -300px;
+    }
+    30% {
+        background-position: 220px -450px;
+    }
+    40% {
+        background-position: 270px -600px;
+    }
+    50% {
+        background-position: 320px -750px;
+    }
+    60% {
+        background-position: 370px  -600px;
+    }
+    70% {
+        background-position: 420px -450px;
+    }
+    80% {
+        background-position: 470px -300px;
+    }
+    90% {
+        background-position: 520px -150px;
+    }
+    100% {
+        background-position: 570px 0px;
+    }
+}
+@keyframes bg {
+    0% {
+        background-position: 50px 0px;
+    }
+    10% {
+        background-position: 120px -150px;
+    }
+    20% {
+        background-position: 170px -300px;
+    }
+    30% {
+        background-position: 220px -450px;
+    }
+    40% {
+        background-position: 270px -600px;
+    }
+    50% {
+        background-position: 320px -750px;
+    }
+    60% {
+        background-position: 370px  -600px;
+    }
+    70% {
+        background-position: 420px -450px;
+    }
+    80% {
+        background-position: 470px -300px;
+    }
+    90% {
+        background-position: 520px -150px;
+    }
+    100% {
+        background-position: 570px 0px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .perspective {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+    }
+}
+@media only screen and (max-width: 500px) {
+    .perspective {
+        -webkit-transform: scale(0.35);
+        transform: scale(0.35);
+    }
+}
