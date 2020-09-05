@@ -21,7 +21,7 @@
     <center>
         <table width="80%">
             <tr>
-                <td width="20%"><font size="5">新增售后服务</font></td>
+                <td width="20%"><font size="5">售后服务详情</font></td>
                 <td width="20%"></td>
                 <td width="20%"></td>
                 <td width="20%" align="right">
@@ -36,7 +36,7 @@
                 <td></td>
             </tr>
             <tr bgcolor="#fafad2">
-                <td height="50px"><h2>新增售后服务</h2></td>
+                <td height="50px"><h2>基本信息</h2></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -52,7 +52,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="theme" id="theme" required="" lay-verify="theme" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                            <input type="text" name="theme" required="" lay-verify="required" th:value="${afterSale.theme}" autocomplete="off" class="layui-input" readonly style="width: 280px">
                         </div>
                     </div>
                 </td>
@@ -61,10 +61,10 @@
                 <td></td>
                 <td>
                     <div class="layui-form-item" style="margin-left: 40px;">
-                        步  骤:<input type="text" style="border: 0px"  value="服务登记" name="step"><br/>
-                        责任人:<input type="text" style="border: 0px"  id="username" name="username"> readonly ><br/>
+                        步  骤:<input type="text" style="border: 0px" th:value="${afterSale.realstatus}" name="step" readonly width="240px;"><br/>
+                        责任人:<input type="text" style="border: 0px"  id="username" name="username" th:value="${afterSale.username}" readonly><br/>
                         <input type="hidden" style="border: 0px"  id="userid" name="userid">
-                        参与人:<input type="text" style="border: 0px"  value="" name="participant">
+                        参与人:<input type="text" style="border: 0px"  value="" name="participant" th:value="${afterSale.participant}" readonly>
                     </div>
                 </td>
             </tr>
@@ -83,10 +83,11 @@
             <tr>
                 <td>客户名称</td>
                 <td>
+                    <input type="hidden" id="serviceid"  th:value="${afterSale.saleid}">
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
-                            <select name="customerid" id="customerid"  lay-filter="customername" lay-verify="customername" onchange="customerChange()">
-                                <option value="">请选择</option>
+                            <select name="customerid" id="customerid"   lay-filter="customername" lay-verify="required"  readonly="readonly">
+                                <option th:value="${afterSale.customerid}" selected>[[${afterSale.customername}]]</option>
                             </select>
                         </div>
                     </div>
@@ -95,8 +96,8 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <select id="contractid" name="contractid" lay-verify="contractid" lay-filter="contractid">
-                                <option value="">请选择</option>
+                            <select id="contractid" name="contractid" lay-verify="required" lay-filter="contractid" readonly="readonly">
+                                <option th:value="${afterSale.contractid}" selected>[[${afterSale.contractname}]]</option>
                             </select>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="info" id="info" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="info" id="info" class="layui-input" readonly th:text="${info}"  autocomplete="off" lay-verify="">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -117,7 +118,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" readonly th:value="${afterSale.contactperson}"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -126,7 +127,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="officephone" id="officephone"  required lay-verify="" placeholder="请输入"
+                            <input type="text" name="officephone" id="officephone"  required lay-verify="" readonly th:value="${afterSale.officephone}"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -137,7 +138,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="telephone" id="telephone" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="telephone" id="telephone" required lay-verify=""  readonly th:value="${afterSale.telephone}"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -146,7 +147,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="email" id="email" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="email" id="email" required lay-verify="" th:value="${afterSale.email}"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -157,13 +158,8 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
-                            <select name="typeservices" lay-verify="required">
-                                <option value="">请选择</option>
-                                <option value="故障申报">故障申报</option>
-                                <option value="业务咨询">业务咨询</option>
-                                <option value="实施或培训">实施或培训</option>
-                                <option value="主动关怀">主动关怀</option>
-                                <option value="其他">其他</option>
+                            <select name="typeservices" lay-verify="required" readonly="readonly">
+                                <option th:value="${afterSale.typeservices}">[[${afterSale.typeservices}]]</option>
                             </select>
                         </div>
                     </div>
@@ -172,13 +168,8 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
-                            <select id="servicemode" name="servicemode" lay-verify="required">
-                                <option value="">请选择</option>
-                                <option value="故障申报">故障申报</option>
-                                <option value="业务咨询">业务咨询</option>
-                                <option value="实施或培训">实施或培训</option>
-                                <option value="主动关怀">主动关怀</option>
-                                <option value="其他">其他</option>
+                            <select id="servicemode" name="servicemode" lay-verify="required" readonly="readonly">
+                                <option th:value="${afterSale.servicemode}">[[${afterSale.servicemode}]]</option>
                             </select>
                         </div>
                     </div>
@@ -191,7 +182,7 @@
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <div class="layui-input-inline">
-                                <input type="date" class="layui-input" id="begintime" name="begintime" placeholder="yyyy-MM-dd" lay-key="1">
+                                <input type="date" class="layui-input" id="begintime" name="begintime" readonly lay-key="1" th:value="${afterSale.begintime}">
                             </div>
                         </div>
                     </div>
@@ -203,7 +194,7 @@
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="overtime" name="overtime" placeholder="yyyy-MM-dd" lay-key="1" readonly>
+                                    <input type="date" class="layui-input" id="overtime" name="overtime" readonly lay-key="1" th:value="${afterSale.overtime}">
                                 </div>
                             </div>
                         </div>
@@ -215,7 +206,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="servicescontent" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="servicescontent" class="layui-input" required="" readonly autocomplete="off" th:text="${afterSale.servicescontent}">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -225,7 +216,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="customerfeedback" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="customerfeedback" class="layui-input" required="" readonly autocomplete="off" th:text="${afterSale.customerfeedback}">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -235,7 +226,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="servicespeople"  required lay-verify="" placeholder="请输入"
+                            <input type="text" name="servicespeople"  required readonly th:value="${afterSale.servicespeople}"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -244,11 +235,11 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="radio" value="5" name="servicesscore" title="5分">
-                            <input type="radio" value="4" name="servicesscore" title="4分">
-                            <input type="radio" value="3" name="servicesscore" title="3分">
-                            <input type="radio" value="2" name="servicesscore" title="2分">
-                            <input type="radio" value="1" name="servicesscore" title="1分">
+                            <input type="radio" value="5" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='5' ? true :false}" title="5分">
+                            <input type="radio" value="4" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='4' ? true :false}" title="4分">
+                            <input type="radio" value="3" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='3' ? true :false}" title="3分">
+                            <input type="radio" value="2" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='2' ? true :false}" title="2分">
+                            <input type="radio" value="1" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='1' ? true :false}" title="1分">
                         </div>
                     </div>
                 </td>
@@ -257,13 +248,11 @@
                 <td>附件</td>
                 <td>
                     <div class="layui-upload">
-                        <button type="button" class="layui-btn" id="card"><i class="layui-icon layui-icon-upload-drag"></i>上传图片</i></button>
                         <div class="layui-upload-list">
-                            <label class="layui-form-label">预览附件</label>
-                            <img class="layui-upload-img" id="idcard" style="width: 100px;height: 100px;">
+                            <label class="layui-form-label">附件</label>
+                            <img class="layui-upload-img" id="idcard" style="width: 100px;height: 100px;" th:src="${afterSale.attachment}">
                         </div>
                     </div>
-                    <input type="hidden" name="attachment" id="attachment" lay-verify="photo">
                 </td>
             </tr>
             <tr>
@@ -313,11 +302,9 @@
             </div>
         </div>
         <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
-            <div class="layui-input-block">
+            <div class="layui-input-block" th:if="${afterSale.realstatus=='处理中'}==true">
                 <p>
-                    <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="formDemo">保存</button>
-                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">转服务人员处理</button>
-                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="serviceOver" formmethod="get">本次服务完成</button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="serviceOver" >本次服务完成</button>
                     <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" onclick="goback()">取消</button>
                 </p>
             </div>
@@ -328,113 +315,12 @@
 <script>
     layui.use(['form', 'layer', 'upload', 'laydate'], function () {
         var form = layui.form;
-        var layer = layui.layer;
-        var upload = layui.upload;
-        var $=layui.jquery;
-
-       $(function () {
-           $.ajax({
-               type:'get',
-               url: '/customer/queryCustomer.do',
-               datatype: 'json',
-               success:function(data){
-                   for (var i = 0; i < data.length; i++) {
-                       $('#customerid').append(new Option(data[i].customername, data[i].customerid))
-                   }
-                   form.render();
-               }
-           });
-       })
-
-        form.on('select(customername)', function(data){
-            $.ajax({
-                type:'get',
-                url: '/customer/queryCustomerById.do?customerid='+data.value,
-                datatype: 'json',
-                success:function(cus){
-                    $("#contactperson").val(cus.linkman);
-                    $("#officephone").val(cus.officephone);
-                    $("#telephone").val(cus.telephone);
-                    $("#email").val(cus.email);
-                    $.ajax({
-                        type:'get',
-                        url: '/contract/queryContractByCustomer.do?customerid='+data.value,
-                        datatype: 'json',
-                        success:function(contract){
-                            $("#contractid").empty();
-                            form.render();
-                            var str="<option value=''>请选择</option>";
-                            for (var i = 0; i < contract.length; i++) {
-                                 str+="<option value='"+contract[i].contractid+"'>"+contract[i].contractname+"</option>";
-                            }
-                            $("#contractid").html(str);
-                            form.render();
-                        }
-                    });
-                }
-            });
-        })
-
-        form.on('select(contractid)', function(data){
-            $.ajax({
-                type:'get',
-                url: '/aftersale/queryContractSaleByContractId.do?contractid='+data.value,
-                datatype: 'json',
-                success:function(aftersale){
-                    $("#username").val(aftersale.username);
-                    $("#userid").val(aftersale.userid);
-                   var str="【合同全称】:"+aftersale.contractname+"  【合同所属部门】:"+aftersale.deptname+"  【关联人员】:"
-                       +aftersale.associatedpersons+"  【签约日期】:  "+aftersale.signingdate+"  【生效日期】："+aftersale.takedate
-                       +"  【合同状态】："+aftersale.todaystate+"  【服务期至】："+aftersale.serviceto;
-                    $("#info").val(str);
-
-                }
-            });
-        })
-
-        //普通图片上传
-        var uploadInst = upload.render({
-            elem: '#card'
-            ,url: '/aftersale/upload.do' //改成您自己的上传接口
-            ,before: function(obj){
-                //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
-                    $('#idcard').attr('src', result); //图片链接（base64）
-                });
-            }
-            ,done: function(res){
-                //如果上传失败
-                if(res.code == 0){
-                    $("#attachment").val(res.data)
-                    layer.msg('上传成功', {icon: 6});
-                }else{
-                    layer.msg('上传失败', {icon: 5});
-                }
-            }
-        });
-
-        form.on('submit(formDemo)', function(data){
-            $.ajax({
-                type: 'post',
-                url: '/aftersale/addAfterSale.do', // ajax请求路径
-                data: data.field,
-                success: function(res){
-                    if(res=='yes'){
-                        layer.msg('添加成功');
-                        location.href="aftersale.html"
-                    }else if(data=='no'){
-                        layer.msg('添加失败');
-                    }
-                }
-            });
-            return false;//禁止跳转，否则会提交两次，且页面会刷新
-        });
 
         form.on('submit(serviceOver)', function(data){
+            var s=$("#serviceid").val();
             $.ajax({
-                type: 'get',
-                url: '/aftersale/addAfterSaleOver.do', // ajax请求路径
-                data: data.field,
+                type: 'post',
+                url: '/aftersale/updateStatusById.do?serviceid='+s, // ajax请求路径
                 success: function(res){
                     if(res=='yes'){
                         layer.msg('处理成功');
@@ -445,25 +331,6 @@
                 }
             });
             return false;//禁止跳转，否则会提交两次，且页面会刷新
-        });
-
-        form.verify({
-            theme: function(value, item) { //value：表单的值、item：表单的DOM对象
-                if(value.trim().length==0 ||null==value){
-                    return '请填写主题';
-                }
-            }
-            ,customername:function (value, item) {
-                if(value.trim().length==0 || null==value){
-                    return '请选择客户名称';
-                }
-            }
-            ,contractid:function (value, item) {
-                if(value.trim().length==0 || null==value){
-                    return '请选择合同编号';
-                }
-            }
-
         });
 
 
