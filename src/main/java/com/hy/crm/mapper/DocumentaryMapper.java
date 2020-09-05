@@ -25,11 +25,14 @@ public interface DocumentaryMapper extends BaseMapper<Documentary> {
      * @return
      */
     @SelectProvider(type = SqlDocumentary.class,method = "queryAll")
-    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo, Integer m,Integer n);
+    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo);
 
     @Select("select * from documentary d,user u where d.userid=u.userid")
     public List<DocumentaryBo> query();
 
-    @Select("select * from documentary d,user u where d.theme ='房地产跟单' and d.userid=u.userid")
-    public DocumentaryBo selectTheme(String theme);
+    @Select("select * from documentary d,user u where d.theme =#{theme} and d.userid=u.userid")
+    public List<DocumentaryBo> selectTheme(String theme);
+
+    @Select("select * from documentary d,user u where d.theme =#{theme} and d.userid=u.userid")
+    public DocumentaryBo selectUpdate(String theme);
 }

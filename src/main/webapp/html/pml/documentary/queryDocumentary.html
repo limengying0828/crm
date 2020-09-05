@@ -70,17 +70,18 @@
             ,dataType:'JSONP'
             ,cols: [[
                 {field:'documentarytime', width:150, title: '跟单时间', sort: true}
-                ,{field:'theme', width:150, title: '跟单主题',templet:'<div><a href="/html/pml/documentary/updateDocumentary.html">{{d.theme}}</a></div>'}/*d代表当前行*/
+                ,{field:'theme', width:150, title: '跟单主题',templet:'<div><a href="/documentary/selectTheme.do?theme={{d.theme}}">{{d.theme}}</a></div>'}/*d代表当前行*/
                 ,{field:'username', width:150, title: '跟单人', sort: true}
                 ,{field:'detail', width:150, title: '详细内容'}
-                ,{field:'attachment', title: '附件', minWidth: 150}
+                ,{field:'attachment',templet:function(d){
+                        return'<div><img style="height: 50px;width: 50px" src='+d.attachment+'></div>'
+                    }, title: '附件', width: 150,sort: true}
             ]]
             ,page: false
         });
 
 
         form.on('submit(formDemo)', function(data){
-            console.log(data.field);
             table.reload('test', {
                 url: '/documentary/queryAll.do'
                 ,where: {
@@ -91,8 +92,11 @@
             });
             return false;
         });
-
     });
+
+    var jump = function (theme) {
+        location.href="/documentary/selectTheme.do?theme="+theme;
+    }
 </script>
 
 </body>

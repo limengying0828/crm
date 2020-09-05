@@ -27,13 +27,13 @@ public class DocumentaryServiceImpl extends ServiceImpl<DocumentaryMapper, Docum
     /**
      * 查询全部跟单
      * @param documentaryBo
-     * @param m
-     * @param n
+     * @param
+     * @param
      * @return
      */
     @Override
-    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo, Integer m,Integer n) {
-        return documentaryMapper.queryAll(documentaryBo,m,n);
+    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo) {
+        return documentaryMapper.queryAll(documentaryBo);
     }
 
     @Override
@@ -42,8 +42,13 @@ public class DocumentaryServiceImpl extends ServiceImpl<DocumentaryMapper, Docum
     }
 
     @Override
-    public DocumentaryBo selectTheme(String theme) {
+    public List<DocumentaryBo> selectTheme(String theme) {
         return documentaryMapper.selectTheme(theme);
+    }
+
+    @Override
+    public DocumentaryBo selectUpdate(String theme) {
+        return documentaryMapper.selectUpdate(theme);
     }
 
     ;
