@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>售后服务</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <script src="../../../js/jquery-3.4.1.js"></script>
+    <script src="../../../layui/layui.js"></script>
+    <script src="../../../js/echarts.min.js"></script>
+</head>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryMySta.do',
+            datatype: 'json',
+            success:function(data){
+                if(null!=data && data.length>0){
+                    for (var i = 0; i <data.length; i++) {
+                        if(data[i].type=='business' && data[i].time=='本周'){
+                            $("#businessCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='business' && data[i].time=='上周'){
+                            $("#businessLastWeekCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='business' && data[i].time=='本月'){
+                            $("#businessMonthCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='business' && data[i].time=='上月'){
+                            $("#businessLastMonthCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='business' && data[i].time=='本季度'){
+                            $("#businessQuarterCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='business' && data[i].time=='上季度'){
+                            $("#businessLastQuarterCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='business' && data[i].time=='本年度'){
+                            $("#businessYearCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='business' && data[i].time=='上年度'){
+                            $("#businessLastYearCount").html("<font size='3' color='black'>"+0/10000+"万</font>");
+                        }
+
+                        if(data[i].type=='buprocess' && data[i].time=='本周'){
+                            $("#busprocessWeek").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='buprocess' && data[i].time=='上周'){
+                            $("#busprocessLastWeek").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='buprocess' && data[i].time=='本月'){
+                            $("#busprocessMonth").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='buprocess' && data[i].time=='上月'){
+                            $("#busprocessLastMonth").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='buprocess' && data[i].time=='本季度'){
+                            $("#busprocessQuarter").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='buprocess' && data[i].time=='上季度'){
+                            $("#busprocessLastQuarter").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='buprocess' && data[i].time=='本年度'){
+                            $("#busprocessYear").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                        if(data[i].type=='buprocess' && data[i].time=='上年度'){
+                            $("#busprocessLastYear").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                        }
+                    }
+                }
+            }
+        });
+    });
+    var weekStatistical=function () {
+        $("#mySta").attr("style","display:none")
+    }
+
+    var businessFunnel=function () {
+        $("#mySta").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:block");
+        // 基于准备好的dom，初始化echarts实例
+        var myFunnelAll = echarts.init(document.getElementById('funnelAll'));
+        var option;
+        option = {
+            title: {
+                text: '全部商机销售漏斗',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                feature: {
+                    dataView: {
+                        readOnly: false
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            calculable: true,
+            series: [{
+                name: '漏斗图',
+                type: 'funnel',
+                left: '10%',
+                top: 60,
+                //x2: 80,
+                bottom: 60,
+                width: '80%',
+                // height: {totalHeight} - y - y2,
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data: [{
+                    value: 60,
+                    name: '初期沟通'
+                },
+                    {
+                        value: 40,
+                        name: '方案和报价'
+                    },
+                    {
+                        value: 20,
+                        name: '竞争或投标'
+                    },
+                    {
+                        value: 80,
+                        name: '商务谈判'
+                    },
+                    {
+                        value: 100,
+                        name: '成交'
+                    }
+                ]
+            }]
+        };
+        myFunnelAll.setOption(option);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myYearFunnelAll = echarts.init(document.getElementById('yearFunnelAll'));
+        var option1;
+        option1 = {
+            title: {
+                text: '本年度商机销售漏斗',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                feature: {
+                    dataView: {
+                        readOnly: false
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            calculable: true,
+            series: [{
+                name: '漏斗图',
+                type: 'funnel',
+                left: '10%',
+                top: 60,
+                //x2: 80,
+                bottom: 60,
+                width: '80%',
+                // height: {totalHeight} - y - y2,
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data: [{
+                    value: 60,
+                    name: '初期沟通'
+                },
+                    {
+                        value: 40,
+                        name: '方案和报价'
+                    },
+                    {
+                        value: 20,
+                        name: '竞争或投标'
+                    },
+                    {
+                        value: 80,
+                        name: '商务谈判'
+                    },
+                    {
+                        value: 100,
+                        name: '成交'
+                    }
+                ]
+            }]
+        };
+        myYearFunnelAll.setOption(option1);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myLastYearFunnelAll = echarts.init(document.getElementById('lastYearFunnelAll'));
+        var option2;
+        option2 = {
+            title: {
+                text: '上年度商机销售漏斗',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                feature: {
+                    dataView: {
+                        readOnly: false
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            calculable: true,
+            series: [{
+                name: '漏斗图',
+                type: 'funnel',
+                left: '10%',
+                top: 60,
+                //x2: 80,
+                bottom: 60,
+                width: '80%',
+                // height: {totalHeight} - y - y2,
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data: [{
+                    value: 60,
+                    name: '初期沟通'
+                },
+                    {
+                        value: 40,
+                        name: '方案和报价'
+                    },
+                    {
+                        value: 20,
+                        name: '竞争或投标'
+                    },
+                    {
+                        value: 80,
+                        name: '商务谈判'
+                    },
+                    {
+                        value: 100,
+                        name: '成交'
+                    }
+                ]
+            }]
+        };
+        myLastYearFunnelAll.setOption(option2);
+
+        // 基于准备好的dom，初始化echarts实例
+        var quarterFunnelAll = echarts.init(document.getElementById('quarter'));
+        var option3;
+        option3 = {
+            title: {
+                text: '本季度商机销售漏斗',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                feature: {
+                    dataView: {
+                        readOnly: false
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            calculable: true,
+            series: [{
+                name: '漏斗图',
+                type: 'funnel',
+                left: '10%',
+                top: 60,
+                //x2: 80,
+                bottom: 60,
+                width: '80%',
+                // height: {totalHeight} - y - y2,
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data: [{
+                    value: 60,
+                    name: '初期沟通'
+                },
+                    {
+                        value: 40,
+                        name: '方案和报价'
+                    },
+                    {
+                        value: 20,
+                        name: '竞争或投标'
+                    },
+                    {
+                        value: 80,
+                        name: '商务谈判'
+                    },
+                    {
+                        value: 100,
+                        name: '成交'
+                    }
+                ]
+            }]
+        };
+        quarterFunnelAll.setOption(option3);
+
+        // 基于准备好的dom，初始化echarts实例
+        var lastQuarterFunnelAll = echarts.init(document.getElementById('lastQuarter'));
+        var option4;
+        option4 = {
+            title: {
+                text: '上季度商机销售漏斗',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                feature: {
+                    dataView: {
+                        readOnly: false
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            calculable: true,
+            series: [{
+                name: '漏斗图',
+                type: 'funnel',
+                left: '10%',
+                top: 60,
+                //x2: 80,
+                bottom: 60,
+                width: '80%',
+                // height: {totalHeight} - y - y2,
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data: [{
+                    value: 60,
+                    name: '初期沟通'
+                },
+                    {
+                        value: 40,
+                        name: '方案和报价'
+                    },
+                    {
+                        value: 20,
+                        name: '竞争或投标'
+                    },
+                    {
+                        value: 80,
+                        name: '商务谈判'
+                    },
+                    {
+                        value: 100,
+                        name: '成交'
+                    }
+                ]
+            }]
+        };
+        lastQuarterFunnelAll.setOption(option4);
+
+    }
+</script>
+<body>
+<i class="layui-icon layui-icon-align-center" style="font-size: 50px;margin-top: 100px;"><font size="5" color="#00bfff">统计分析</font></i>
+<div id="bigDiv" style="width:1500px">
+    <div style="float:left;">
+        <div class="site-text">
+            <form class="layui-form layui-form-pane">
+                <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                    <label class="layui-form-label"><font size="3" color="black">分类</font></label>
+                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:380px;">
+                        <ul>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">我的统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="weekStatistical()"><font color="#6495ed" size="3">本周统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">本月统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">本季度统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">本年度统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="businessFunnel()"><font color="#6495ed" size="3">商机销售漏斗</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">按行业分布</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">按商机来源分布</font></a></i></li><br/>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="float: left;margin-left: 50px;">
+
+        <div class="site-text" id="mySta" >
+            <form class="layui-form layui-form-pane">
+                <table width="100%">
+               <tr>
+                   <td>
+                       <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                           <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">商机数</font></label>
+                           <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 40px;"><font size="3" color="black">本周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 30px;" id="businessCount"></span>
+                               </div>
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 10px;"><font size="3" color="black">上周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 5px;" id="businessLastWeekCount"></span>
+                               </div>
+                           </div>
+                       </div>
+                   </td>
+                   <td style="width: 20px;"></td>
+                   <td>
+                       <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                           <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">成交数</font></label>
+                           <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 30px;"><font size="3" color="black">本周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 40px;" id="busprocessWeek"></span>
+                               </div>
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 10px;"><font size="3" color="black">上周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 5px;" id="busprocessLastWeek"></span>
+                               </div>
+                           </div>
+                       </div>
+                   </td>
+                   <td style="width: 20px;"></td>
+                   <td>
+                       <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                           <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">跟单数</font></label>
+                           <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 40px;"><font size="3" color="black">本周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 30px;"></span>
+                               </div>
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 10px;"><font size="3" color="black">上周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 5px;" ></span>
+                               </div>
+                           </div>
+                       </div>
+                   </td>
+                   <td style="width: 20px;"></td>
+                   <td>
+                       <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                           <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">合同数</font></label>
+                           <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 40px;"><font size="3" color="black">本周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                               </div>
+                               <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                   <span style="margin-left: 10px;"><font size="3" color="black">上周</font></span><br/><br/><br/>
+                                   <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                               </div>
+                           </div>
+                       </div>
+                   </td>
+               </tr>
+                    <tr>
+                        <td style="height: 20px;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">商机数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;" id="businessMonthCount"></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;" id="businessLastMonthCount"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">成交数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;" id="busprocessMonth"></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;" id="busprocessLastMonth"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">跟单数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">合同数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 20px;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">商机数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;"id="businessQuarterCount"></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;" id="businessLastQuarterCount"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">成交数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;" id="busprocessQuarter"></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;" id="busprocessLastQuarter"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">跟单数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">合同数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上季度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 20px;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">商机数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;" id="businessYearCount"></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;" id="businessLastYearCount"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">成交数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;" id="busprocessYear"></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;" id="busprocessLastYear"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">跟单数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <div class="layui-form-item layui-form-text" style="width:200px;height: 260px;">
+                                <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">合同数</font></label>
+                                <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 40px;"><font size="3" color="black">本年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                    <div style="float: left;width: 97px;height: 130px;border:1px solid">
+                                        <span style="margin-left: 10px;"><font size="3" color="black">上年度</font></span><br/><br/><br/>
+                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div style="display: none;width: 800px;height: 340px;" id="funnelStatistical" >
+            <div id="funnelAll" style="width:340px;height:340px;float: left"></div>
+            <div id="businessTable" style="float: left;margin-left: 20px;">
+                <table  id="selectTab" lay-filter="test"></table>
+            </div>
+
+            <div style="height: 20px;"></div>
+            <div id="yearFunnelAll" style="width:340px;height:340px;float: left"></div>
+            <div id="yearBusinessTable" style="float: left;margin-left: 20px;">
+                <table  id="yearSelectTab" lay-filter="yearTest"></table>
+            </div>
+
+            <div style="height: 20px;"></div>
+            <div id="lastYearFunnelAll" style="width:340px;height:340px;float: left"></div>
+            <div id="lastYearBusinessTable" style="float: left;margin-left: 20px;">
+                <table  id="lastYearSelectTab" lay-filter="lastYearTest"></table>
+            </div>
+
+            <div style="height: 20px;"></div>
+            <div id="quarter" style="width:340px;height:340px;float: left"></div>
+            <div id="quarterBusinessTable" style="float: left;margin-left: 20px;">
+                <table  id="quarterSelectTab" lay-filter="quarterSelectTab"></table>
+            </div>
+
+            <div style="height: 20px;"></div>
+            <div id="lastQuarter" style="width:340px;height:340px;float: left"></div>
+            <div id="lastQuarterBusinessTable" style="float: left;margin-left: 20px;">
+                <table  id="lastQuarterSelectTab" lay-filter="lastQuarterSelectTab"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['table','form'], function(){
+        var table = layui.table;
+        var form=layui.form;
+        var $=layui.jquery;
+
+       /* table.render({
+            elem: '#selectTab'
+            ,height: 500
+            ,url: '#' //数据接口
+            ,cols: [[ //表头
+                ,{field: 'theme', title: '商机数', width:291}
+                ,{field: 'typeservices', title: '百分比', width:181}
+                ,{field: 'begintime', title: '金额', width:151, sort: true}
+                ,{field: 'servicespeople', title: '百分比', width:151}
+            ]]
+        });*/
+
+    });
+</script>
+</body>
+</html>

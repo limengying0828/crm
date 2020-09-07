@@ -48,7 +48,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td>主题</td>
+                <td><font color="red">*</font>主题</td>
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
@@ -81,7 +81,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td>客户名称</td>
+                <td><font color="red">*</font>客户名称</td>
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
@@ -95,7 +95,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <select id="contractid" name="contractid" lay-verify="contractid" lay-filter="contractid">
+                            <select id="contractid" name="contractid" lay-verify="contractid" >
                                 <option value="">请选择</option>
                             </select>
                         </div>
@@ -113,7 +113,7 @@
                 </td>
             </tr>
             <tr>
-                <td>对方联系人</td>
+                <td><font color="red">*</font>对方联系人</td>
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
@@ -157,7 +157,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
-                            <select name="typeservices" lay-verify="required">
+                            <select name="typeservices" lay-verify="typeservices">
                                 <option value="">请选择</option>
                                 <option value="故障申报">故障申报</option>
                                 <option value="业务咨询">业务咨询</option>
@@ -172,7 +172,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
-                            <select id="servicemode" name="servicemode" lay-verify="required">
+                            <select id="servicemode" name="servicemode" lay-verify="servicemode">
                                 <option value="">请选择</option>
                                 <option value="故障申报">故障申报</option>
                                 <option value="业务咨询">业务咨询</option>
@@ -185,13 +185,13 @@
                 </td>
             </tr>
             <tr>
-                <td>开始时间</td>
+                <td><font color="red">*</font>开始时间</td>
                 <td>
                     <div class="layui-form">
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <div class="layui-input-inline">
-                                <input type="date" class="layui-input" id="begintime" name="begintime" placeholder="yyyy-MM-dd" lay-key="1">
+                                <input type="date" class="layui-input" id="begintime" name="begintime" lay-verify="begintime" placeholder="yyyy-MM-dd" lay-key="1">
                             </div>
                         </div>
                     </div>
@@ -211,11 +211,11 @@
                 </td>
             </tr>
             <tr>
-                <td>服务内容</td>
+                <td><font color="red">*</font>服务内容</td>
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="servicescontent" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="servicescontent" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="servicescontent">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -231,11 +231,11 @@
                 </td>
             </tr>
             <tr>
-                <td>服务人员</td>
+                <td><font color="red">*</font>服务人员</td>
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="servicespeople"  required lay-verify="" placeholder="请输入"
+                            <input type="text" name="servicespeople"  required lay-verify="servicespeople" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -458,15 +458,27 @@
                     return '请选择客户名称';
                 }
             }
-            ,contractid:function (value, item) {
+            ,typeservices:function (value, item) {
                 if(value.trim().length==0 || null==value){
-                    return '请选择合同编号';
+                    return '请选择服务类型';
                 }
             }
-
+            ,begintime:function (value, item) {
+                if(value.trim().length==0 || null==value){
+                    return '请选择服务开始时间';
+                }
+            }
+            ,servicescontent:function (value, item) {
+                if(value.trim().length==0 || null==value){
+                    return '请输入服务内容';
+                }
+            }
+            ,servicespeople:function (value, item) {
+                if(value.trim().length==0 || null==value){
+                    return '请输入服务人员';
+                }
+            }
         });
-
-
     });
 </script>
 </body>
