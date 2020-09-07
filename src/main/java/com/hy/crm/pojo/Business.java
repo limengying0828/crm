@@ -77,6 +77,9 @@ public class Business implements Serializable {
     @ApiModelProperty(value = "合同优先级")
     private Integer contractpriority;
 
+    @ApiModelProperty(value = "商机添加时间")
+    private String addbusinesstime;
+
     public Integer getCustomerid() {
         return customerid;
     }
@@ -205,6 +208,14 @@ public class Business implements Serializable {
 
     public void setBusinessid(Integer businessid) {
         this.businessid = businessid;
+    }
+
+    public String getAddbusinesstime() {
+        return addbusinesstime;
+    }
+
+    public void setAddbusinesstime(String addbusinesstime) {
+        this.addbusinesstime = addbusinesstime;
     }
 
     @Override

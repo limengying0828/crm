@@ -18,7 +18,7 @@ import java.util.List;
 public interface IAftersaleService extends IService<Aftersale> {
      ContractSaleBo queryContractSale(String contractid);
      List<Aftersale> queryAfterSale(String classification, String key, Integer page, Integer limit, String status);
-     Integer queryCount(String classification, String key,String status);
+     Integer queryCount(String status);
      AfterSaleUserBo queryAfterSaleUserBoByTheme(Integer saleid);
      Boolean updateAfterSaleStatus(Integer serviceid,String overtime);
 }
