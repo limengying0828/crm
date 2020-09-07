@@ -14,14 +14,23 @@
             window.location.href=""
         }
 
+
+
     </script>
 </head>
 <body>
-<div style="width: 80%;float: left" >
-    <form class="layui-form" style="width: 1300px" method="get">
+<div style="width: 8%;float: left">
+    <font size="4">客户管理</font><br><br><br>
+    <div><a href="#" onclick="cone('分类一')"><img src="/html/ykz/img/u214.png">客户分类一</a></div><br>
+    <div><a href="#" onclick="ctwo('分类二')"><img src="/html/ykz/img/u214.png">客户分类二</a></div><br>
+    <div><a href="#" onclick="cthree('分类三')"><img src="/html/ykz/img/u214.png">客户分类三</a></div><br>
+</div>
+
+<div style="width: 65%;float: left" >
+    <form class="layui-form" style="width: 1100px" method="get">
         <div class="layui-inline" style="float:left;">
             <div class="layui-form-item">
-                <div class="layui-input-block" style="width: 200px;">
+                <div class="layui-input-block" style="width: 100px;">
                     <select name="condition">
                         <option value=""></option>
                         <option value="customername">客户名称</option>
@@ -32,9 +41,9 @@
             </div>
         </div>
 
-        <div class="layui-inline">
+        <div class="layui-inline" style="width: 300px">
             <div class="layui-input-block">
-                <input type="text" name="keyword" style="width: 300px;height: 40px;" placeholder="请输入关键字" autocomplete="off"
+                <input type="text" name="keyword" style="width: 250px;height: 40px;" placeholder="请输入关键字" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -47,9 +56,9 @@
     </form>
     </center>
 </div>
-<div style="margin-left: 1000px;margin-top: 0px;">
-    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a1()" value="新增客户" style="font-size: 20px;font-weight: bold;width:140px;height:50px;">
-    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a2()" value="刷新" style="font-size: 20px;font-weight: bold;width:100px;height:50px;">
+<div style="margin-left: 900px;margin-top: 0px;">
+    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a1()" value="新增客户" style="font-size: 20px;font-weight: bold;">
+    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a2()" value="刷新" style="font-size: 20px;font-weight: bold;">
 </div>
 <center>
     <table align="center" id="demo" lay-filter="test"></table>
@@ -61,26 +70,54 @@
         var table = layui.table;
         var form = layui.form;
 
+        window.cone=function(data){
+            console.log(data)
+            table.reload('',{
+                url :'/customer/customerAll.do',
+                where:{
+                    status : data
+                }
+            });
+        }
+        window.ctwo=function(data){
+            console.log(data)
+            table.reload('',{
+                url :'/customer/customerAll.do',
+                where:{
+                    status : data
+                }
+            });
+        }
+        window.cthree=function(data){
+            console.log(data)
+            table.reload('',{
+                url :'/customer/customerAll.do',
+                where:{
+                    status : data
+                }
+            });
+        }
+
         //第一个实例
         table.render({
             elem: '#demo'
-            , height: 680
-            , width: 1500
+            , height: 580
+            , width: 1100
             , toolbar: '#barDemo1'
             , url: '/customer/customerAll.do' //数据接口
             , page: true //开启分页
             , limits: [1, 2, 5, 6, 8, 10, 15, 20]
             , limit: 10
             , cols: [[
-                 {type: 'numbers', title: "序号", width: 80}
-                , {field: 'customername', title: '客户名称', width: 270 ,templet:'<div><a href="/customer/queryall.do?customerid={{d.customerid}}" style="color: #0000FF">{{d.customername}}</a></div>'}
-                , {field: 'businessNumber', title: '商机数', width: 150 , sort: true,templet:'<div><a href="/html/ykz/cusbusinesslist.html" style="color: #0000FF">{{d.businessNumber}}</a></div>'}
-                , {field: 'expectedTransactionAmount', title: '预计成交金额', width: 170, sort: true}
-                , {field: 'contractNumber', title: '合同数', width: 150 , sort: true,templet:'<div><a href="/html/ykz/cuscontractlist.html" style="color: #0000FF">{{d.contractNumber}}</a></div>'}
-                , {field: 'contractmoney', title: '合同金额', width: 160 , sort: true}
-                , {field: 'returned', title: '回款额', width: 160, sort: true}
-                , {field: 'aftersaleNumbre', title: '售后服务数', width: 150, sort: true,templet:'<div><a href="/html/ykz/cusaftersalelist.html" style="color: #0000FF">{{d.aftersaleNumbre}}</a></div>'}
-                , {field: 'average', title: '服务均分', width: 150, sort: true}
+                 {type: 'numbers', title: "序号", width: 58}
+                , {field: 'customername', title: '客户名称', width: 200 ,templet:'<div><a href="/customer/queryall.do?customerid={{d.customerid}}" style="color: #0000FF">{{d.customername}}</a></div>'}
+                , {field: 'businessNumber', title: '商机数', width: 100 , sort: true,templet:'<div><a href="/html/ykz/cusbusinesslist.html" style="color: #0000FF">{{d.businessNumber}}</a></div>'}
+                , {field: 'expectedTransactionAmount', title: '预计成交金额', width: 140, sort: true}
+                , {field: 'contractNumber', title: '合同数', width: 110 , sort: true,templet:'<div><a href="/html/ykz/cuscontractlist.html" style="color: #0000FF">{{d.contractNumber}}</a></div>'}
+                , {field: 'contractmoney', title: '合同金额', width: 120 , sort: true}
+                , {field: 'returned', title: '回款额', width: 120, sort: true}
+                , {field: 'aftersaleNumbre', title: '售后服务数', width: 120, sort: true,templet:'<div><a href="/html/ykz/cusaftersalelist.html" style="color: #0000FF">{{d.aftersaleNumbre}}</a></div>'}
+                , {field: 'average', title: '服务均分', width: 120, sort: true}
             ]]
         });
 

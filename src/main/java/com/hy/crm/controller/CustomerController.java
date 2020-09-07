@@ -4,7 +4,9 @@ package com.hy.crm.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hy.crm.bo.ykz.BusinessBo;
 import com.hy.crm.bo.ykz.CbcaBo;
+import com.hy.crm.pojo.Business;
 import com.hy.crm.pojo.Customer;
 import com.hy.crm.pojo.Finance;
 import com.hy.crm.service.ICustomerService;
@@ -175,6 +177,24 @@ public class CustomerController {
     }
 
     /**
+     *查商机
+     */
+    @GetMapping("/businessQueryall.do")
+    @ResponseBody
+    public LayuiUtils businessQueryall(String businessname,String todaystate,String userId,String makemoney,String documentarytime,String forum) {
+        List<BusinessBo> list1=iCustomerService.businessQueryall(businessname,todaystate,userId,makemoney,documentarytime,forum);
+        LayuiUtils layuiUtils=new LayuiUtils();
+        layuiUtils.setCode(0);
+        layuiUtils.setMsg("查询成功");
+        layuiUtils.setCount(list1.size());
+        layuiUtils.setData(list1);
+        return layuiUtils;
+    }
+
+
+
+
+     /**
      * 根据客户名称查询客户信息
      * @param customername
      * @return

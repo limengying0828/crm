@@ -30,7 +30,7 @@
 <form class="layui-form" action="/customer/update.do" method="post">
     <input type="hidden" id="customerid" name="customerid" th:value="${customer.customerid}">
     <center>
-        <table width="80%">
+        <table width="90%">
             <tr>
                 <td><font size="5">[[${customer.customername}]]</font></td>
                 <td></td>
@@ -84,30 +84,10 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
                             <select name="customerclass" >
-                                <span th:if="${customer.customerclass}==0">
-                                    <option value="0" selected="selected"></option>
-                                    <option value="1">老客户</option>
-                                    <option value="2">代理商</option>
-                                    <option value="3">其他</option>
-                                </span>
-                                <span th:if="${customer.customerclass}==1">
-                                    <option value="0"></option>
-                                    <option value="1" selected="selected">客户分类1</option>
-                                    <option value="2">客户分类2</option>
-                                    <option value="3">客户分类3</option>
-                                </span>
-                                <span th:if="${customer.customerclass}==2">
-                                    <option value="0"></option>
-                                    <option value="1">客户分类1</option>
-                                    <option value="2" selected="selected">客户分类2</option>
-                                    <option value="3">客户分类3</option>
-                                </span>
-                                <span th:if="${customer.customerclass}==3">
-                                    <option value="0"></option>
-                                    <option value="1">客户分类1</option>
-                                    <option value="2">客户分类2</option>
-                                    <option value="3" selected="selected">客户分类3</option>
-                                </span>
+                                <option value="0" th:selected="${customer.customerclass=='0' ? true:false}"></option>
+                                <option value="1" th:selected="${customer.customerclass=='1' ? true:false}">客户分类一</option>
+                                <option value="2" th:selected="${customer.customerclass=='2' ? true:false}">客户分类二</option>
+                                <option value="3" th:selected="${customer.customerclass=='3' ? true:false}">客户分类三</option>
                             </select>
                         </div>
                     </div>
@@ -117,30 +97,13 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
                             <select name="customersource"  lay-verify="required">
-                                <span th:if="${customer.customersource}==0">
-                                    <option value="0" selected="selected"></option>
-                                    <option value="1">老客户</option>
-                                    <option value="2">代理商</option>
-                                    <option value="3">其他</option>
-                                </span>
-                                <span th:if="${customer.customersource}==1">
-                                    <option value="0"></option>
-                                    <option value="1" selected="selected">老客户</option>
-                                    <option value="2">代理商</option>
-                                    <option value="3">其他</option>
-                                </span>
-                                <span th:if="${customer.customersource}==2">
-                                    <option value="0"></option>
-                                    <option value="1">老客户</option>
-                                    <option value="2" selected="selected">代理商</option>
-                                    <option value="3">其他</option>
-                                </span>
-                                <span th:if="${customer.customersource}==3">
-                                    <option value="0"></option>
-                                    <option value="1">老客户</option>
-                                    <option value="2">代理商</option>
-                                    <option value="3" selected="selected">其他</option>
-                                </span>
+                                <option value="0" th:selected="${customer.customersource=='0' ? true:false}"></option>
+                                <option value="1" th:selected="${customer.customersource=='1' ? true:false}">老客户</option>
+                                <option value="2" th:selected="${customer.customersource=='2' ? true:false}">代理商</option>
+                                <option value="1" th:selected="${customer.customersource=='3' ? true:false}">合作伙伴</option>
+                                <option value="2" th:selected="${customer.customersource=='4' ? true:false}">互联网</option>
+                                <option value="3" th:selected="${customer.customersource=='5' ? true:false}">其他</option>
+
                             </select>
                         </div>
                     </div>
@@ -152,32 +115,11 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
                             <select name="industry"  lay-verify="required">
-                                <span th:if="${customer.industry}==0">
-                                    <option value="0" selected="selected"></option>
-                                    <option value="1">老客户</option>
-                                    <option value="2">代理商</option>
-                                    <option value="3">其他</option>
-                                </span>
-                                <span th:if="${customer.industry}==1">
-                                    <option value="0"></option>
-                                    <option value="1" selected="selected">IT</option>
-                                    <option value="2">银行</option>
-                                    <option value="3">保险</option>
-                                </span>
-                                <span th:if="${customer.industry}==2">
-                                    <option value="0"></option>
-                                    <option value="1">IT</option>
-                                    <option value="2" selected="selected">银行</option>
-                                    <option value="3">保险</option>
-                                </span>
-                                <span th:if="${customer.industry}==3">
-                                    <option value="0"></option>
-                                    <option value="1">IT</option>
-                                    <option value="2">银行</option>
-                                    <option value="3" selected="selected">保险</option>
-                                </span>
-
-
+                                <option value="0" th:selected="${customer.industry=='0' ? true:false}"></option>
+                                <option value="1" th:selected="${customer.industry=='1' ? true:false}">IT</option>
+                                <option value="2" th:selected="${customer.industry=='2' ? true:false}">金融</option>
+                                <option value="2" th:selected="${customer.industry=='3' ? true:false}">广告</option>
+                                <option value="3" th:selected="${customer.industry=='4' ? true:false}">其他</option>
                             </select>
                         </div>
                     </div>
@@ -217,7 +159,7 @@
                 <td colspan="3" align="right">
                     <div class="layui-form-item" >
                         <div class="layui-input-block">
-                            <input type="text" name="address" th:value="${customer.address}" style="width: 955px;" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="address" th:value="${customer.address}" style="width: 922px;" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -329,7 +271,7 @@
                 <td colspan="3" align="right" >
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="additional" style="width: 955px;height: 50px" required lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <textarea name="additional" style="width: 922px;height: 50px" required lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
                                 [[${customer.additional}]]
                             </textarea>
                         </div>

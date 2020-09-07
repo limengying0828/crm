@@ -45,7 +45,7 @@ public class Remits implements Serializable {
     private Integer customerid;
 
     @ApiModelProperty(value = "合同编号")
-    private Integer contractid;
+    private String contractid;
 
     @ApiModelProperty(value = "合同说明")
     private String incomestatement;
@@ -106,13 +106,15 @@ public class Remits implements Serializable {
     public void setCustomerid(Integer customerid) {
         this.customerid = customerid;
     }
-    public Integer getContractid() {
+
+    public String getContractid() {
         return contractid;
     }
 
-    public void setContractid(Integer contractid) {
+    public void setContractid(String contractid) {
         this.contractid = contractid;
     }
+
     public String getIncomestatement() {
         return incomestatement;
     }
