@@ -33,7 +33,6 @@
                 <td></td>
                 <td></td>
             </tr>
-
             <tr>
                 <td>商机全称</td>
                 <td>
@@ -61,7 +60,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name=""  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="userId"  style="width: 290px;" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -70,7 +69,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name=""  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="post"  style="width: 290px;" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -91,7 +90,7 @@
                 <td align="right">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input type="text" name="" required lay-verify="date" style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
+                            <input type="text" name="overdate" required lay-verify="date" style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
                         </div>
                     </div>
                 </td>
@@ -129,28 +128,32 @@
             , height: 400
             , width: 1120
             , toolbar: '#barDemo1'
-            , url: '/customer/customerAll.do' //数据接口
-            , page: true //开启分页
+            , url: '/customer/businessQueryall.do' //数据接口
+            , page: false //开启分页
             , limits: [1, 2, 5, 6, 8, 10, 15, 20]
             , limit: 10
             , cols: [[
-                {type: '', title: "序号", width: 80}/*,templet:'<div><a href="" style="color: #0000FF">{{d.}}</a></div>'*/
-                , {field: '', title: '商机名称', width: 270 }
-                , {field: '', title: '商机阶段', width: 150 , sort: true}
-                , {field: '', title: '预计成交金额', width: 170, sort: true}
-                , {field: '', title: '商机负责人', width: 150 , sort: true}
-                , {field: '', title: '最后跟单', width: 160 , sort: true }
-                , {field: '', title: '讨论版', width: 140, sort: true }
+                {type: 'numbers', title: "序号", width: 77}/*,templet:'<div><a href="" style="color: #0000FF">{{d.}}</a></div>'*/
+                , {field: 'businessname', title: '商机名称', width: 262 }
+                , {field: 'todaystate', title: '商机阶段', width: 150 , sort: true}
+                , {field: 'makemoney', title: '预计成交金额', width: 170, sort: true}
+                , {field: 'userId', title: '商机负责人', width: 150 , sort: true}
+                , {field: 'documentarytime', title: '最后跟单时间', width: 160 , sort: true }
+                , {field: 'forum', title: '讨论版', width: 140, sort: true }
             ]]
         });
 
         //监听提交   模糊查询
         form.on('submit(formDemo)', function (data) {
             table.reload('demo', {
-                url: '',
+                url: '/customer/businessQueryall.do',
                 where: { //设定异步数据接口的额外参数，任意设
-                    condition: data.field.condition
-                    , keyword: data.field.keyword
+                    businessname: data.field.businessname
+                    , todaystate: data.field.todaystate
+                    , userId: data.field.userId
+                    , post: data.field.post
+                    , makemoney: data.field.makemoney
+                    , overdate: data.field.overdate
                 }
                 , page: {
                     curr: 1 //重新从第 1 页开始

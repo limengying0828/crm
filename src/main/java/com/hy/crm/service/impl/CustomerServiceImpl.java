@@ -2,7 +2,9 @@ package com.hy.crm.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.hy.crm.bo.ykz.BusinessBo;
 import com.hy.crm.bo.ykz.CbcaBo;
+import com.hy.crm.mapper.BusinessMapper;
 import com.hy.crm.pojo.*;
 import com.hy.crm.mapper.CustomerMapper;
 import com.hy.crm.service.*;
@@ -30,6 +32,9 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     private CustomerMapper customerMapper;
 
     @Autowired
+    private BusinessMapper businessMapper;
+
+    @Autowired
     private IBusinessService iBusinessService;
 
     @Autowired
@@ -41,6 +46,8 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     @Autowired
     private IRemitsService iRemitsService;
 
+    @Autowired
+    private IBusprocessService iBusprocessService;
     /**
      * 查询所有
      * @return
@@ -72,24 +79,34 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             Float feta = 0.0f;
             for(Business lb:listbusiness){
                 feta +=lb.getMakemoney();
-                cbcaBo.setExpectedTransactionAmount(feta);//预计成交金额
             }
+            cbcaBo.setExpectedTransactionAmount(feta);//预计成交金额
             //拿到客户id,根据客户id去合同表查询有几条合同
             QueryWrapper queryWrapper2=new QueryWrapper();
-            queryWrapper2.eq("customerid",cuid);
+            queryWrapper2.eq("customername",cuname);
             List<Contract> listcontract=iContractService.list(queryWrapper2);
-            List<Remits> listremist=iRemitsService.list(queryWrapper2);
+
             int contractNumber=listcontract.size();
             Float con=0.0f;
             Float rem=0.0f;
             for(Contract lc:listcontract){
                 con+=lc.getContractmoney();
-                cbcaBo.setContractmoney(con);//合同金额
             }
-            for(Remits lr:listremist){
-                rem+=lr.getIncomemoney();
-                cbcaBo.setReturned(rem);//回款额
+            cbcaBo.setContractmoney(con);//合同金额
+
+            /*
+            * 查回款额
+            * */
+            for (Contract lct:listcontract) {
+                String contractid=lct.getContractid();
+                QueryWrapper queryWrapper4=new QueryWrapper();
+                queryWrapper4.eq("contractid",contractid);
+                List<Remits> listremist=iRemitsService.list(queryWrapper4);
+                for(Remits lr:listremist){
+                    rem+=lr.getIncomemoney();
+                }
             }
+            cbcaBo.setReturned(rem);//回款额
             //拿到客户id,根据客户id去售后服务表查询有几条售后服务
             QueryWrapper queryWrapper3=new QueryWrapper();
             queryWrapper3.eq("customerid",cuid);
@@ -112,5 +129,34 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         return list1;
     }
 
+    @Override
+    public List<BusinessBo> businessQueryall( String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum) {
+        List<BusinessBo> boList=new ArrayList<>();
+        BusinessBo businessBo=new BusinessBo();
+
+        List<Business> list=iBusinessService.list();
+        Integer buid=0;
+        String bname="";
+        for(Business li:list){
+            buid=li.getBusinessid();
+            bname=li.getBusinessname();
+        }
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("businessid",buid);
+        List<Busprocess> busprocessList=iBusprocessService.list(queryWrapper);
+        for(Busprocess lp:busprocessList){
+            lp.getTodaystate();
+        }
+
+
+        businessBo.setBusinessname(bname);//商机名称
+        /*businessBo.setTodaystate();//商机阶段
+        businessBo.setUserId();//商机负责人
+        businessBo.setMakemoney();//预计成交金额
+        businessBo.setDocumentarytime();//最后跟单时间
+        businessBo.setForum();//讨论版*/
+        boList.add(businessBo);
+        return boList;
+    }
 
 }
