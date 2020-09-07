@@ -1,7 +1,13 @@
 package com.hy.crm.mapper;
 
-import com.hy.crm.pojo.Contract;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hy.crm.bo.pml.ContractBo;
+import com.hy.crm.bo.pml.SqlDocumentary;
+import com.hy.crm.pojo.Contract;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +19,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ContractMapper extends BaseMapper<Contract> {
 
+    /**
+     * 查询所有合同信息
+     * @param
+     * @param page
+     * @param limit
+     * @return
+     */
+    @SelectProvider(type = SqlDocumentary.class,method = "queryContract")
+    public List<ContractBo> queryContract(@Param("classification")String classification, @Param("key")String key, @Param("page") Integer page, @Param("limit") Integer limit);
 }

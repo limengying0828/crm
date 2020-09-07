@@ -22,4 +22,7 @@ public interface ICustomerService extends IService<Customer> {
     public List<CbcaBo> queryAll(IPage<Customer> page, String condition,String keyword);
 
     public List<BusinessBo> businessQueryall( String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum);
+
+    public Customer queryAllByName(String customername);
+
 }

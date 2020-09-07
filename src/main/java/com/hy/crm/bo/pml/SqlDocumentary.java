@@ -1,6 +1,6 @@
 package com.hy.crm.bo.pml;
 
-import org.springframework.util.StringUtils;
+import org.springframework.data.repository.query.Param;
 
 /**
  * @Author 潘梦丽
@@ -9,26 +9,36 @@ import org.springframework.util.StringUtils;
 public class SqlDocumentary {
 
     /**
-     * 查询所有跟单
+     * 查询所有跟单信息
      */
-    public String  queryAll(DocumentaryBo documentaryBo){
+    public String  queryAll(@Param("classification")String classification, @Param("key")String key, @Param("page")Integer page, @Param("limit") Integer limit){
        StringBuffer stringBuffer= new StringBuffer("select * from documentary d,user u where d.userid=u.userid  ");
-       /*if (StringUtils.isEmpty(documentaryBo)){
-           stringBuffer.append(" limit " + m + " , " + n);
-       }*/
-        if (!StringUtils.isEmpty(documentaryBo)){
-            if(!StringUtils.isEmpty(documentaryBo.getDocumentarytime())){
-                stringBuffer.append(" and d.documentarytime like '%"+documentaryBo.getDocumentarytime()+"%'");
-            }
-            if (!StringUtils.isEmpty(documentaryBo.getTheme())){
-                System.out.println(documentaryBo.getTheme());
-                stringBuffer.append(" and d.theme like '%"+documentaryBo.getTheme()+"%'");
-            }
-            if (!StringUtils.isEmpty(documentaryBo.getUsername())){
-                stringBuffer.append(" and u.username like '%"+documentaryBo.getUsername()+"%'");
-            }
-            //stringBuffer.append(" limit " + m + " , " + n);
+        if (page==null){
+            page=1;
         }
+        if (null!=classification &&  !"".equals(classification) &&  null!=key  &&  !"".equals(key)){
+            stringBuffer.append(" and "+classification+" like '%" + key + "%' ");
+        }
+        stringBuffer.append(" limit "+((page-1)*limit)+","+limit);
+        return stringBuffer.toString();
+    }
+
+    /**
+     * 查询所有合同信息
+     * @param
+     * @param page
+     * @param limit
+     * @return
+     */
+    public String queryContract(@Param("classification")String classification, @Param("key")String key, @Param("page")Integer page, @Param("limit") Integer limit){
+        StringBuffer stringBuffer=new StringBuffer("select * from contract c,makeapply m where c.contractid=m.contractid ");
+        if (page==null){
+            page=1;
+        }
+            if (null!=classification &&  !"".equals(classification) && null!=key && !"".equals(key)){
+                stringBuffer.append(" and "+classification+" like '%" + key + "%' ");
+            }
+        stringBuffer.append(" limit "+((page-1)*limit)+","+limit);
         return stringBuffer.toString();
     }
 }

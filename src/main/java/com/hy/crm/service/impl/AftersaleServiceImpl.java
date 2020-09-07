@@ -34,8 +34,8 @@ public class AftersaleServiceImpl extends ServiceImpl<AftersaleMapper, Aftersale
     }
 
     @Override
-    public Integer queryCount(String classification, String key, String status) {
-        return aftersaleMapper.queryCount(classification,key,status);
+    public Integer queryCount(String status) {
+        return aftersaleMapper.queryCount(status);
     }
 
     @Override

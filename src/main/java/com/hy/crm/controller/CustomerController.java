@@ -16,12 +16,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -196,5 +194,15 @@ public class CustomerController {
 
 
 
+     /**
+     * 根据客户名称查询客户信息
+     * @param customername
+     * @return
+     */
+    @GetMapping("/queryAllByName.do")
+    @ResponseBody
+    public Customer queryAllByName(String customername){
+       return iCustomerService.queryAllByName(customername);
+    }
 
 }

@@ -2,9 +2,10 @@ package com.hy.crm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -54,7 +55,7 @@ public class Makeapply implements Serializable {
     private Integer customerid;
 
     @ApiModelProperty(value = "关联合同(合同编号)")
-    private Integer contractid;
+    private String contractid;
 
     @ApiModelProperty(value = "开票种类")
     private String makekind;
@@ -73,6 +74,14 @@ public class Makeapply implements Serializable {
 
     @ApiModelProperty(value = "附件")
     private String attachment;
+
+    public String getContractid() {
+        return contractid;
+    }
+
+    public void setContractid(String contractid) {
+        this.contractid = contractid;
+    }
 
     public Integer getMakeid() {
         return makeid;
@@ -148,16 +157,6 @@ public class Makeapply implements Serializable {
         return customerid;
     }
 
-    public void setCustomerid(Integer customerid) {
-        this.customerid = customerid;
-    }
-    public Integer getContractid() {
-        return contractid;
-    }
-
-    public void setContractid(Integer contractid) {
-        this.contractid = contractid;
-    }
     public String getMakekind() {
         return makekind;
     }

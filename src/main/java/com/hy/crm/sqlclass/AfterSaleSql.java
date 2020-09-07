@@ -32,7 +32,7 @@ public class AfterSaleSql {
             buffer.append(" and a.realstatus='已撤除'");
         }
         if(!StringUtils.isNullOrEmpty(status) && status.equals("本周")){
-            buffer.append(" and DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= a.begintime");
+            buffer.append(" and YEARWEEK(date_format(a.begintime,'%Y-%m-%d'),-1) = YEARWEEK(date_format(NOW(),'%Y-%m-%d'))");
         }
         if(!StringUtils.isNullOrEmpty(status) && status.equals("上周")){
             buffer.append(" and YEARWEEK(date_format(a.begintime,'%Y-%m-%d'),1) = YEARWEEK(date_format(NOW(),'%Y-%m-%d'))");
@@ -53,12 +53,8 @@ public class AfterSaleSql {
         return buffer.toString();
     }
 
-    public String querySumCount(@Param("classification")String classification, @Param("key")String key,@Param("status")String status){
+    public String querySumCount(String status){
         StringBuffer buffer=new StringBuffer("select count(*) from aftersale a where 1=1  ");
-
-        if(!StringUtils.isNullOrEmpty(classification) && !StringUtils.isNullOrEmpty(key)){
-            buffer.append(" and "+classification+" like '%"+key+"%'");
-        }
         if(!StringUtils.isNullOrEmpty(status)&& status.equals("处理中")){
             buffer.append(" and a.realstatus='处理中'");
         }
@@ -69,7 +65,7 @@ public class AfterSaleSql {
             buffer.append(" and a.realstatus='已撤除'");
         }
         if(!StringUtils.isNullOrEmpty(status)&&status.equals("本周")){
-            buffer.append(" and DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= a.begintime");
+            buffer.append(" and YEARWEEK(date_format(a.begintime,'%Y-%m-%d'),-1) = YEARWEEK(date_format(NOW(),'%Y-%m-%d'))");
         }
         if(!StringUtils.isNullOrEmpty(status)&&status.equals("上周")){
             buffer.append(" and YEARWEEK(date_format(a.begintime,'%Y-%m-%d'),1) = YEARWEEK(date_format(NOW(),'%Y-%m-%d'))");

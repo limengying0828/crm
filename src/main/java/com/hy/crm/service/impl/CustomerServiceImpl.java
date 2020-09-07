@@ -6,14 +6,15 @@ import com.hy.crm.bo.ykz.BusinessBo;
 import com.hy.crm.bo.ykz.CbcaBo;
 import com.hy.crm.mapper.BusinessMapper;
 import com.hy.crm.pojo.*;
-import com.hy.crm.mapper.CustomerMapper;
-import com.hy.crm.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hy.crm.bo.ykz.CbcaBo;
+import com.hy.crm.mapper.CustomerMapper;
+import com.hy.crm.pojo.*;
+import com.hy.crm.service.*;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,23 +132,22 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
 
     @Override
     public List<BusinessBo> businessQueryall( String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum) {
-        List<BusinessBo> boList=new ArrayList<>();
-        BusinessBo businessBo=new BusinessBo();
+        List<BusinessBo> boList = new ArrayList<>();
+        BusinessBo businessBo = new BusinessBo();
 
-        List<Business> list=iBusinessService.list();
-        Integer buid=0;
-        String bname="";
-        for(Business li:list){
-            buid=li.getBusinessid();
-            bname=li.getBusinessname();
+        List<Business> list = iBusinessService.list();
+        Integer buid = 0;
+        String bname = "";
+        for (Business li : list) {
+            buid = li.getBusinessid();
+            bname = li.getBusinessname();
         }
-        QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("businessid",buid);
-        List<Busprocess> busprocessList=iBusprocessService.list(queryWrapper);
-        for(Busprocess lp:busprocessList){
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("businessid", buid);
+        List<Busprocess> busprocessList = iBusprocessService.list(queryWrapper);
+        for (Busprocess lp : busprocessList) {
             lp.getTodaystate();
         }
-
 
         businessBo.setBusinessname(bname);//商机名称
         /*businessBo.setTodaystate();//商机阶段
@@ -157,6 +157,10 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         businessBo.setForum();//讨论版*/
         boList.add(businessBo);
         return boList;
+    }
+    @Override
+    public Customer queryAllByName(String customername) {
+        return customerMapper.queryAllByName(customername);
     }
 
 }

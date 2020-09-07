@@ -9,8 +9,8 @@
     <script src="../../../layui/layui.js"></script>
 </head>
 <script type="text/javascript">
-    addAfterSale=function () {
-        location.href="addaftersale.html";
+    addContract=function () {
+        window.open("addContract.html");
     }
 </script>
 <body>
@@ -46,12 +46,11 @@
             <div class="layui-inline" >
                 <label class="layui-form-label">主题</label>
                 <div class="layui-input-inline">
-
-                    <select id="deptno" name="deptno" lay-verify="otherReq" >
+                    <select id="classification" name="classification" lay-verify="otherReq" >
                         <option value="">请选择</option>
-                        <option value="">按合同全称</option>
-                        <option value="">按合同编号</option>
-                        <option value="">按签约日期</option>
+                        <option value="contractname">按合同全称</option>
+                        <option value="contractid">按合同编号</option>
+                        <option value="signingdate">按签约日期</option>
                     </select>
                 </div>
             </div>
@@ -62,7 +61,7 @@
             </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo"><i class="layui-icon layui-icon-search" > </i></button>
+                    <button class="layui-btn" lay-submit lay-filter="search"><i class="layui-icon layui-icon-search" > </i></button>
                 </div>
             </div>
             <div class="layui-inline" style="width: 30px;"></div>
@@ -94,9 +93,19 @@
                 ,{field: 'contractid', title: '合同编号', width:180}
                 ,{field: 'contractmoney', title: '合同金额', width:150, sort: true}
                 ,{field: 'remittancecount', title: '汇款额', width:150}
-                ,{field: 'makecount', title: '开票额', width: 120}
+                ,{field: 'makemoney', title: '开票额', width: 120}
                 ,{field: 'signingdate', title: '签约日期', width: 120}
             ]]
+        });
+
+
+        form.on('submit(search)', function(data){
+            alert(data.field)
+            table.reload('selectTab', {
+                url:'/contract/selectContract.do'
+                ,where:data.field//设定异步数据接口的额外参数
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
 
     });

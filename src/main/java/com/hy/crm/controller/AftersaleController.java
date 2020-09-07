@@ -113,7 +113,7 @@ public class AftersaleController {
         List<Aftersale> list=aftersaleService.queryAfterSale(classification,key,page,limit,status);
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
-        msgUtils.setCount(aftersaleService.queryCount(classification,key,status));
+        msgUtils.setCount(aftersaleService.queryCount(status));
         msgUtils.setMsg("");
         msgUtils.setData(list);
         return msgUtils;

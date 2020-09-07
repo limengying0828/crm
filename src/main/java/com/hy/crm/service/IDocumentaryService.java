@@ -18,12 +18,12 @@ public interface IDocumentaryService extends IService<Documentary> {
 
     /**
      * 查询所有跟单信息
-     * @param documentaryBo
+     * @param
      * @param
      * @param
      * @return
      */
-    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo);
+    public List<DocumentaryBo> queryAll(String classification,String key,Integer page,Integer limit);
 
 
     public List<DocumentaryBo> select();
