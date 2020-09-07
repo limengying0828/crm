@@ -22,7 +22,7 @@ public class Contract implements Serializable {
     private String contractid;
 
     @ApiModelProperty(value = "客户编号")
-    private Integer customerid;
+    private String customername;
 
     @ApiModelProperty(value = "合同名称（客户名+合同名）")
     private String contractname;
@@ -73,18 +73,12 @@ public class Contract implements Serializable {
         return contractid;
     }
 
-    public void setContractid(String contractid) {
-        this.contractid = contractid;
-    }
-    public Integer getCustomerid() {
-        return customerid;
+    public String getCustomername() {
+        return customername;
     }
 
-    public void setCustomerid(Integer customerid) {
-        this.customerid = customerid;
-    }
-    public String getContractname() {
-        return contractname;
+    public void setCustomername(String customername) {
+        this.customername = customername;
     }
 
     public void setContractname(String contractname) {
@@ -196,7 +190,7 @@ public class Contract implements Serializable {
     public String toString() {
         return "Contract{" +
             "contractid=" + contractid +
-            ", customerid=" + customerid +
+            ",customername =" + customername +
             ", contractname=" + contractname +
             ", contractmoney=" + contractmoney +
             ", remittancecount=" + remittancecount +
