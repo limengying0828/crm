@@ -1,17 +1,10 @@
 package com.hy.crm.mapper;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.hy.crm.bo.ykz.CbcaBo;
-import com.hy.crm.pojo.Customer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hy.crm.yuutils.SqlDynamic;
+import com.hy.crm.pojo.Customer;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * <p>
@@ -24,11 +17,10 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CustomerMapper extends BaseMapper<Customer> {
-    /**
-     * 查询所有+多条件查询
+   /* *
+     * 根据客户名称查询客户信息
      * @return
-     * RowBounds rowBounds
-     */
-    /*@Select("select * from customer")
-    public List<Customer> queryAll(IPage<Customer> page);*/
+     * RowBounds rowBounds*/
+    @Select("select * from customer where customername = #{customername}")
+    public Customer queryAllByName(String customername);
 }

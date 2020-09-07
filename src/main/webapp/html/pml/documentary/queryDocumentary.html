@@ -13,26 +13,32 @@
 <body>
 
     <div style="float: right;width: 100%">
-
-        <form class="layui-form-item" action="/documentary/queryAll.do">
-            <div class="layui-form-item">
-                <label class="layui-form-label">输入框</label>
-                <div class="layui-input-block" style="width: 30%">
-                    <input type="text" style="width: 150px" name="theme"  placeholder="请输入跟单主题"  class="layui-input">
+        <form class="layui-form-item">
+            <div class="layui-inline" >
+                <label class="layui-form-label">主题</label>
+                <div class="layui-input-inline">
+                    <select id="classification" name="classification" lay-verify="otherReq" >
+                        <option value="">请选择</option>
+                        <option value="theme">按跟单主题</option>
+                        <option value="documentarytime">按跟单时间</option>
+                        <option value="username">按跟单人</option>
+                    </select>
                 </div>
+            </div>
 
-                <div class="layui-input-block" style="width: 30%">
-                    <input type="text" style="width: 150px" name="documentarytime"  placeholder="请输入跟单时间"  class="layui-input">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="key" required  lay-verify="otherReq" placeholder="请输入关键字" autocomplete="off" class="layui-input">
                 </div>
-
-                <div class="layui-input-block" style="width: 30%">
-                    <input type="text" style="width: 150px" name="username"  placeholder="请输入跟单人"  class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <button class="layui-btn" lay-submit lay-filter="search"><i class="layui-icon layui-icon-search" > </i></button>
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -43,7 +49,7 @@
             <div class="layui-btn-container">
                 <button class="layui-btn " lay-event="add">
                     <i class="layui-icon">&#xe61f;</i>
-                    <a href="/html/pml/documentary/addDocument.html">添加</a>
+                    <a href="/html/pml/documentary/addDocument.html">新增跟单</a>
                 </button>
             </div>
         </script>
@@ -61,6 +67,7 @@
         var table = layui.table;
         var form =layui.form;
         var layer = layui.layer;
+        var $ = layui.jquery;
 
         table.render({
              elem: '#test'
@@ -77,11 +84,12 @@
                         return'<div><img style="height: 50px;width: 50px" src='+d.attachment+'></div>'
                     }, title: '附件', width: 150,sort: true}
             ]]
-            ,page: false
+            ,page: true
+            ,limit:5
         });
 
 
-        form.on('submit(formDemo)', function(data){
+       /* form.on('submit(formDemo)', function(data){
             table.reload('test', {
                 url: '/documentary/queryAll.do'
                 ,where: {
@@ -91,12 +99,19 @@
                 } //设定异步数据接口的额外参数
             });
             return false;
+        });*/
+
+        form.on('submit(search)', function(data){
+            alert(data.field)
+            table.reload('test', {
+                url:'/documentary/queryAll.do'
+                ,where:data.field//设定异步数据接口的额外参数
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
+
     });
 
-    var jump = function (theme) {
-        location.href="/documentary/selectTheme.do?theme="+theme;
-    }
 </script>
 
 </body>

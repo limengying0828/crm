@@ -46,13 +46,13 @@ public class DocumentaryController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/queryAll.do")
-    public MsgUtils queryAll(DocumentaryBo documentaryBo){
-        List<DocumentaryBo> list =iDocumentaryService.queryAll(documentaryBo);
+    @GetMapping("/queryAll.do")
+    public MsgUtils queryAll(String classification,String key,Integer page,Integer limit){
+        List<DocumentaryBo> list =iDocumentaryService.queryAll(classification,key,page,limit);
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
         msgUtils.setMsg("查询成功");
-        msgUtils.setCount(list.size()-1);
+        msgUtils.setCount(list.size());
         msgUtils.setData(list);
         return msgUtils;
     }
@@ -116,7 +116,7 @@ public class DocumentaryController {
 
     @RequestMapping("/updateDocumentary.do")
     public String updateDocumentary(Documentary documentaryBo){
-        iDocumentaryService.updateById(documentaryBo);
+        iDocumentaryService.save(documentaryBo);
         return "redirect:/html/pml/documentary/queryDocumentary.html";
     }
 }

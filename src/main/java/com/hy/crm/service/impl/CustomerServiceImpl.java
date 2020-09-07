@@ -2,16 +2,15 @@ package com.hy.crm.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.hy.crm.bo.ykz.CbcaBo;
-import com.hy.crm.pojo.*;
-import com.hy.crm.mapper.CustomerMapper;
-import com.hy.crm.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hy.crm.bo.ykz.CbcaBo;
+import com.hy.crm.mapper.CustomerMapper;
+import com.hy.crm.pojo.*;
+import com.hy.crm.service.*;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,5 +111,9 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         return list1;
     }
 
+    @Override
+    public Customer queryAllByName(String customername) {
+        return customerMapper.queryAllByName(customername);
+    }
 
 }

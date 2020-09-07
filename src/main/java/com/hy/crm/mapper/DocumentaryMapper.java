@@ -6,6 +6,7 @@ import com.hy.crm.bo.pml.SqlDocumentary;
 import com.hy.crm.pojo.Documentary;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -21,11 +22,11 @@ public interface DocumentaryMapper extends BaseMapper<Documentary> {
 
     /**
      * 查询全部跟单
-     * @param documentaryBo
+     * @param
      * @return
      */
     @SelectProvider(type = SqlDocumentary.class,method = "queryAll")
-    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo);
+    public List<DocumentaryBo> queryAll(@Param("classification")String classification, @Param("key")String key, @Param("page")Integer page, @Param("limit") Integer limit);
 
     @Select("select * from documentary d,user u where d.userid=u.userid")
     public List<DocumentaryBo> query();

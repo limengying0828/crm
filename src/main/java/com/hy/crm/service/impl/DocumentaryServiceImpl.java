@@ -26,14 +26,14 @@ public class DocumentaryServiceImpl extends ServiceImpl<DocumentaryMapper, Docum
 
     /**
      * 查询全部跟单
-     * @param documentaryBo
+     * @param
      * @param
      * @param
      * @return
      */
     @Override
-    public List<DocumentaryBo> queryAll(DocumentaryBo documentaryBo) {
-        return documentaryMapper.queryAll(documentaryBo);
+    public List<DocumentaryBo> queryAll(String classification,String key,Integer page,Integer limit) {
+        return documentaryMapper.queryAll(classification,key,page,limit);
     }
 
     @Override

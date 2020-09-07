@@ -17,4 +17,5 @@ import java.util.List;
  */
 public interface ICustomerService extends IService<Customer> {
     public List<CbcaBo> queryAll(IPage<Customer> page, String condition,String keyword);
+    public Customer queryAllByName(String customername);
 }
