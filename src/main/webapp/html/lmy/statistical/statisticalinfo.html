@@ -18,74 +18,948 @@
             success:function(data){
                 if(null!=data && data.length>0){
                     for (var i = 0; i <data.length; i++) {
+                        //商机
                         if(data[i].type=='business' && data[i].time=='本周'){
-                            $("#businessCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#businessCount").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='business' && data[i].time=='上周'){
-                            $("#businessLastWeekCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#businessLastWeekCount").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='business' && data[i].time=='本月'){
-                            $("#businessMonthCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#businessMonthCount").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='business' && data[i].time=='上月'){
-                            $("#businessLastMonthCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#businessLastMonthCount").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='business' && data[i].time=='本季度'){
-                            $("#businessQuarterCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#businessQuarterCount").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='business' && data[i].time=='上季度'){
-                            $("#businessLastQuarterCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#businessLastQuarterCount").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='business' && data[i].time=='本年度'){
-                            $("#businessYearCount").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#businessYearCount").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='business' && data[i].time=='上年度'){
-                            $("#businessLastYearCount").html("<font size='3' color='black'>"+0/10000+"万</font>");
+                            $("#businessLastYearCount").html("<font size='3' color='black'>"+0+"</font>");
                         }
 
+                        //成交
                         if(data[i].type=='buprocess' && data[i].time=='本周'){
-                            $("#busprocessWeek").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessWeek").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='buprocess' && data[i].time=='上周'){
-                            $("#busprocessLastWeek").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessLastWeek").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='buprocess' && data[i].time=='本月'){
-                            $("#busprocessMonth").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessMonth").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='buprocess' && data[i].time=='上月'){
-                            $("#busprocessLastMonth").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessLastMonth").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='buprocess' && data[i].time=='本季度'){
-                            $("#busprocessQuarter").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessQuarter").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='buprocess' && data[i].time=='上季度'){
-                            $("#busprocessLastQuarter").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessLastQuarter").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='buprocess' && data[i].time=='本年度'){
-                            $("#busprocessYear").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessYear").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                         if(data[i].type=='buprocess' && data[i].time=='上年度'){
-                            $("#busprocessLastYear").html("<font size='3' color='black'>"+data[i].count/10000+"万</font>");
+                            $("#busprocessLastYear").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+
+                        //跟单
+                        if(data[i].type=='documentary' && data[i].time=='本周'){
+                            $("#documentaryWeek").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='documentary' && data[i].time=='上周'){
+                            $("#documentaryLastWeek").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='documentary' && data[i].time=='本月'){
+                            $("#documentaryMonth").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='documentary' && data[i].time=='上月'){
+                            $("#documentaryLastMonth").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='documentary' && data[i].time=='本季度'){
+                            $("#documentaryQuarter").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='documentary' && data[i].time=='上季度'){
+                            $("#documentaryLastQuarter").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='documentary' && data[i].time=='本年度'){
+                            $("#documentaryYear").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='documentary' && data[i].time=='上年度'){
+                            $("#documentaryLastYear").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+
+                        //合同
+                        if(data[i].type=='contract' && data[i].time=='本周'){
+                            $("#contractWeek").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='contract' && data[i].time=='上周'){
+                            $("#contractLastWeek").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='contract' && data[i].time=='本月'){
+                            $("#contractMonth").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='contract' && data[i].time=='上月'){
+                            $("#contractLastMonth").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='contract' && data[i].time=='本季度'){
+                            $("#contractQuarter").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='contract' && data[i].time=='上季度'){
+                            $("#contractLastQuarter").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='contract' && data[i].time=='本年度'){
+                            $("#contractYear").html("<font size='3' color='black'>"+data[i].count+"</font>");
+                        }
+                        if(data[i].type=='contract' && data[i].time=='上年度'){
+                            $("#contractLastYear").html("<font size='3' color='black'>"+data[i].count+"</font>");
                         }
                     }
                 }
             }
         });
     });
-    var weekStatistical=function () {
-        $("#mySta").attr("style","display:none")
+    //我的统计
+    var mySta=function () {
+        $("#mySta").attr("style","display:block")
+        $("#tradeDiv").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:none");
+        $("#originDiv").attr("style","display:none")
+        $("#businessTabDiv").attr("style","display:none");
+        $("#businessMonthTabDiv").attr("style","display:none");
+        $("#businessQuarterTabDiv").attr("style","display:none");
+        $("#businessYearTabDiv").attr("style","display:none");
     }
 
+    //本周统计
+    var weekStatistical=function () {
+        $("#mySta").attr("style","display:none")
+        $("#tradeDiv").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:none");
+        $("#originDiv").attr("style","display:none")
+        $("#businessMonthTabDiv").attr("style","display:none");
+        $("#businessQuarterTabDiv").attr("style","display:none");
+        $("#businessYearTabDiv").attr("style","display:none");
+        $("#businessTabDiv").attr("style","display:block");
+    }
+
+    //本月统计
+    var monthStatistical=function () {
+        $("#mySta").attr("style","display:none")
+        $("#tradeDiv").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:none");
+        $("#originDiv").attr("style","display:none")
+        $("#businessMonthTabDiv").attr("style","display:block");
+        $("#businessTabDiv").attr("style","display:none");
+        $("#businessQuarterTabDiv").attr("style","display:none");
+        $("#businessYearTabDiv").attr("style","display:none");
+    }
+    
+    //商机来源
+    var originBusiness=function () {
+        $("#mySta").attr("style","display:none")
+        $("#tradeDiv").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:none");
+        $("#businessTabDiv").attr("style","display:none");
+        $("#businessMonthTabDiv").attr("style","display:none");
+        $("#originDiv").attr("style","display:block")
+        $("#businessQuarterTabDiv").attr("style","display:none");
+        $("#businessYearTabDiv").attr("style","display:none");
+    }
+    //行业分布
+    var trade=function () {
+        $("#mySta").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:none");
+        $("#originDiv").attr("style","display:none");
+        $("#businessMonthTabDiv").attr("style","display:none");
+        $("#businessTabDiv").attr("style","display:none");
+        $("#tradeDiv").attr("style","display:block");
+        $("#businessQuarterTabDiv").attr("style","display:none");
+        $("#businessYearTabDiv").attr("style","display:none");
+    }
+
+    var quarterStatistical=function () {
+        $("#mySta").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:none");
+        $("#originDiv").attr("style","display:none");
+        $("#businessMonthTabDiv").attr("style","display:none");
+        $("#businessTabDiv").attr("style","display:none");
+        $("#tradeDiv").attr("style","display:none");
+        $("#businessQuarterTabDiv").attr("style","display:block");
+        $("#businessYearTabDiv").attr("style","display:none");
+    }
+
+    var yearStatistical=function () {
+        $("#mySta").attr("style","display:none");
+        $("#funnelStatistical").attr("style","display:none");
+        $("#originDiv").attr("style","display:none");
+        $("#businessMonthTabDiv").attr("style","display:none");
+        $("#businessTabDiv").attr("style","display:none");
+        $("#tradeDiv").attr("style","display:none");
+        $("#businessQuarterTabDiv").attr("style","display:none");
+        $("#businessYearTabDiv").attr("style","display:block");
+    }
+
+
+    //来源=商机柱状图
+    var originView=function () {
+        $("#originMoneyViewDiv").attr("style","display:none");
+        $("#originMoneyCircleDiv").attr("style","display:none");
+        $("#originBusinessCircleDiv").attr("style","display:none")
+        $("#originViewDiv").attr("style","display: block");
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryOrigin.do',
+            datatype: 'json',
+            success:function(msg){
+                var list=msg.data;
+                var a1='', a2='',a3='',a4='', a5='',a6='', a7='',a8='', a9='';
+                var a1c=0, a2c=0, a3c=0,a4c=0, a5c=0,a6c=0, a7c=0,a8c=0, a9c=0;
+                for (var i = 0; i <list.length; i++) {
+                    if(i+1==1){
+                        a1=list[i].originname;
+                        a1c=list[i].count;
+                    }
+                    if(i+1==2){
+                        a2=list[i].originname;
+                        a2c=list[i].count;
+                    }
+                    if(i+1==3){
+                        a3=list[i].originname;
+                        a3c=list[i].count;
+                    } if(i+1==4){
+                        a4=list[i].originname;
+                        a4c=list[i].count;
+                    } if(i+1==5){
+                        a5=list[i].originname;
+                        a5c=list[i].count;
+                    } if(i+1==6){
+                        a6=list[i].originname;
+                        a6c=list[i].count;
+                    } if(i+1==7){
+                        a7=list[i].originname;
+                        a7c=list[i].count;
+                    } if(i+1==8){
+                        a8=list[i].originname;
+                        a8c=list[i].count;
+                    } if(i+1==9){
+                        a9=list[i].originname;
+                        a9c=list[i].count;
+                    }
+                }
+                var myChart = echarts.init(document.getElementById('originView'));
+                var option = {
+                    xAxis: {
+                        type: 'category',
+                        data: [a1,a2,a3,a4,a5,a6,a7,a8,a9]
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: [a1c,a2c,a3c,a4c,a5c,a6c,a7c,a8c,a9c],
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 16
+                                    }
+                                }
+                            }
+                        }
+                    }]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
+    }
+
+    //来源=金额柱状图
+    var originMoneyView=function(){
+        $("#originMoneyViewDiv").attr("style","display:block");
+        $("#originMoneyCircleDiv").attr("style","display:none");
+        $("#originBusinessCircleDiv").attr("style","display:none")
+        $("#originViewDiv").attr("style","display:none");
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryOrigin.do',
+            datatype: 'json',
+            success:function(msg) {
+                var list = msg.data;
+                var a1 = '', a2 = '', a3 = '', a4 = '', a5 = '', a6 = '', a7 = '', a8 = '', a9 = '';
+                var a1c = 0, a2c = 0, a3c = 0, a4c = 0, a5c = 0, a6c = 0, a7c = 0, a8c = 0, a9c = 0;
+                for (var i = 0; i < list.length; i++) {
+                    if (i + 1 == 1) {
+                        a1 = list[i].originname;
+                        a1c = list[i].money;
+                    }
+                    if (i + 1 == 2) {
+                        a2 = list[i].originname;
+                        a2c = list[i].money;
+                    }
+                    if (i + 1 == 3) {
+                        a3 = list[i].originname;
+                        a3c = list[i].money;
+                    }
+                    if (i + 1 == 4) {
+                        a4 = list[i].originname;
+                        a4c = list[i].money;
+                    }
+                    if (i + 1 == 5) {
+                        a5 = list[i].originname;
+                        a5c = list[i].money;
+                    }
+                    if (i + 1 == 6) {
+                        a6 = list[i].originname;
+                        a6c = list[i].money;
+                    }
+                    if (i + 1 == 7) {
+                        a7 = list[i].originname;
+                        a7c = list[i].money;
+                    }
+                    if (i + 1 == 8) {
+                        a8 = list[i].originname;
+                        a8c = list[i].money;
+                    }
+                    if (i + 1 == 9) {
+                        a9 = list[i].originname;
+                        a9c = list[i].money;
+                    }
+                }
+                    var myChart = echarts.init(document.getElementById('originMoneyView'));
+                    var option = {
+                        xAxis: {
+                            type: 'category',
+                            data: [a1, a2, a3, a4, a5, a6, a7, a8, a9]
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: [a1c, a2c, a3c, a4c, a5c, a6c, a7c, a8c, a9c],
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'black',
+                                            fontSize: 16
+                                        }
+                                    }
+                                }
+                            }
+                        }]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+            }
+        });
+    }
+
+    //来源=商机饼状图
+    var originBusinessCircle=function () {
+        $("#originMoneyViewDiv").attr("style","display:none");
+        $("#originMoneyCircleDiv").attr("style","display:none");
+        $("#originBusinessCircleDiv").attr("style","display:block")
+        $("#originViewDiv").attr("style","display: none");
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryOrigin.do',
+            datatype: 'json',
+            success:function(msg) {
+                var list = msg.data;
+                var a1 = '', a2 = '', a3 = '', a4 = '', a5 = '', a6 = '', a7 = '', a8 = '', a9 = '';
+                var a1c = 0, a2c = 0, a3c = 0, a4c = 0, a5c = 0, a6c = 0, a7c = 0, a8c = 0, a9c = 0;
+                for (var i = 0; i < list.length; i++) {
+                    if(i+1==1){
+                        a1=list[i].originname;
+                        a1c=list[i].count;
+                    }
+                    if(i+1==2){
+                        a2=list[i].originname;
+                        a2c=list[i].count;
+                    }
+                    if(i+1==3){
+                        a3=list[i].originname;
+                        a3c=list[i].count;
+                    } if(i+1==4){
+                        a4=list[i].originname;
+                        a4c=list[i].count;
+                    } if(i+1==5){
+                        a5=list[i].originname;
+                        a5c=list[i].count;
+                    } if(i+1==6){
+                        a6=list[i].originname;
+                        a6c=list[i].count;
+                    } if(i+1==7){
+                        a7=list[i].originname;
+                        a7c=list[i].count;
+                    } if(i+1==8){
+                        a8=list[i].originname;
+                        a8c=list[i].count;
+                    } if(i+1==9){
+                        a9=list[i].originname;
+                        a9c=list[i].count;
+                    }
+                    var myChart = echarts.init(document.getElementById('originBusinessCircle'));
+                    var option1 = {
+                        title: {
+                            text: '商机数-饼状图',
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{a} <br/>{b} : {c} ({d}%)'
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            left: 'left',
+                            data: [a1,a2,a3,a4,a5,a6,a7,a8,a9]
+                        },
+                        series: [
+                            {
+                                name: '商机数',
+                                type: 'pie',
+                                radius: '50%',
+                                'center': ['50%', '60%'],
+                                data: [
+                                    {value: a1c, name: a1},
+                                    {value: a2c, name: a2},
+                                    {value: a3c, name: a3},
+                                    {value: a4c, name: a4},
+                                    {value: a5c, name: a5},
+                                    {value: a6c, name: a6},
+                                    {value: a7c, name: a7},
+                                    {value: a8c, name: a8},
+                                    {value: a9c, name: a9},
+                                ],
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                    myChart.setOption(option1);
+                }
+            }
+        });
+    }
+
+    //来源=金额饼状图
+    var originMoneyCircle=function () {
+        $("#originMoneyViewDiv").attr("style","display:none");
+        $("#originMoneyCircleDiv").attr("style","display:block");
+        $("#originBusinessCircleDiv").attr("style","display:none")
+        $("#originViewDiv").attr("style","display: none");
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryOrigin.do',
+            datatype: 'json',
+            success:function(msg) {
+                var list = msg.data;
+                var a1 = '', a2 = '', a3 = '', a4 = '', a5 = '', a6 = '', a7 = '', a8 = '', a9 = '';
+                var a1c = 0, a2c = 0, a3c = 0, a4c = 0, a5c = 0, a6c = 0, a7c = 0, a8c = 0, a9c = 0;
+                for (var i = 0; i < list.length; i++) {
+                    if (i + 1 == 1) {
+                        a1 = list[i].originname;
+                        a1c = list[i].money;
+                    }
+                    if (i + 1 == 2) {
+                        a2 = list[i].originname;
+                        a2c = list[i].money;
+                    }
+                    if (i + 1 == 3) {
+                        a3 = list[i].originname;
+                        a3c = list[i].money;
+                    }
+                    if (i + 1 == 4) {
+                        a4 = list[i].originname;
+                        a4c = list[i].money;
+                    }
+                    if (i + 1 == 5) {
+                        a5 = list[i].originname;
+                        a5c = list[i].money;
+                    }
+                    if (i + 1 == 6) {
+                        a6 = list[i].originname;
+                        a6c = list[i].money;
+                    }
+                    if (i + 1 == 7) {
+                        a7 = list[i].originname;
+                        a7c = list[i].money;
+                    }
+                    if (i + 1 == 8) {
+                        a8 = list[i].originname;
+                        a8c = list[i].money;
+                    }
+                    if (i + 1 == 9) {
+                        a9 = list[i].originname;
+                        a9c = list[i].money;
+                    }
+                    var myChart = echarts.init(document.getElementById('originMoneyCircle'));
+                    var option1 = {
+                        title: {
+                            text: '金额-饼状图',
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{a} <br/>{b} : {c} ({d}%)'
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            left: 'left',
+                            data: [a1,a2,a3,a4,a5,a6,a7,a8,a9]
+                        },
+                        series: [
+                            {
+                                name: '商机数',
+                                type: 'pie',
+                                radius: '50%',
+                                'center': ['50%', '60%'],
+                                data: [
+                                    {value: a1c, name: a1},
+                                    {value: a2c, name: a2},
+                                    {value: a3c, name: a3},
+                                    {value: a4c, name: a4},
+                                    {value: a5c, name: a5},
+                                    {value: a6c, name: a6},
+                                    {value: a7c, name: a7},
+                                    {value: a8c, name: a8},
+                                    {value: a9c, name: a9},
+                                ],
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                    myChart.setOption(option1);
+                }
+            }
+        });
+    }
+
+
+    //行业分布=金额柱状图
+    var moneyView=function () {
+        $("#businessCounts").attr("style","display:none");
+        $("#businessCircleCount").attr("style","display:none");
+        $("#moneyCircleCount").attr("style","display:none")
+        $("#sumMoney").attr("style","display: block");
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryTrade.do',
+            datatype: 'json',
+            success:function(msg){
+                var list=msg.data;
+                var a1='', a2='',a3='',a4='', a5='',a6='', a7='',a8='', a9='',a10='', a11='';
+                var a1c=0, a2c=0, a3c=0,a4c=0, a5c=0,a6c=0, a7c=0,a8c=0, a9c=0,a10c=0, a11c=0;
+                for (var i = 0; i <list.length; i++) {
+                    if(i+1==1){
+                        a1=list[i].nickname;
+                        a1c=list[i].money;
+                    }
+                    if(i+1==2){
+                        a2=list[i].nickname;
+                        a2c=list[i].money;
+                    }
+                    if(i+1==3){
+                        a3=list[i].nickname;
+                        a3c=list[i].money;
+                    } if(i+1==4){
+                        a4=list[i].nickname;
+                        a4c=list[i].money;
+                    } if(i+1==5){
+                        a5=list[i].nickname;
+                        a5c=list[i].money;
+                    } if(i+1==6){
+                        a6=list[i].nickname;
+                        a6c=list[i].money;
+                    } if(i+1==7){
+                        a7=list[i].nickname;
+                        a7c=list[i].money;
+                    } if(i+1==8){
+                        a8=list[i].nickname;
+                        a8c=list[i].money;
+                    } if(i+1==9){
+                        a9=list[i].nickname;
+                        a9c=list[i].money;
+                    }
+                    if(i+1==10){
+                        a10=list[i].nickname;
+                        a10c=list[i].money;
+                    }
+                    if(i+1==11){
+                        a11=list[i].nickname;
+                        a11c=list[i].money;
+                    }
+                }
+                var myChart = echarts.init(document.getElementById('sumMoneyView'));
+                var option = {
+                    xAxis: {
+                        type: 'category',
+                        data: [a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11]
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: [a1c,a2c,a3c,a4c,a5c,a6c,a7c,a8c,a9c,a10c,a11c],
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 16
+                                    }
+                                }
+                            }
+                        }
+                    }]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
+
+    }
+
+    //行业分布=商机柱状图
+    var tradeView=function () {
+        $("#sumMoney").attr("style","display:none");
+        $("#businessCircleCount").attr("style","display:none");
+        $("#moneyCircleCount").attr("style","display:none")
+        $("#businessCounts").attr("style","display:block");
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryTrade.do',
+            datatype: 'json',
+            success:function(msg){
+                var list=msg.data;
+                var a1='', a2='',a3='',a4='', a5='',a6='', a7='',a8='', a9='',a10='', a11='';
+                var a1c=0, a2c=0, a3c=0,a4c=0, a5c=0,a6c=0, a7c=0,a8c=0, a9c=0,a10c=0, a11c=0;
+                for (var i = 0; i <list.length; i++) {
+                    if(i+1==1){
+                        a1=list[i].nickname;
+                        a1c=list[i].count;
+                    }
+                    if(i+1==2){
+                        a2=list[i].nickname;
+                        a2c=list[i].count;
+                    }
+                    if(i+1==3){
+                        a3=list[i].nickname;
+                        a3c=list[i].count;
+                    } if(i+1==4){
+                        a4=list[i].nickname;
+                        a4c=list[i].count;
+                    } if(i+1==5){
+                        a5=list[i].nickname;
+                        a5c=list[i].count;
+                    } if(i+1==6){
+                        a6=list[i].nickname;
+                        a6c=list[i].count;
+                    } if(i+1==7){
+                        a7=list[i].nickname;
+                        a7c=list[i].count;
+                    } if(i+1==8){
+                        a8=list[i].nickname;
+                        a8c=list[i].count;
+                    } if(i+1==9){
+                        a9=list[i].nickname;
+                        a9c=list[i].count;
+                    }
+                    if(i+1==10){
+                        a10=list[i].nickname;
+                        a10c=list[i].count;
+                    }
+                    if(i+1==11){
+                        a11=list[i].nickname;
+                        a11c=list[i].count;
+                    }
+                }
+                var myChart = echarts.init(document.getElementById('businessCountView'));
+                var option = {
+                    xAxis: {
+                        type: 'category',
+                        data: [a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11]
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: [a1c,a2c,a3c,a4c,a5c,a6c,a7c,a8c,a9c,a10c,a11c],
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true, //开启显示
+                                    position: 'top', //在上方显示
+                                    textStyle: { //数值样式
+                                        color: 'black',
+                                        fontSize: 16
+                                    }
+                                }
+                            }
+                        }
+                    }]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
+    }
+    
+    //行业分布=商机饼状图
+    var businessCircle=function () {
+        $("#sumMoney").attr("style","display:none");
+        $("#businessCounts").attr("style","display:none");
+        $("#moneyCircleCount").attr("style","display:none")
+        $("#businessCircleCount").attr("style","display:block");
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryTrade.do',
+            datatype: 'json',
+            success:function(msg){
+                var list=msg.data;
+                var a1='', a2='',a3='',a4='', a5='',a6='', a7='',a8='', a9='',a10='', a11='';
+                var a1c=0, a2c=0, a3c=0,a4c=0, a5c=0,a6c=0, a7c=0,a8c=0, a9c=0,a10c=0, a11c=0;
+                for (var i = 0; i <list.length; i++) {
+                    if(i+1==1){
+                        a1=list[i].nickname;
+                        a1c=list[i].count;
+                    }
+                    if(i+1==2){
+                        a2=list[i].nickname;
+                        a2c=list[i].count;
+                    }
+                    if(i+1==3){
+                        a3=list[i].nickname;
+                        a3c=list[i].count;
+                    } if(i+1==4){
+                        a4=list[i].nickname;
+                        a4c=list[i].count;
+                    } if(i+1==5){
+                        a5=list[i].nickname;
+                        a5c=list[i].count;
+                    } if(i+1==6){
+                        a6=list[i].nickname;
+                        a6c=list[i].count;
+                    } if(i+1==7){
+                        a7=list[i].nickname;
+                        a7c=list[i].count;
+                    } if(i+1==8){
+                        a8=list[i].nickname;
+                        a8c=list[i].count;
+                    } if(i+1==9){
+                        a9=list[i].nickname;
+                        a9c=list[i].count;
+                    }
+                    if(i+1==10){
+                        a10=list[i].nickname;
+                        a10c=list[i].count;
+                    }
+                    if(i+1==11){
+                        a11=list[i].nickname;
+                        a11c=list[i].count;
+                    }
+                }
+                var myChart = echarts.init(document.getElementById('businessCircle'));
+                var option1 = {
+                    title: {
+                        text: '商机数-饼状图',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: [a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11]
+                    },
+                    series: [
+                        {
+                            name: '商机数',
+                            type: 'pie',
+                            radius: '50%',
+                            'center': ['50%', '60%'],
+                            data: [
+                                {value: a1c, name: a1},
+                                {value: a2c, name: a2},
+                                {value: a3c, name: a3},
+                                {value: a4c, name: a4},
+                                {value: a5c, name: a5},
+                                {value: a6c, name: a6},
+                                {value: a7c, name: a7},
+                                {value: a8c, name: a8},
+                                {value: a9c, name: a9},
+                                {value: a10c, name: a10},
+                                {value: a11c, name: a11}
+                            ],
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                 myChart.setOption(option1);
+            }
+        });
+    }
+
+    //行业分布=金额饼状图
+    var moneyCircle=function () {
+        $("#sumMoney").attr("style","display:none");
+        $("#businessCounts").attr("style","display:none");
+        $("#businessCircleCount").attr("style","display:none");
+        $("#moneyCircleCount").attr("style","display:block")
+        $.ajax({
+            type:'get',
+            url: '/statistical/queryTrade.do',
+            datatype: 'json',
+            success:function(msg){
+                var list=msg.data;
+                var a1='', a2='',a3='',a4='', a5='',a6='', a7='',a8='', a9='',a10='', a11='';
+                var a1c=0, a2c=0, a3c=0,a4c=0, a5c=0,a6c=0, a7c=0,a8c=0, a9c=0,a10c=0, a11c=0;
+                for (var i = 0; i <list.length; i++) {
+                    if(i+1==1){
+                        a1=list[i].nickname;
+                        a1c=list[i].money;
+                    }
+                    if(i+1==2){
+                        a2=list[i].nickname;
+                        a2c=list[i].money;
+                    }
+                    if(i+1==3){
+                        a3=list[i].nickname;
+                        a3c=list[i].money;
+                    } if(i+1==4){
+                        a4=list[i].nickname;
+                        a4c=list[i].money;
+                    } if(i+1==5){
+                        a5=list[i].nickname;
+                        a5c=list[i].money;
+                    } if(i+1==6){
+                        a6=list[i].nickname;
+                        a6c=list[i].money;
+                    } if(i+1==7){
+                        a7=list[i].nickname;
+                        a7c=list[i].money;
+                    } if(i+1==8){
+                        a8=list[i].nickname;
+                        a8c=list[i].money;
+                    } if(i+1==9){
+                        a9=list[i].nickname;
+                        a9c=list[i].money;
+                    }
+                    if(i+1==10){
+                        a10=list[i].nickname;
+                        a10c=list[i].money;
+                    }
+                    if(i+1==11){
+                        a11=list[i].nickname;
+                        a11c=list[i].money;
+                    }
+                }
+                var myChart = echarts.init(document.getElementById('moneyCircle'));
+                var option1 = {
+                    title: {
+                        text: '金额-饼状图',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: [a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11]
+                    },
+                    series: [
+                        {
+                            name: '金额',
+                            type: 'pie',
+                            radius: '50%',
+                            'center': ['50%', '60%'],
+                            data: [
+                                {value: a1c, name: a1},
+                                {value: a2c, name: a2},
+                                {value: a3c, name: a3},
+                                {value: a4c, name: a4},
+                                {value: a5c, name: a5},
+                                {value: a6c, name: a6},
+                                {value: a7c, name: a7},
+                                {value: a8c, name: a8},
+                                {value: a9c, name: a9},
+                                {value: a10c, name: a10},
+                                {value: a11c, name: a11}
+                            ],
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                myChart.setOption(option1);
+            }
+        });
+    }
+
+    //商机漏斗
     var businessFunnel=function () {
         $("#mySta").attr("style","display:none");
         $("#funnelStatistical").attr("style","display:block");
+        $("#originDiv").attr("style","display:none");
+        $("#businessMonthTabDiv").attr("style","display:none");
+        $("#businessTabDiv").attr("style","display:none");
+        $("#tradeDiv").attr("style","display:none");
+        $("#businessQuarterTabDiv").attr("style","display:none");
+        $("#businessYearTabDiv").attr("style","display:none");
+
         // 基于准备好的dom，初始化echarts实例
         var myFunnelAll = echarts.init(document.getElementById('funnelAll'));
         var option;
         option = {
             title: {
                 text: '全部商机销售漏斗',
-                left: 'center'
+                left:'center'
             },
             tooltip: {
                 trigger: 'item',
@@ -105,7 +979,7 @@
                 name: '漏斗图',
                 type: 'funnel',
                 left: '10%',
-                top: 60,
+                top: 88,
                 //x2: 80,
                 bottom: 60,
                 width: '80%',
@@ -136,26 +1010,12 @@
                         fontSize: 20
                     }
                 },
-                data: [{
-                    value: 60,
-                    name: '初期沟通'
-                },
-                    {
-                        value: 40,
-                        name: '方案和报价'
-                    },
-                    {
-                        value: 20,
-                        name: '竞争或投标'
-                    },
-                    {
-                        value: 80,
-                        name: '商务谈判'
-                    },
-                    {
-                        value: 100,
-                        name: '成交'
-                    }
+                data: [
+                    {value: 100, name: '初期沟通'},
+                    {value: 80, name: '方案和报价'},
+                    {value: 60, name: '竞争或投标'},
+                    {value: 40, name: '商务谈判'},
+                    {value: 20, name: '成交'}
                 ]
             }]
         };
@@ -187,7 +1047,7 @@
                 name: '漏斗图',
                 type: 'funnel',
                 left: '10%',
-                top: 60,
+                top: 88,
                 //x2: 80,
                 bottom: 60,
                 width: '80%',
@@ -218,26 +1078,12 @@
                         fontSize: 20
                     }
                 },
-                data: [{
-                    value: 60,
-                    name: '初期沟通'
-                },
-                    {
-                        value: 40,
-                        name: '方案和报价'
-                    },
-                    {
-                        value: 20,
-                        name: '竞争或投标'
-                    },
-                    {
-                        value: 80,
-                        name: '商务谈判'
-                    },
-                    {
-                        value: 100,
-                        name: '成交'
-                    }
+                data: [
+                    {value: 100, name: '初期沟通'},
+                    {value: 80, name: '方案和报价'},
+                    {value: 60, name: '竞争或投标'},
+                    {value: 40, name: '商务谈判'},
+                    {value: 20, name: '成交'}
                 ]
             }]
         };
@@ -269,7 +1115,7 @@
                 name: '漏斗图',
                 type: 'funnel',
                 left: '10%',
-                top: 60,
+                top: 88,
                 //x2: 80,
                 bottom: 60,
                 width: '80%',
@@ -300,26 +1146,12 @@
                         fontSize: 20
                     }
                 },
-                data: [{
-                    value: 60,
-                    name: '初期沟通'
-                },
-                    {
-                        value: 40,
-                        name: '方案和报价'
-                    },
-                    {
-                        value: 20,
-                        name: '竞争或投标'
-                    },
-                    {
-                        value: 80,
-                        name: '商务谈判'
-                    },
-                    {
-                        value: 100,
-                        name: '成交'
-                    }
+                data: [
+                    {value: 100, name: '初期沟通'},
+                    {value: 80, name: '方案和报价'},
+                    {value: 60, name: '竞争或投标'},
+                    {value: 40, name: '商务谈判'},
+                    {value: 20, name: '成交'}
                 ]
             }]
         };
@@ -351,7 +1183,7 @@
                 name: '漏斗图',
                 type: 'funnel',
                 left: '10%',
-                top: 60,
+                top: 88,
                 //x2: 80,
                 bottom: 60,
                 width: '80%',
@@ -382,26 +1214,12 @@
                         fontSize: 20
                     }
                 },
-                data: [{
-                    value: 60,
-                    name: '初期沟通'
-                },
-                    {
-                        value: 40,
-                        name: '方案和报价'
-                    },
-                    {
-                        value: 20,
-                        name: '竞争或投标'
-                    },
-                    {
-                        value: 80,
-                        name: '商务谈判'
-                    },
-                    {
-                        value: 100,
-                        name: '成交'
-                    }
+                data: [
+                    {value: 100, name: '初期沟通'},
+                    {value: 80, name: '方案和报价'},
+                    {value: 60, name: '竞争或投标'},
+                    {value: 40, name: '商务谈判'},
+                    {value: 20, name: '成交'}
                 ]
             }]
         };
@@ -433,7 +1251,7 @@
                 name: '漏斗图',
                 type: 'funnel',
                 left: '10%',
-                top: 60,
+                top: 88,
                 //x2: 80,
                 bottom: 60,
                 width: '80%',
@@ -464,26 +1282,12 @@
                         fontSize: 20
                     }
                 },
-                data: [{
-                    value: 60,
-                    name: '初期沟通'
-                },
-                    {
-                        value: 40,
-                        name: '方案和报价'
-                    },
-                    {
-                        value: 20,
-                        name: '竞争或投标'
-                    },
-                    {
-                        value: 80,
-                        name: '商务谈判'
-                    },
-                    {
-                        value: 100,
-                        name: '成交'
-                    }
+                data: [
+                    {value: 100, name: '初期沟通'},
+                    {value: 80, name: '方案和报价'},
+                    {value: 60, name: '竞争或投标'},
+                    {value: 40, name: '商务谈判'},
+                    {value: 20, name: '成交'}
                 ]
             }]
         };
@@ -492,7 +1296,7 @@
     }
 </script>
 <body>
-<i class="layui-icon layui-icon-align-center" style="font-size: 50px;margin-top: 100px;"><font size="5" color="#00bfff">统计分析</font></i>
+<i class="layui-icon layui-icon-align-'center'" style="font-size: 50px;margin-top: 100px;"><font size="5" color="#00bfff">统计分析</font></i>
 <div id="bigDiv" style="width:1500px">
     <div style="float:left;">
         <div class="site-text">
@@ -501,14 +1305,14 @@
                     <label class="layui-form-label"><font size="3" color="black">分类</font></label>
                     <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:380px;">
                         <ul>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">我的统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="mySta()"><font color="#6495ed" size="3">我的统计</font></a></i></li><br/>
                             <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="weekStatistical()"><font color="#6495ed" size="3">本周统计</font></a></i></li><br/>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">本月统计</font></a></i></li><br/>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">本季度统计</font></a></i></li><br/>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">本年度统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="monthStatistical()"><font color="#6495ed" size="3">本月统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="quarterStatistical()"><font color="#6495ed" size="3">本季度统计</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="yearStatistical()"><font color="#6495ed" size="3">本年度统计</font></a></i></li><br/>
                             <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="businessFunnel()"><font color="#6495ed" size="3">商机销售漏斗</font></a></i></li><br/>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">按行业分布</font></a></i></li><br/>
-                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick=""><font color="#6495ed" size="3">按商机来源分布</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="trade()"><font color="#6495ed" size="3">按行业分布</font></a></i></li><br/>
+                            <li><i class="layui-icon layui-icon-file" ><a href="#" onclick="originBusiness()"><font color="#6495ed" size="3">按商机来源分布</font></a></i></li><br/>
                         </ul>
                     </div>
                 </div>
@@ -559,11 +1363,11 @@
                            <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                    <span style="margin-left: 40px;"><font size="3" color="black">本周</font></span><br/><br/><br/>
-                                   <span style="margin-left: 30px;"></span>
+                                   <span style="margin-left: 30px;" id="documentaryWeek"></span>
                                </div>
                                <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                    <span style="margin-left: 10px;"><font size="3" color="black">上周</font></span><br/><br/><br/>
-                                   <span style="margin-left: 5px;" ></span>
+                                   <span style="margin-left: 5px;"  id="documentaryLastWeek"></span>
                                </div>
                            </div>
                        </div>
@@ -575,11 +1379,11 @@
                            <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                    <span style="margin-left: 40px;"><font size="3" color="black">本周</font></span><br/><br/><br/>
-                                   <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                   <span style="margin-left: 30px;" id="contractWeek"></span>
                                </div>
                                <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                    <span style="margin-left: 10px;"><font size="3" color="black">上周</font></span><br/><br/><br/>
-                                   <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                   <span style="margin-left: 5px;" id="contractLastWeek"></span>
                                </div>
                            </div>
                        </div>
@@ -627,11 +1431,11 @@
                                 <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 40px;"><font size="3" color="black">本月</font></span><br/><br/><br/>
-                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 30px;" id="documentaryMonth"></span>
                                     </div>
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 10px;"><font size="3" color="black">上月</font></span><br/><br/><br/>
-                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 5px;" id="documentaryLastMonth"></span>
                                     </div>
                                 </div>
                             </div>
@@ -642,12 +1446,12 @@
                                 <label class="layui-form-label" style="background-color: #c0c4cc;border:1px"><font size="3" color="black" style="font-weight:bold">合同数</font></label>
                                 <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
-                                        <span style="margin-left: 40px;"><font size="3" color="black">本月</font></span><br/><br/><br/>
-                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 40px;" ><font size="3" color="black">本月</font></span><br/><br/><br/>
+                                        <span style="margin-left: 30px;" id="contractMonth"></span>
                                     </div>
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 10px;"><font size="3" color="black">上月</font></span><br/><br/><br/>
-                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 5px;" id="contractLastMonth"></span>
                                     </div>
                                 </div>
                             </div>
@@ -695,11 +1499,11 @@
                                 <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 40px;"><font size="3" color="black">本季度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 30px;" id="documentaryQuarter"></span>
                                     </div>
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 10px;"><font size="3" color="black">上季度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 5px;" id="documentaryLastQuarter"></span>
                                     </div>
                                 </div>
                             </div>
@@ -711,11 +1515,11 @@
                                 <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 40px;"><font size="3" color="black">本季度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 30px;" id="contractLastQuarter"></span>
                                     </div>
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 10px;"><font size="3" color="black">上季度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 5px;" id="contractQuarter"></span>
                                     </div>
                                 </div>
                             </div>
@@ -763,11 +1567,11 @@
                                 <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 40px;"><font size="3" color="black">本年度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 30px;" id="documentaryYear"></span>
                                     </div>
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 10px;"><font size="3" color="black">上年度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 5px;" id="documentaryLastYear"></span>
                                     </div>
                                 </div>
                             </div>
@@ -779,11 +1583,11 @@
                                 <div class="layui-input-block" style="border:1px solid ;color: #2E2D3C;height:170px;background-color: #c0c4cc">
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 40px;"><font size="3" color="black">本年度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 30px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 30px;" id="contractYear"></span>
                                     </div>
                                     <div style="float: left;width: 97px;height: 130px;border:1px solid">
                                         <span style="margin-left: 10px;"><font size="3" color="black">上年度</font></span><br/><br/><br/>
-                                        <span style="margin-left: 5px;"><font size="3" color="black">0.0万</font></span>
+                                        <span style="margin-left: 5px;" id="contractLastYear"></span>
                                     </div>
                                 </div>
                             </div>
@@ -793,35 +1597,135 @@
             </form>
         </div>
 
-        <div style="display: none;width: 800px;height: 340px;" id="funnelStatistical" >
-            <div id="funnelAll" style="width:340px;height:340px;float: left"></div>
-            <div id="businessTable" style="float: left;margin-left: 20px;">
-                <table  id="selectTab" lay-filter="test"></table>
+        <div style="display: none;width: 1200px;height: 1200px;" id="funnelStatistical" >
+            <table style="width: 1200px;">
+                <tr>
+                    <td>
+                        <div id="funnelAll" style="width:340px;height:340px;"></div>
+                    </td>
+                    <td>
+                        <div id="businessTable" style="margin-left: 40px;margin-top: 18px;">
+                            <table  id="selectTab" lay-filter="test"></table>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height: 20px;"></tr>
+                <tr>
+                    <td>
+                        <div id="yearFunnelAll" style="width:340px;height:340px;margin-left: 10px;"></div>
+                    </td>
+                    <td>
+                        <div id="yearBusinessTable" style="margin-left: 20px;margin-top: 18px;">
+                            <table  id="yearSelectTab" lay-filter="yearTest"></table>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height: 20px;"></tr>
+                <tr>
+                    <td>
+                        <div id="lastYearFunnelAll" style="width:340px;height:340px;float: left"></div>
+                    </td>
+                    <td>
+                        <div id="lastYearBusinessTable" style="margin-left: 20px;margin-top: 18px;">
+                            <table  id="lastYearSelectTab" lay-filter="lastYearTest"></table>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height: 20px;"></tr>
+                <tr>
+                    <td>
+                        <div id="quarter" style="width:340px;height:340px;float: left"></div>
+                    </td>
+                    <td>
+                        <div id="quarterBusinessTable" style="margin-left: 20px;margin-top: 18px;">
+                            <table  id="quarterSelectTab" lay-filter="quarterSelectTab"></table>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height: 20px;"></tr>
+                <tr>
+                    <td>
+                        <div id="lastQuarter" style="width:340px;height:340px;float: left"></div>
+                    </td>
+                    <td>
+                        <div id="lastQuarterBusinessTable" style="margin-left: 20px;margin-top: 18px;">
+                            <table  id="lastQuarterSelectTab" lay-filter="lastQuarterSelectTab"></table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="display: none" id="tradeDiv">
+            <table id="tradeSelectTab" lay-filter="tradeSelectTab"></table><br>
+            <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
+                <div class="layui-input-block">
+                    <p>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="tradeView()">商机数-柱状图</button>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="moneyView()">金额-柱状图</button>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="businessCircle()">商机数-饼状图</button>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="moneyCircle()">金额-饼状图</button>
+                    </p>
+                </div>
             </div>
 
-            <div style="height: 20px;"></div>
-            <div id="yearFunnelAll" style="width:340px;height:340px;float: left"></div>
-            <div id="yearBusinessTable" style="float: left;margin-left: 20px;">
-                <table  id="yearSelectTab" lay-filter="yearTest"></table>
+            <div id="businessCounts" style="display: block">
+                <div id="businessCountView" style="width: 1000px;height: 500px;">
+                </div>
+            </div>
+            <div id="sumMoney" style="display: none">
+                <div id="sumMoneyView" style="width: 1000px;height: 500px;">
+                </div>
+            </div>
+            <div id="businessCircleCount" style="display: none">
+                <div id="businessCircle" style="width: 1000px;height: 500px;">
+                </div>
+            </div>
+            <div id="moneyCircleCount" style="display: none">
+                <div id="moneyCircle" style="width: 1000px;height: 500px;">
+                </div>
             </div>
 
-            <div style="height: 20px;"></div>
-            <div id="lastYearFunnelAll" style="width:340px;height:340px;float: left"></div>
-            <div id="lastYearBusinessTable" style="float: left;margin-left: 20px;">
-                <table  id="lastYearSelectTab" lay-filter="lastYearTest"></table>
+        </div>
+
+        <div style="display: none" id="originDiv">
+            <table id="originSelectTab" lay-filter="originSelectTab"></table><br>
+            <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
+                <div class="layui-input-block">
+                    <p>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="originView()">商机数-柱状图</button>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="originMoneyView()">金额-柱状图</button>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="originBusinessCircle()">商机数-饼状图</button>
+                        <button type="button" class="layui-btn layui-btn-primary" onclick="originMoneyCircle()">金额-饼状图</button>
+                    </p>
+                </div>
             </div>
 
-            <div style="height: 20px;"></div>
-            <div id="quarter" style="width:340px;height:340px;float: left"></div>
-            <div id="quarterBusinessTable" style="float: left;margin-left: 20px;">
-                <table  id="quarterSelectTab" lay-filter="quarterSelectTab"></table>
+            <div id="originViewDiv" style="display: block">
+                <div id="originView" style="width: 1000px;height: 500px;"></div>
+            </div>
+            <div id="originMoneyViewDiv" style="display: block">
+                <div id="originMoneyView" style="width: 1000px;height: 500px;"></div>
+            </div>
+            <div id="originBusinessCircleDiv" style="display: block">
+                <div id="originBusinessCircle" style="width: 1000px;height: 500px;"></div>
+            </div>
+            <div id="originMoneyCircleDiv" style="display: block">
+                <div id="originMoneyCircle" style="width: 1000px;height: 500px;"></div>
             </div>
 
-            <div style="height: 20px;"></div>
-            <div id="lastQuarter" style="width:340px;height:340px;float: left"></div>
-            <div id="lastQuarterBusinessTable" style="float: left;margin-left: 20px;">
-                <table  id="lastQuarterSelectTab" lay-filter="lastQuarterSelectTab"></table>
-            </div>
+        </div>
+        <div id="businessTabDiv" style="display: none">
+            <table  id="businessUserTab" lay-filter="businessUserTab"></table>
+        </div>
+        <div id="businessMonthTabDiv" style="display: none">
+            <table  id="businessUserMonthTab" lay-filter="businessUserMonthTab"></table>
+        </div>
+        <div id="businessQuarterTabDiv" style="display: none">
+            <table  id="businessUserQuarterTab" lay-filter="businessUserQuarterTab"></table>
+        </div>
+        <div id="businessYearTabDiv" style="display: none">
+            <table  id="businessUserYearTab" lay-filter="businessUserYearTab"></table>
         </div>
     </div>
 </div>
@@ -831,17 +1735,205 @@
         var form=layui.form;
         var $=layui.jquery;
 
-       /* table.render({
+        table.render({
             elem: '#selectTab'
-            ,height: 500
-            ,url: '#' //数据接口
+            ,width:600
+            ,page:false
+            ,url: '/statistical/queryFunnel.do' //数据接口
             ,cols: [[ //表头
-                ,{field: 'theme', title: '商机数', width:291}
-                ,{field: 'typeservices', title: '百分比', width:181}
-                ,{field: 'begintime', title: '金额', width:151, sort: true}
-                ,{field: 'servicespeople', title: '百分比', width:151}
+                {field: 'count', title: '商机数',width:150}
+                ,{field: 'countPercent', title: '百分比',width:150}
+                ,{field: 'money', title: '金额',width:150}
+                ,{field: 'moneyPercent', title: '百分比',width:150}
             ]]
-        });*/
+        });
+
+        table.render({
+            elem: '#yearSelectTab'
+            ,width:600
+            ,page:false
+            ,url: '/statistical/queryFunnelYear.do' //数据接口
+            ,cols: [[ //表头
+                {field: 'count', title: '商机数',width:150}
+                ,{field: 'countPercent', title: '百分比',width:150}
+                ,{field: 'money', title: '金额',width:150}
+                ,{field: 'moneyPercent', title: '百分比',width:150}
+            ]]
+        });
+
+        table.render({
+            elem: '#lastYearSelectTab'
+            ,width:600
+            ,page:false
+            ,url: '/statistical/queryFunnelLastYear.do' //数据接口
+            ,cols: [[ //表头
+                {field: 'count', title: '商机数',width:150}
+                ,{field: 'countPercent', title: '百分比',width:150}
+                ,{field: 'money', title: '金额',width:150}
+                ,{field: 'moneyPercent', title: '百分比',width:150}
+            ]]
+        });
+
+        table.render({
+            elem: '#quarterSelectTab'
+            ,width:600
+            ,page:false
+            ,url: '/statistical/queryFunnelQuarter.do' //数据接口
+            ,cols: [[ //表头
+                {field: 'count', title: '商机数',width:150}
+                ,{field: 'countPercent', title: '百分比',width:150}
+                ,{field: 'money', title: '金额',width:150}
+                ,{field: 'moneyPercent', title: '百分比',width:150}
+            ]]
+        });
+
+        table.render({
+            elem: '#lastQuarterSelectTab'
+            ,width:600
+            ,page:false
+            ,url: '/statistical/queryFunnelLastQuarter.do' //数据接口
+            ,cols: [[ //表头
+                {field: 'count', title: '商机数',width:150}
+                ,{field: 'countPercent', title: '百分比',width:150}
+                ,{field: 'money', title: '金额',width:150}
+                ,{field: 'moneyPercent', title: '百分比',width:150}
+            ]]
+        });
+
+        table.render({
+            elem: '#tradeSelectTab'
+            ,width:900
+            ,page:false
+            ,url: '/statistical/queryTrade.do' //数据接口
+            ,cols: [[ //表头
+                {field: 'nickname', title: '别名',width:100}
+                ,{field: 'trade', title: '行业分布',width:300}
+                ,{field: 'count', title: '商机数',width:250}
+                ,{field: 'money', title: '金额',width:250}
+            ]]
+        });
+
+        table.render({
+            elem: '#originSelectTab'
+            ,width:800
+            ,page:false
+            ,url: '/statistical/queryOrigin.do' //数据接口
+            ,cols: [[ //表头
+                {field: 'originname', title: '商机来源',width:300}
+                ,{field: 'count', title: '商机数',width:250}
+                ,{field: 'money', title: '金额',width:250}
+            ]]
+        });
+
+        table.render({
+            elem: '#businessUserTab'
+            ,width:900
+            ,page:true
+            ,limit:5
+            ,url: '/statistical/queryBusinessByTime.do?time=本周' //数据接口
+            ,cols: [
+                [ //表头
+                    {field: 'username',align:'center',title: '姓名',rowspan:2,width:100}
+                    ,{title: '商机数',align:'center',colspan:2,width:100}
+                    ,{title: '成交数',align:'center',colspan:2,width:100}
+                    ,{title: '跟单数',align:'center',colspan:2,width:100}
+                    ,{title: '合同数',align:'center',colspan:2,width:100}
+                ],
+                [ //表头
+                    {field: 'businessWeekCount',align:'center',title: '本周',width:100}
+                    ,{field: 'businessLastWeekCount',align:'center',title: '上周',width:100}
+                    ,{field: 'successWeekCount',align:'center',title: '本周',width:100}
+                    ,{field: 'successLastWeekCount',align:'center',title: '上周',width:100}
+                    ,{field: 'documentaryWeekCount',align:'center',title: '本周',width:100}
+                    ,{field: 'documentaryLastWeekCount',align:'center',title: '上周',width:100}
+                    ,{field: 'contractWeekCount',align:'center',title: '本周',width:100}
+                    ,{field: 'contractLastWeekCount',align:'center',title: '上周',width:100}
+                ]
+            ]
+        });
+
+
+        table.render({
+            elem: '#businessUserMonthTab'
+            ,width:900
+            ,page:true
+            ,limit:5
+            ,url: '/statistical/queryBusinessByMonth.do?time=本月' //数据接口
+            ,cols: [
+                [ //表头
+                    {field: 'username',align:'center',title: '姓名',rowspan:2,width:100}
+                    ,{title: '商机数',align:'center',colspan:2,width:100}
+                    ,{title: '成交数',align:'center',colspan:2,width:100}
+                    ,{title: '跟单数',align:'center',colspan:2,width:100}
+                    ,{title: '合同数',align:'center',colspan:2,width:100}
+                ],
+                [ //表头
+                    {field: 'businessWeekCount',align:'center',title: '本月',width:100}
+                    ,{field: 'businessLastWeekCount',align:'center',title: '上月',width:100}
+                    ,{field: 'successWeekCount',align:'center',title: '本月',width:100}
+                    ,{field: 'successLastWeekCount',align:'center',title: '上月',width:100}
+                    ,{field: 'documentaryWeekCount',align:'center',title: '本月',width:100}
+                    ,{field: 'documentaryLastWeekCount',align:'center',title: '上月',width:100}
+                    ,{field: 'contractWeekCount',align:'center',title: '本月',width:100}
+                    ,{field: 'contractLastWeekCount',align:'center',title: '上月',width:100}
+                ]
+            ]
+        });
+
+        table.render({
+            elem: '#businessUserQuarterTab'
+            ,width:900
+            ,page:true
+            ,limit:5
+            ,url: '/statistical/queryBusinessByQuarter.do?time=本季度' //数据接口
+            ,cols: [
+                [ //表头
+                    {field: 'username',align:'center',title: '姓名',rowspan:2,width:100}
+                    ,{title: '商机数',align:'center',colspan:2,width:100}
+                    ,{title: '成交数',align:'center',colspan:2,width:100}
+                    ,{title: '跟单数',align:'center',colspan:2,width:100}
+                    ,{title: '合同数',align:'center',colspan:2,width:100}
+                ],
+                [ //表头
+                    {field: 'businessWeekCount',align:'center',title: '本季度',width:100}
+                    ,{field: 'businessLastWeekCount',align:'center',title: '上季度',width:100}
+                    ,{field: 'successWeekCount',align:'center',title: '本季度',width:100}
+                    ,{field: 'successLastWeekCount',align:'center',title: '上季度',width:100}
+                    ,{field: 'documentaryWeekCount',align:'center',title: '本季度',width:100}
+                    ,{field: 'documentaryLastWeekCount',align:'center',title: '上季度',width:100}
+                    ,{field: 'contractWeekCount',align:'center',title: '本季度',width:100}
+                    ,{field: 'contractLastWeekCount',align:'center',title: '上季度',width:100}
+                ]
+            ]
+        });
+
+        table.render({
+            elem: '#businessUserYearTab'
+            ,width:900
+            ,page:true
+            ,limit:5
+            ,url: '/statistical/queryBusinessByYear.do?time=本年度' //数据接口
+            ,cols: [
+                [ //表头
+                    {field: 'username',align:'center',title: '姓名',rowspan:2,width:100}
+                    ,{title: '商机数',align:'center',colspan:2,width:100}
+                    ,{title: '成交数',align:'center',colspan:2,width:100}
+                    ,{title: '跟单数',align:'center',colspan:2,width:100}
+                    ,{title: '合同数',align:'center',colspan:2,width:100}
+                ],
+                [ //表头
+                    {field: 'businessWeekCount',align:'center',title: '本年度',width:100}
+                    ,{field: 'businessLastWeekCount',align:'center',title: '上年度',width:100}
+                    ,{field: 'successWeekCount',align:'center',title: '本年度',width:100}
+                    ,{field: 'successLastWeekCount',align:'center',title: '上年度',width:100}
+                    ,{field: 'documentaryWeekCount',align:'center',title: '本年度',width:100}
+                    ,{field: 'documentaryLastWeekCount',align:'center',title: '上年度',width:100}
+                    ,{field: 'contractWeekCount',align:'center',title: '本年度',width:100}
+                    ,{field: 'contractLastWeekCount',align:'center',title: '上年度',width:100}
+                ]
+            ]
+        });
+
 
     });
 </script>

@@ -62,7 +62,7 @@
                 <td>
                     <div class="layui-form-item" style="margin-left: 40px;">
                         步  骤:<input type="text" style="border: 0px"  value="服务登记" name="step"><br/>
-                        责任人:<input type="text" style="border: 0px"  id="username" name="username"> readonly ><br/>
+                        责任人:<input type="text" style="border: 0px"  id="username" name="username"><br/>
                         <input type="hidden" style="border: 0px"  id="userid" name="userid">
                         参与人:<input type="text" style="border: 0px"  value="" name="participant">
                     </div>
@@ -91,11 +91,11 @@
                         </div>
                     </div>
                 </td>
-                <td align="center">合同编号</td>
+                <td align="center"><font color="red">*</font>合同编号</td>
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <select id="contractid" name="contractid" lay-verify="contractid" >
+                            <select id="contractid" name="contractid" lay-verify="contract" >
                                 <option value="">请选择</option>
                             </select>
                         </div>
@@ -476,6 +476,11 @@
             ,servicespeople:function (value, item) {
                 if(value.trim().length==0 || null==value){
                     return '请输入服务人员';
+                }
+            }
+            ,contract:function (value, item) {
+                if(value.trim().length==0 || null==value){
+                    return '请选择合同编号';
                 }
             }
         });

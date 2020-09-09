@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
     <meta charset="utf-8">
@@ -23,23 +25,23 @@
     <div class="layui-header" style="background-color: #20222A;">
         <div class="layui-logo" style="background-color: #393D49;color: white;height: 120px;border-bottom: 1px solid white">
             <div style="background-color: #393D49;color: #009E94;font-weight: bolder">客户关系管理系统</div>
-            <img id="userImg"  src="img/log3.jpg"
+            <img id="userImg"  th:src="${user.image}"
                  style="width: 50px;height: 50px" class="layui-nav-img">
-            王娜
+            [[${user.username}]]
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
         </ul>
         <!--刷新-->
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item"><a href="" id="refresh">
+            <li class="layui-nav-item"><a href="host.html" id="refresh">
                 <i class="layui-icon layui-icon-refresh"></i></a>
             </li>
 
             <li class="layui-nav-item">
                 <a href="#">
-                    <img src="img/log3.jpg" class="layui-nav-img">
-                    <span>王娜</span>
+                    <img  th:src="${user.image}" class="layui-nav-img">
+                    <span>[[${user.username}]]</span>
                 </a>
             </li>
             <li class="layui-nav-item"><a href="#" onclick="" id="logout"><i

@@ -30,7 +30,7 @@ public interface AftersaleMapper extends BaseMapper<Aftersale> {
     @SelectProvider(type = AfterSaleSql.class,method ="querySumCount")
     public Integer queryCount(String status);
 
-    @Select("select * from `user` u,aftersale af,customer c,contract con,contractprocess cp where u.userid=af.userid and c.customerid=af.customerid and con.customerid=c.customerid and cp.contractid=con.contractid and af.saleid=#{saleid}  ")
+    @Select("select * from `user` u,aftersale af,customer c,contract con,contractprocess cp where u.userid=af.userid and c.customerid=af.customerid  and cp.contractid=con.contractid and af.saleid=#{saleid}  ")
     public AfterSaleUserBo queryAfterSaleUserBoByTheme(Integer saleid);
 
     @Update("update aftersale set realstatus='已结束',overtime=#{overtime} where saleid=#{serviceid}")

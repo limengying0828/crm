@@ -36,7 +36,7 @@ public class ContractController {
     @ResponseBody
     public List<Contract> queryContractByCustomer(Integer customerid){
         QueryWrapper wrapper=new QueryWrapper<>();
-        wrapper.eq("customerid",customerid);
+        wrapper.eq("customername",customerid);
         return contractService.list(wrapper);
     }
 
