@@ -120,9 +120,6 @@ public class BusinessController {
         queryWrapper.eq("businessid",businessid);
         Business business=iBusinessService.getOne(queryWrapper);
 
-        User user=(User) session.getAttribute("user");
-        System.out.println("session====="+user.getUsername());
-
         QueryWrapper queryWrapper1=new QueryWrapper();
         queryWrapper1.eq("customerid",business.getCustomerid());
         Customer customer=iCustomerService.getOne(queryWrapper1);

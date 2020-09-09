@@ -265,9 +265,10 @@
                 </td>
                 <td align="center">商机负责人</td>
                 <td align="center">
+                    <input type="hidden" name="userId" th:value="${}">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" required="" name="userId" th:value="${session.user.getUsername()}"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  >
+                            <input type="text" required="" th:value="${session.user.getUsername()}"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  >
                         </div>
                     </div>
                 </td>

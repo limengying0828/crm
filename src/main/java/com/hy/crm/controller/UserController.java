@@ -142,7 +142,7 @@ public class UserController {
      * @throws IOException
      */
     @PostMapping("/registerUser.do")
-    public String registerUser(String username,String password,String image, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String registerUser(String username,String password,String image,String deptname, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user =new User();
         user.setUsername(username);
         if(iUserService.selusername(user)!=null){
@@ -160,8 +160,9 @@ public class UserController {
                 user1.setUsername(username);
                 user1.setPassword(password);
                 user1.setImage(image);
-                iUserService.registerUser(user1);
-                return "/ykz/host.html";
+                user1.setDeptname(deptname);
+                iUserService.save(user1);
+                return "/ykz/login.html";
             }
         }
     }

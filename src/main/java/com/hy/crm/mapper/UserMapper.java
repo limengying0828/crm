@@ -27,7 +27,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param user
      * @return
      */
-    @Insert("insert into user (username,password,image) values (#{username},#{password},#{image})")
+    @Insert("insert into user (username,password,deptname,image) values (#{username},#{password},#{deptname},#{image})")
     public void registerUser(User user);
 
     /**
