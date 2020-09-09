@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>查看商机</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/layui/layui.js"></script>
+
+    <script type="text/javascript">
+        var a1=function(){
+            window.location.href="/html/ykz/businessupdate.html"
+        }
+
+        var a2=function(){
+            window.location.href="/html/ykz/business.html"
+        }
+
+        var a3=function(){
+            window.location.href="/html/ykz/business.html"
+        }
+
+        var a4=function(){
+            window.location.href=""
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <table width="95%">
+            <tr>
+                <td><font size="5">查看商机</font></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>商机名称</td>
+                <td>
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" th:value="${business.businessname}"  name="businessname" style="width: 290px;" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            优先级
+                            <input type="radio" value="1" name="" title="低">
+                            <input type="radio" value="2" name="" title="中">
+                            <input type="radio" value="3" name="" title="高">
+                        </div>
+                    </div>
+                </td>
+                <td width="20%" align="right">
+                    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a3()" value="< 返回 " style="font-size: 20px;font-weight: bold;width:100px;height:40px;">
+                    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a4()" value="刷新 " style="font-size: 20px;font-weight: bold;width:100px;height:40px;">
+                </td>
+            </tr>
+
+            <tr bgcolor="#fafad2">
+                <td height="50px"><h2>客户信息</h2></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td height="5px"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>客户名称</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="customerid" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">所属行业</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" style="width: 290px;">
+                            <select name="industry"  lay-verify="required" >
+                                <option value=""></option>
+                                <option value="">IT</option>
+                                <option value="">银行</option>
+                                <option value="">保险</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>所在城市</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">详细地址</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr bgcolor="#fafad2">
+                <td height="50px"><h2>商机信息</h2></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>商机名称</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="businessname" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">客户来源</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" style="width: 290px;">
+                            <select name="customersource"  lay-verify="required">
+                                <option value=""></option>
+                                <option value="">老客户</option>
+                                <option value="">代理商</option>
+                                <option value="">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>预计成交金额</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="makemoney" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">预计结单日期</td>
+                <td align="right">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input type="text" name="overdate" required lay-verify="date" style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>联系人</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="contact" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">部门</td>
+                <td align="center">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="post" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>职务</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">固定电话</td>
+                <td align="center">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="officephone" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>移动电话</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="telephone" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">邮件/QQ</td>
+                <td align="center">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="email" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td height="5px"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>主要业务需求</td>
+                <td colspan="3">
+                    <div align="center" class="layui-form-item">
+                        <div class="layui-input-block">
+                            <textarea name="businessdemand" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>附件</td>
+                <td><!--attachment-->
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="uploadTest"><i class="layui-icon"></i>上传文件</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>商机所属部门</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">商机负责人</td>
+                <td align="center">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="userId" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>商机参与人</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="participate" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">商机关注人</td>
+                <td align="center">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="focuspeople" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td height="20px"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr bgcolor="#fafad2">
+                <td height="50px"><h2>处理流程日志</h2></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table><br><br>
+        <div class="site-text">
+            <div style="width:1250px;">
+                <div style="float: left">
+                    <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:480px;width:400px;">
+                        <div>
+                            <font size="3" color="black">【处理流程】</font><br/>
+                            ----------------------------------------------------------------------
+                        </div>
+                        <a href="#"><font style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;哈哈哈哈哈</font></a>
+                    </div>
+                </div>
+                <div style="float: left">
+                    <div class="layui-form-item layui-form-text" style="margin-left: 160px;">
+                        <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:220px;width: 400px;">
+                            <div>
+                                <font size="3" color="black">【父事务】</font><br/>
+                                ----------------------------------------------------------------------
+                            </div>
+                            <a href="#"><font style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;哈哈哈哈哈</font></a>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text" style="margin-left: 160px; margin-top: 20px;">
+                        <div class="layui-input-block" style="border:1px solid ;color: #e2e2e2;height:220px;width: 400px;">
+                            <div>
+                                <font size="3" color="black">【子事务】</font><br/>
+                                ----------------------------------------------------------------------
+                            </div>
+                            <a href="#"><font style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;哈哈哈哈哈</font></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
+            <div class="layui-input-block">
+                <p>
+                    <button type="button" onclick="a1()" class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>
+                    <button type="button" onclick="a2()" class="layui-btn layui-btn-radius layui-btn-primary">取消</button>
+                </p>
+            </div>
+        </div>
+    </center>
+
+
+
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layer', 'upload', 'laydate'], function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $=layui.jquery;
+        var laydate = layui.laydate;
+
+        //时间
+        laydate.render({
+            elem: '#date1'
+        });
+
+
+        //常规用法
+        laydate.render({
+            elem: '#begintime'
+        });
+        laydate.render({
+            elem: '#overtime'
+        });
+
+
+    });
+</script>
+</body>
+</html>
