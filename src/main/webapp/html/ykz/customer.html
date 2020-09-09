@@ -13,56 +13,70 @@
         var a2=function(){
             window.location.href=""
         }
-
-
-
     </script>
+    <style>
+        .box1{
+
+        }
+        .box2{
+
+            top:200px
+        }
+    </style>
 </head>
 <body>
-<div style="width: 8%;float: left">
-    <font size="4">客户管理</font><br><br><br>
-    <div><a href="#" onclick="cone('分类一')"><img src="/html/ykz/img/u214.png">客户分类一</a></div><br>
-    <div><a href="#" onclick="ctwo('分类二')"><img src="/html/ykz/img/u214.png">客户分类二</a></div><br>
-    <div><a href="#" onclick="cthree('分类三')"><img src="/html/ykz/img/u214.png">客户分类三</a></div><br>
+<div style="height: 30px">
+    <font size="5" color="#ff69b4">客户管理</font><br>
+</div><br><br><br><br>
+<div class="box1">
+    <div style="float: left;">
+        <br><br><br><br>
+        <div><a href="#" onclick="ctwo('分类一')"><img src="/html/ykz/img/u214.png">客户分类一</a></div><br>
+        <div><a href="#" onclick="ctwo('分类二')"><img src="/html/ykz/img/u214.png">客户分类二</a></div><br>
+        <div><a href="#" onclick="cthree('分类三')"><img src="/html/ykz/img/u214.png">客户分类三</a></div><br>
+    </div>
 </div>
-
-<div style="width: 65%;float: left" >
-    <form class="layui-form" style="width: 1100px" method="get">
-        <div class="layui-inline" style="float:left;">
-            <div class="layui-form-item">
-                <div class="layui-input-block" style="width: 100px;">
-                    <select name="condition">
-                        <option value=""></option>
-                        <option value="customername">客户名称</option>
-                        <option value="customersource">客户来源</option>
-                        <option value="city">所在城市</option>
-                    </select>
+<div class="box2" >
+    <div style="width: 65%;float: left" >
+        <form class="layui-form" style="width: 1100px" method="get">
+            <div class="layui-inline" style="float:left;">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="width: 100px;">
+                        <select name="condition">
+                            <option value=""></option>
+                            <option value="customername">客户名称</option>
+                            <option value="customersource">客户来源</option>
+                            <option value="city">所在城市</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="layui-inline" style="width: 300px">
-            <div class="layui-input-block">
-                <input type="text" name="keyword" style="width: 250px;height: 40px;" placeholder="请输入关键字" autocomplete="off"
-                       class="layui-input">
+            <div class="layui-inline" style="width: 300px">
+                <div class="layui-input-block">
+                    <input type="text" name="keyword" style="width: 250px;height: 40px;" placeholder="请输入关键字" autocomplete="off"
+                           class="layui-input">
+                </div>
             </div>
-        </div>
-        <div class="layui-inline">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">查找</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="layui-inline">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">查找</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+        </center>
+    </div>
+    <div style="margin-left: 900px;margin-top: 0px;">
+        <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a1()" value="新增客户" style="font-size: 20px;font-weight: bold;">
+        <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a2()" value="刷新" style="font-size: 20px;font-weight: bold;">
+    </div>
+    <center>
+        <table align="center" id="demo" lay-filter="test"></table>
     </center>
 </div>
-<div style="margin-left: 900px;margin-top: 0px;">
-    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a1()" value="新增客户" style="font-size: 20px;font-weight: bold;">
-    <input data-method="offset" data-type="r" class="layui-btn layui-btn-normal" type="button" onclick="a2()" value="刷新" style="font-size: 20px;font-weight: bold;">
-</div>
-<center>
-    <table align="center" id="demo" lay-filter="test"></table>
-</center>
+
+
 
 <script src="/layui/layui.js"></script>
 <script>
@@ -101,7 +115,7 @@
         //第一个实例
         table.render({
             elem: '#demo'
-            , height: 580
+            , height: 520
             , width: 1100
             , toolbar: '#barDemo1'
             , url: '/customer/customerAll.do' //数据接口

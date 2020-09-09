@@ -78,7 +78,6 @@ public class CustomerController {
         for(Customer c:list){
             customerid=c.getCustomerid();
         }
-        System.out.println("customerid==="+customerid);
         Finance finance=new Finance();
         finance.setCustomerid(customerid);
         finance.setBankaccount(bankaccount);
@@ -192,9 +191,7 @@ public class CustomerController {
     }
 
 
-
-
-     /**
+    /**
      * 根据客户名称查询客户信息
      * @param customername
      * @return
