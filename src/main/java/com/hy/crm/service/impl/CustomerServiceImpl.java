@@ -49,6 +49,15 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
 
     @Autowired
     private IBusprocessService iBusprocessService;
+
+    @Autowired
+    private IUserService iUserService;
+
+    @Autowired
+    private IDocumentaryService iDocumentaryService;
+
+    @Autowired
+    private IInvitationService iInvitationService;
     /**
      * 查询所有
      * @return
@@ -130,32 +139,68 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         return list1;
     }
 
+    /**
+     * 查商机
+     * @param businessname
+     * @param todaystate
+     * @param userId
+     * @param makemoney
+     * @param documentarytime
+     * @param forum
+     * @return
+     */
     @Override
     public List<BusinessBo> businessQueryall( String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum) {
         List<BusinessBo> boList = new ArrayList<>();
-        BusinessBo businessBo = new BusinessBo();
-
         List<Business> list = iBusinessService.list();
-        Integer buid = 0;
-        String bname = "";
-        for (Business li : list) {
-            buid = li.getBusinessid();
-            bname = li.getBusinessname();
-        }
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("businessid", buid);
-        List<Busprocess> busprocessList = iBusprocessService.list(queryWrapper);
-        for (Busprocess lp : busprocessList) {
-            lp.getTodaystate();
+
+        QueryWrapper queryWrapper5=new QueryWrapper();
+        if(businessname !="" && businessname !=null){
+
+        }else if(todaystate !="" && todaystate !=null){
+
+        }else if(userId !="" && userId !=null){
+
+        }else if(makemoney !="" && makemoney!=null ){
+
+        }else if(documentarytime !="" && documentarytime!=null ){
+
+        }else if(forum !="" && forum!=null ){
+
         }
 
-        businessBo.setBusinessname(bname);//商机名称
-        /*businessBo.setTodaystate();//商机阶段
-        businessBo.setUserId();//商机负责人
-        businessBo.setMakemoney();//预计成交金额
-        businessBo.setDocumentarytime();//最后跟单时间
-        businessBo.setForum();//讨论版*/
-        boList.add(businessBo);
+
+        for (Business li : list) {
+            BusinessBo businessBo = new BusinessBo();
+            Integer buid = li.getBusinessid();
+            String bname = li.getBusinessname();
+            businessBo.setBusinessname(bname);//商机名称
+            businessBo.setMakemoney(String.valueOf(li.getMakemoney()));//预计成交金额
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("businessid", buid);
+            List<Busprocess> busprocessList = iBusprocessService.list(queryWrapper);
+            for (Busprocess lp : busprocessList) {
+                businessBo.setTodaystate(lp.getTodaystate());//商机阶段
+            }
+            int uid=li.getUserId();
+            QueryWrapper queryWrapper1=new QueryWrapper();
+            queryWrapper1.eq("userid",uid);
+            List<User> listuser=iUserService.list(queryWrapper1);
+            for(User lu:listuser){
+                businessBo.setUserId(lu.getUsername());//商机负责人
+            }
+            QueryWrapper queryWrapper2=new QueryWrapper();
+            queryWrapper2.eq("processid",buid);
+            List<Documentary> documentaryList=iDocumentaryService.list(queryWrapper2);
+            for(Documentary ld:documentaryList){
+                businessBo.setDocumentarytime(ld.getDocumentarytime());//最后跟单时间
+            }
+            QueryWrapper queryWrapper3=new QueryWrapper();
+            queryWrapper3.eq("processid",buid);
+            List<Invitation> invitationList=iInvitationService.list(queryWrapper3);
+            businessBo.setForum(String.valueOf(invitationList.size()));//讨论版
+            boList.add(businessBo);
+        }
         return boList;
     }
     @Override

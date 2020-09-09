@@ -90,7 +90,8 @@ public class UserController {
             QueryWrapper queryWrapper=new QueryWrapper();
             queryWrapper.eq("username",username);
             User user=iUserService.getOne(queryWrapper);
-            session.setAttribute("user",user);
+            System.out.println(user);
+            sub.getSession().setAttribute("user",user);
             return "redirect:/host.html";
 
         }
@@ -123,7 +124,7 @@ public class UserController {
         }
         multipartFile.transferTo(new File(file +"/"+ uuid + extName));
         System.out.println("图片===================="+file +"/"+ uuid + extName);
-        String str="/upload/"+uuid + extName;
+        String str=uuid + extName;
         LayuiUtilsPrice layuiUtilsPrice=new LayuiUtilsPrice();
         layuiUtilsPrice.setFileName(str);
         return layuiUtilsPrice;

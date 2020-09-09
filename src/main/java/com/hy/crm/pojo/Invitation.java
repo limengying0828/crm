@@ -55,7 +55,7 @@ public class Invitation implements Serializable {
     private String classify;
 
     @ApiModelProperty(value = "设置（精华、顶置）")
-    private String set;
+    private String settop;
 
     @ApiModelProperty(value = "最后回复时间")
     @TableField("lastReplytime")
@@ -147,13 +147,14 @@ public class Invitation implements Serializable {
         this.classify = classify;
     }
 
-    public String getSet() {
-        return set;
+    public String getSettop() {
+        return settop;
     }
 
-    public void setSet(String set) {
-        this.set = set;
+    public void setSettop(String settop) {
+        this.settop = settop;
     }
+
     public String getLastReplytime() {
         return lastReplytime;
     }
@@ -177,7 +178,7 @@ public class Invitation implements Serializable {
             ", clickcount=" + clickcount +
             ", replycount=" + replycount +
             ", classify=" + classify +
-            ", set=" + set +
+            ", settop=" + settop +
             ", lastReplytime=" + lastReplytime +
         "}";
     }
