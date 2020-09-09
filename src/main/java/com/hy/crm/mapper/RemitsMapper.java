@@ -2,6 +2,7 @@ package com.hy.crm.mapper;
 
 import com.hy.crm.pojo.Remits;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>
@@ -13,4 +14,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface RemitsMapper extends BaseMapper<Remits> {
 
+    @Select("select * from remits where contractid = #{contractid}")
+    public Remits queryAll(String contractid);
 }

@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IRemitsService extends IService<Remits> {
 
+    public Remits queryAll(String contractid);
+
 }
