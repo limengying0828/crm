@@ -17,7 +17,7 @@
     }
 </script>
 <body>
-<form class="layui-form" action="" method="post">
+<form class="layui-form" action="/contract/addContract.do" method="post">
     <center>
         <table width="80%">
             <tr>
@@ -27,17 +27,6 @@
                 <td width="20%" align="right">
                     <button type="button" class="layui-btn layui-btn-primary" onclick="goback()"><i class="layui-icon layui-icon-return">返回</i></button>
                     <button type="button" class="layui-btn layui-btn-primary" onclick="refresh()"><i class="layui-icon layui-icon-refresh">刷新</i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>合同名称</td>
-                <td>
-                    <div class="layui-form-item" align="center">
-                        <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
-                                   autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
                 </td>
             </tr>
             <tr>
@@ -64,7 +53,7 @@
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
                             <input type="text" name="customername" id="customername" required lay-verify="customername" placeholder="请输入"
-                                   autocomplete="off" class="layui-input" onchange="customerChange()">
+                                   autocomplete="off" class="layui-input" onblur="selectCustomer(this.value)">
                         </div>
                     </div>
                 </td>
@@ -74,6 +63,9 @@
                         <div class="layui-input-block">
                             <select id="industry" name="industry" lay-verify="industry" lay-filter="industry">
                                 <option value="">请选择</option>
+                                <option value="IT">IT</option>
+                                <option value="银行">银行</option>
+                                <option value="保险">保险</option>
                             </select>
                         </div>
                     </div>
@@ -118,7 +110,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="contractname" id="contractname" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -127,7 +119,7 @@
                 <td align="right">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="contractid" id="contractid" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -139,7 +131,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="contractmoney" id="contractmoney" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -150,7 +142,7 @@
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="begintime" name="begintime" placeholder="yyyy-MM-dd" lay-key="1">
+                                    <input type="date" class="layui-input" id="signingdate" name="signingdate" placeholder="yyyy-MM-dd" lay-key="1">
                                 </div>
                             </div>
                         </div>
@@ -165,7 +157,7 @@
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="begintime" name="begintime" placeholder="yyyy-MM-dd" lay-key="1">
+                                    <input type="date" class="layui-input" id="takedate" name="takedate" placeholder="yyyy-MM-dd" lay-key="1">
                                 </div>
                             </div>
                         </div>
@@ -177,7 +169,7 @@
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="begintime" name="begintime" placeholder="yyyy-MM-dd" lay-key="1">
+                                    <input type="date" class="layui-input" id="serviceto" name="serviceto" placeholder="yyyy-MM-dd" lay-key="1">
                                 </div>
                             </div>
                         </div>
@@ -190,7 +182,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="email" id="email" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="sidelinkman" id="sidelinkman" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -199,7 +191,7 @@
                 <td align="right">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="officephone" id="officephone" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -211,7 +203,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="telephone" id="telephone" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -220,7 +212,7 @@
                 <td align="right">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="email" id="email" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -232,7 +224,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="servicescontent" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="technicalterms" id="technicalterms" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -242,7 +234,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="customerfeedback" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="businessterms" id="businessterms" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -266,7 +258,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="department" id="department" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -275,7 +267,7 @@
                 <td align="right">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="associatedpersons" id="associatedpersons" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -343,6 +335,21 @@
 
 </form>
 <script>
+
+    function selectCustomer(d){
+        $.ajax({
+            type:'get',
+            url: '/customer/queryAllByName.do?customername='+d,
+            datatype: 'json',
+            success:function(customer){
+                $("#industry").val(customer.industry);
+                $("#city").val(customer.city);
+                $("#address").val(customer.address);
+                $("#department").val(customer.department);
+            }
+        });
+    }
+
     layui.use(['form', 'layer', 'upload', 'laydate','jquery'], function () {
         var form = layui.form;
         var layer = layui.layer;
@@ -351,8 +358,7 @@
         var laydate = layui.laydate;
 
 
-
-        form.on('input(customername)', function(data){
+        /*form.on('input(customername)', function(data){
             $.ajax({
                 type:'get',
                 url: '/customer/queryAllByName.do?customername='+data.value,
@@ -364,7 +370,7 @@
                     $("#address").val(cus.address);
                 }
             });
-        })
+        })*/
 
 
         //普通图片上传
@@ -388,43 +394,21 @@
             }
         });
 
-        form.on('submit(formDemo)', function(data){
+        /*form.on('submit(formDemo)', function(doc){
             $.ajax({
                 type: 'post',
-                url: '/aftersale/addAfterSale.do', // ajax请求路径
+                url: '/contract/addContract.do', // ajax请求路径
                 data: data.field,
                 success: function(res){
                     if(res=='yes'){
                         layer.msg('添加成功');
-                        location.href="aftersale.html"
                     }else if(data=='no'){
                         layer.msg('添加失败');
                     }
                 }
             });
             return false;//禁止跳转，否则会提交两次，且页面会刷新
-        });
-
-
-        form.verify({
-            theme: function(value, item) { //value：表单的值、item：表单的DOM对象
-                if(value.trim().length==0 ||null==value){
-                    return '请填写主题';
-                }
-            }
-            ,customername:function (value, item) {
-                if(value.trim().length==0 || null==value){
-                    return '请选择客户名称';
-                }
-            }
-            ,contractid:function (value, item) {
-                if(value.trim().length==0 || null==value){
-                    return '请选择合同编号';
-                }
-            }
-
-        });
-
+        });*/
 
     });
 </script>

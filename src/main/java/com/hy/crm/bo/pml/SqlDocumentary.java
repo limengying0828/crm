@@ -1,5 +1,7 @@
 package com.hy.crm.bo.pml;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.hy.crm.pojo.Invitation;
 import org.springframework.data.repository.query.Param;
 
 /**
@@ -39,6 +41,22 @@ public class SqlDocumentary {
                 stringBuffer.append(" and "+classification+" like '%" + key + "%' ");
             }
         stringBuffer.append(" limit "+((page-1)*limit)+","+limit);
+        return stringBuffer.toString();
+    }
+
+    /**
+     * 查询全部讨论帖子
+     * @param classification
+     * @param key
+     * @param page
+     * @param
+     * @return
+     */
+    public String queryInvitation(@Param("page") IPage<Invitation> page ,@Param("classification")String classification, @Param("key")String key){
+        StringBuffer stringBuffer=new StringBuffer("select * from invitation where 1=1 ");
+        if (null!=classification &&  !"".equals(classification) && null!=key && !"".equals(key)){
+            stringBuffer.append(" and "+classification+" like '%" + key + "%' ");
+        }
         return stringBuffer.toString();
     }
 }

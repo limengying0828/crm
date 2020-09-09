@@ -7,7 +7,9 @@ import com.hy.crm.service.IContractService;
 import com.hy.crm.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -60,5 +62,40 @@ public class ContractController {
     @ResponseBody
     public List<Contract> queryAll(){
         return contractService.list();
+    }
+
+    /**
+     * 新增合同
+     * @param contract
+     * @return
+     */
+    @PostMapping("/addContract.do")
+    public String addContract(Contract contract){
+        contractService.save(contract);
+        return "/html/pml/contract/queryContract.html";
+    }
+
+    @RequestMapping("/updateContract.do")
+    public String updateContract(String contractid, Model model){
+        QueryWrapper queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("contractid",contractid);
+        Contract contractList=contractService.getOne(queryWrapper);
+        model.addAttribute("contractList",contractList);
+        return "/pml/contract/updateContract.html";
+    }
+
+    @RequestMapping("/selectContractById.do")
+    public String selectContractById(String contractid, Model model){
+        QueryWrapper queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("contractid",contractid);
+        Contract contractList=contractService.getOne(queryWrapper);
+        model.addAttribute("contractList",contractList);
+        return "/pml/makeapply/addmakeapply.html";
+    }
+
+    @PostMapping("/updateContractById.do")
+    public String updateContractById(Contract  contract){
+        contractService.updateById(contract);
+        return "/pml/contract/queryContract.html";
     }
 }

@@ -1,5 +1,6 @@
 package com.hy.crm.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,6 +20,7 @@ public class Contract implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "合同编号")
+    @TableId(value = "contractid")
     private String contractid;
 
     @ApiModelProperty(value = "客户编号")
@@ -26,6 +28,10 @@ public class Contract implements Serializable {
 
     @ApiModelProperty(value = "合同名称（客户名+合同名）")
     private String contractname;
+
+    public String getContractname() {
+        return contractname;
+    }
 
     @ApiModelProperty(value = "合同金额")
     private Float contractmoney;
@@ -184,6 +190,10 @@ public class Contract implements Serializable {
 
     public void setAssociatedpersons(String associatedpersons) {
         this.associatedpersons = associatedpersons;
+    }
+
+    public void setContractid(String contractid) {
+        this.contractid = contractid;
     }
 
     @Override

@@ -1,9 +1,18 @@
 package com.hy.crm.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hy.crm.bo.pml.InvitationBo;
+import com.hy.crm.pojo.Invitation;
+import com.hy.crm.service.IInvitationService;
+import com.hy.crm.utils.MsgUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +25,26 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping("//invitation")
 public class InvitationController {
+    @Autowired
+    private IInvitationService iInvitationService;
+
+    @PostMapping("/addInvitation.do")
+    public String addInvitation(Invitation invitation){
+        iInvitationService.save(invitation);
+        return "/host.html";
+    }
+
+    @RequestMapping("/queryInvitation.do")
+    @ResponseBody
+    public MsgUtils queryInvitation(Integer page, Integer limit, String classification, String key){
+        Page page1=new Page<>(page,limit);
+        List<InvitationBo>  invitationBoList=iInvitationService.queryInvitation(page1,classification,key);
+        MsgUtils msgUtils=new MsgUtils();
+        msgUtils.setCode(0);
+        msgUtils.setMsg("查询成功");
+        msgUtils.setCount(invitationBoList.size());
+        msgUtils.setData(invitationBoList);
+        return msgUtils;
+    }
 
 }
