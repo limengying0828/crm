@@ -36,7 +36,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" id="businessname" name="businessname" style="width: 290px;" required lay-verify="" placeholder="请输入"
+                            <input type="text" id="businessnameall" name="businessname" style="width: 290px;" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" id="businessname1"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input type="text" id="businessname"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -383,16 +383,18 @@
                         $("#officephone").val(data.officephone);
                         $("#telephone").val(data.telephone);
                         $("#email").val(data.email);
-
                         form.render();
+                        if(data==null){
+                            location.href="/html/ykz/customeradd.html"
+                        }
                     }
                 })
-
             });
 
             $("#businessname").blur(function(){
                 var businessname=$("#businessname").val();
-                $("#businessname1").val(businessname);
+                var customername=$("#customername").val();
+                $("#businessnameall").val(customername+"-"+businessname);
             });
 
         });
