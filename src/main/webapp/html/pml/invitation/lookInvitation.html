@@ -56,11 +56,11 @@
                     </div>
                     <div style="clear:both;"></div><!-- 去浮动div -->
                 </div>
-                <div th:each="forumReplyBo : ${list}" style="margin-top:10px;margin-bottom:10px;"><!-- 其他楼层(主贴评论) -->
-                    <div style="float: left;width: 16%;text-align:center;"><!-- 左边图片 -->
+                <!--<div th:each="forumReplyBo : ${list}" style="margin-top:10px;margin-bottom:10px;">&lt;!&ndash; 其他楼层(主贴评论) &ndash;&gt;
+                    <div style="float: left;width: 16%;text-align:center;">&lt;!&ndash; 左边图片 &ndash;&gt;
                         <img th:src="${invitationBo.user.image}">
                     </div>
-                    <div style="float: right;width: 83%;border:solid 1px #dfdfdf"><!-- 右边内容 -->
+                    <div style="float: right;width: 83%;border:solid 1px #dfdfdf">&lt;!&ndash; 右边内容 &ndash;&gt;
                         <div style="padding:10px 10px 10px 10px;background-color: #f5f5f5;font-size: 18px;">
                             &nbsp;&nbsp;
                             <span th:text="${invitationBo.user.username}"/>
@@ -73,11 +73,11 @@
                             </div>
                             <div style="margin-top:10px;">
                                 <div style="float: left;width: 50%"></div>
-                                <!-- 三级回复 -->
+                                &lt;!&ndash; 三级回复 &ndash;&gt;
                                 <div style="float: right;width: 48%;padding:0px 10px 10px 10px;" th:each="forumReplyBos : ${forumReplyBo.forumReplyBos}">
                                     <span th:text="${forumReplyBos.emp.empName}"/>回复:<span th:text="${forumReplyBos.principalPart}"/>
                                 </div>
-                                <div style="clear:both;"></div><!-- 去浮动div -->
+                                <div style="clear:both;"></div>&lt;!&ndash; 去浮动div &ndash;&gt;
                                 <div style="float:right;padding:0px 10px 10px 10px;" th:id="'eDiv' + ${forumReplyBo.forumReplyId}">
                                     <button style="width: 85px;height: 35px;" class="layui-btn layui-btn-radius layui-btn-primary" th:onclick="reply([[${forumReplyBo.forumReplyId}]])" lay-submit lay-filter="*">回复</button>
                                 </div>
@@ -98,8 +98,8 @@
                             </div>
                         </div>
                     </div>
-                    <div style="clear:both;"></div><!-- 去浮动div -->
-                </div>
+                    <div style="clear:both;"></div>&lt;!&ndash; 去浮动div &ndash;&gt;
+                </div>-->
             </div>
         </div>
         <div style="text-align:center;">
