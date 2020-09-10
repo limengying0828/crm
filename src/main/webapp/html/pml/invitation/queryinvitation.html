@@ -65,12 +65,12 @@
             ,limit:5
             ,url: '/invitation/queryInvitation.do' //数据接口
             ,cols: [[ //表头
-                ,{field: 'theme', title: '主题', width:170, sort: true, fixed: 'left',templet:'<div><a href="/contract/updateContract.do?contractid={{d.contractid}}">{{d.invitation.theme}}</a></div>'}
+                ,{field: 'theme', title: '主题', width:180, sort: true, fixed: 'left',templet:'<div><a href="/invitation/selectInvitationById.do?invitationid={{d.invitation.invitationid}}">{{d.invitation.theme}}</a></div>'}
                 ,{field: 'userid', title: '作者', width:180,sort: true,templet:'<div>{{d.user.username}}</div>'}
                 ,{field: 'processid', title: '所属商机', width:280, sort: true,templet:'<div>{{d.business.businessname}}</div>'}
                 ,{field: 'clickcount', title: '点击', width:180, sort: true,templet:'<div>{{d.invitation.clickcount}}</div>'}
                 ,{field: 'replies', title: '回复', width: 180, sort: true,templet:'<div>{{d.replies}}</div>'}
-                ,{field: 'lastReplytime', title: '最后回复时间', width: 180, sort: true,templet:'<div>{{d.invitation.lastReplytime}}</div>'}
+                ,{field: 'lastReplytime', title: '最后回复时间', width: 210, sort: true,templet:'<div>{{d.invitation.lastReplytime}}</div>'}
             ]]
         });
 

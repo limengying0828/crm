@@ -48,8 +48,12 @@ public class InvitationServiceImpl extends ServiceImpl<InvitationMapper, Invitat
             Integer replyes=replyMapper.countreply(pos.getInvitationid());
             InvitationBo postExt1=new InvitationBo(pos,bus,use,replyes);
             listpostExt.add(postExt1);
-            System.out.println("bus"+bus+"replyes"+replyes);
         }
         return listpostExt;
+    }
+
+    @Override
+    public InvitationBo queryInvitationById(Integer invitationid) {
+       return invitationMapper.queryInvitationById(invitationid);
     }
 }
