@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hy.crm.bo.lmy.ExpectedMoneyBo;
 import com.hy.crm.bo.ykz.BusinessBo;
+import com.hy.crm.mapper.BusprocessMapper;
 import com.hy.crm.mapper.CustomerMapper;
 import com.hy.crm.pojo.*;
 import com.hy.crm.mapper.BusinessMapper;
@@ -46,6 +47,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     @Autowired
     private IInvitationService iInvitationService;
 
+    @Autowired
+    private BusprocessMapper busprocessMapper;
+
     /**
      * //桌面各种状态预计成交金额
      * @return
@@ -78,12 +82,12 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
             String bname = li.getBusinessname();
             businessBo.setBusinessname(bname);//商机名称
             businessBo.setMakemoney(String.valueOf(li.getMakemoney()));//预计成交金额
-            QueryWrapper queryWrapper = new QueryWrapper();
-            queryWrapper.eq("businessid", buid);
-            List<Busprocess> busprocessList = iBusprocessService.list(queryWrapper);
-            for (Busprocess lp : busprocessList) {
-                businessBo.setTodaystate(lp.getTodaystate());//商机阶段
-            }
+
+            Busprocess busprocess=new Busprocess();
+            busprocess.setBusinessid(buid);
+            Busprocess busprocess1=busprocessMapper.seltodaystate(busprocess);
+            businessBo.setTodaystate(busprocess1.getTodaystate());//商机阶段
+
             int uid=li.getUserId();
             QueryWrapper queryWrapper1=new QueryWrapper();
             queryWrapper1.eq("userid",uid);

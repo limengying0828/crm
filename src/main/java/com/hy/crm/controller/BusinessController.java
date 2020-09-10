@@ -70,7 +70,7 @@ public class BusinessController {
      */
     @GetMapping("/businessQueryall.do")
     @ResponseBody
-    public LayuiUtils businessQueryall(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum) {
+    public LayuiUtils businessQueryall(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum, HttpSession session) {
         IPage<Business> page=new Page<>(pg,size);
         List<BusinessBo> list1=iBusinessService.businessQueryall(page,businessname,todaystate,userId,makemoney,documentarytime,forum);
         LayuiUtils layuiUtils=new LayuiUtils();
@@ -115,7 +115,7 @@ public class BusinessController {
      * @return
      */
     @GetMapping("/queryall.do")
-    public String queryall(Model model, int businessid, HttpSession session){
+    public String queryall(Model model, int businessid){
         QueryWrapper queryWrapper=new QueryWrapper();
         queryWrapper.eq("businessid",businessid);
         Business business=iBusinessService.getOne(queryWrapper);
