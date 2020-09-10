@@ -92,7 +92,7 @@ public class UserController {
             User user=iUserService.getOne(queryWrapper);
             System.out.println(user);
             sub.getSession().setAttribute("user",user);
-            return "redirect:/host.html";
+            return "/host.html";
 
         }
     }
