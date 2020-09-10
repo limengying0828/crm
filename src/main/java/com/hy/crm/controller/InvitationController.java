@@ -8,10 +8,12 @@ import com.hy.crm.service.IInvitationService;
 import com.hy.crm.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +32,8 @@ public class InvitationController {
 
     @PostMapping("/addInvitation.do")
     public String addInvitation(Invitation invitation){
+        Date date=new Date();
+        invitation.setReleasetime(String.valueOf(date.getTime()));
         iInvitationService.save(invitation);
         return "/host.html";
     }
@@ -45,6 +49,13 @@ public class InvitationController {
         msgUtils.setCount(invitationBoList.size());
         msgUtils.setData(invitationBoList);
         return msgUtils;
+    }
+
+    @RequestMapping("/selectInvitationById.do")
+    public String selectInvitationById(Integer invitationid, Model model){
+        InvitationBo invitationBo=iInvitationService.queryInvitationById(invitationid);
+        model.addAttribute("invitationBo",invitationBo);
+        return "/pml/invitation/lookInvitation.html";
     }
 
 }

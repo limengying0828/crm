@@ -18,4 +18,5 @@ import java.util.List;
 public interface IInvitationService extends IService<Invitation> {
     public List<InvitationBo> queryInvitation(Page page, String classification, String key);
 
+    InvitationBo queryInvitationById(Integer invitationid);
 }
