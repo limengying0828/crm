@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>查询所有跟单</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+    <div style="float: right;width: 100%">
+        <form class="layui-form-item">
+            <div class="layui-inline" >
+                <label class="layui-form-label">主题</label>
+                <div class="layui-input-inline">
+                    <select id="classification" name="classification" lay-verify="otherReq" >
+                        <option value="">请选择</option>
+                        <option value="theme">按跟单主题</option>
+                        <option value="documentarytime">按跟单时间</option>
+                        <option value="username">按跟单人</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="key" required  lay-verify="otherReq" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <button class="layui-btn" lay-submit lay-filter="search"><i class="layui-icon layui-icon-search" > </i></button>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn " lay-event="add">
+                    <i class="layui-icon">&#xe61f;</i>
+                    <a href="/html/pml/documentary/addDocument.html">新增跟单</a>
+                </button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="test"></table>
+    </div>
+
+
+
+<script src="/layui/layui.js" charset="utf-8"></script>
+    <script src="/js/jquery-3.4.1.js"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['table','form','layer'], function(){
+        var table = layui.table;
+        var form =layui.form;
+        var layer = layui.layer;
+        var $ = layui.jquery;
+
+        table.render({
+             elem: '#test'
+            ,url:'/documentary/queryAllMyDoc.do'
+            ,toolbar: '#toolbarDemo'
+            ,width:1000
+            ,dataType:'JSONP'
+            ,cols: [[
+                {field:'documentarytime', width:150, title: '跟单时间', sort: true,templet:'<div>{{d.documentary.documentarytime}}</div>'}
+                ,{field:'theme', width:150, title: '跟单主题',templet:'<div><a href="/documentary/selectTheme.do?theme={{d.theme}}" style="color: #1E9FFF">{{d.business.businessname}}-{{d.documentary.documentaryclass}}</a></div>'}/*d代表当前行*/
+                ,{field:'username', width:150, title: '跟单人', sort: true,templet:'<div>{{d.user.username}}</div>'}
+                ,{field:'detail', width:150, title: '详细内容',sort: true,templet:'<div>{{d.documentary.detail}}</div>'}
+                ,{field:'attachment',templet:function(d){
+                        return'<div><img style="height: 50px;width: 50px" src='+d.documentary.attachment+'></div>'
+                    }, title: '附件', width: 150,sort: true}
+            ]]
+            ,page: true
+            ,limit:5
+        });
+
+
+       /* form.on('submit(formDemo)', function(data){
+            table.reload('test', {
+                url: '/documentary/queryAll.do'
+                ,where: {
+                    theme:data.field.theme,
+                    documentarytime:data.field.documentarytime,
+                    username:data.field.username
+                } //设定异步数据接口的额外参数
+            });
+            return false;
+        });*/
+
+        form.on('submit(search)', function(data){
+            alert(data.field)
+            table.reload('test', {
+                url:'/documentary/queryAll.do'
+                ,where:data.field//设定异步数据接口的额外参数
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
