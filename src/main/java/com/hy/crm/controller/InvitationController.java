@@ -3,7 +3,9 @@ package com.hy.crm.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hy.crm.bo.pml.InvitationBo;
+import com.hy.crm.bo.pml.InvitationBos;
 import com.hy.crm.pojo.Invitation;
+import com.hy.crm.pojo.User;
 import com.hy.crm.service.IInvitationService;
 import com.hy.crm.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +34,11 @@ public class InvitationController {
     private IInvitationService iInvitationService;
 
     @PostMapping("/addInvitation.do")
-    public String addInvitation(Invitation invitation){
+    public String addInvitation(Invitation invitation, HttpSession session){
         Date date=new Date();
         invitation.setReleasetime(String.valueOf(date.getTime()));
+        User user = (User) session.getAttribute("user");
+        invitation.setUserid(user.getUserid());
         iInvitationService.save(invitation);
         return "/host.html";
     }
@@ -53,8 +58,9 @@ public class InvitationController {
 
     @RequestMapping("/selectInvitationById.do")
     public String selectInvitationById(Integer invitationid, Model model){
-        InvitationBo invitationBo=iInvitationService.queryInvitationById(invitationid);
-        model.addAttribute("invitationBo",invitationBo);
+        InvitationBos invitationBos=iInvitationService.queryInvitationById(iInvitationService.getById(invitationid));
+        System.out.println("controller层："+invitationBos);
+        model.addAttribute("invitationBos",invitationBos);
         return "/pml/invitation/lookInvitation.html";
     }
 

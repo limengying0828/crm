@@ -19,5 +19,7 @@ public interface IContractService extends IService<Contract> {
 
     public List<ContractBo> queryContract(@Param("classification")String classification, @Param("key")String key, @Param("page") Integer page, @Param("limit") Integer limit);
 
+    public List<ContractBo> queryContractMy(@Param("classification")String classification, @Param("key")String key, @Param("page") Integer page, @Param("limit") Integer limit,String associatedpersons);
+
 
 }

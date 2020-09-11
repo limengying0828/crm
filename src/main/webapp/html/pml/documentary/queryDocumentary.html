@@ -71,17 +71,17 @@
 
         table.render({
              elem: '#test'
-            ,url:'/documentary/queryAll.do'
+            ,url:'/documentary/queryAllDoc.do'
             ,toolbar: '#toolbarDemo'
             ,width:1000
             ,dataType:'JSONP'
             ,cols: [[
-                {field:'documentarytime', width:150, title: '跟单时间', sort: true}
-                ,{field:'theme', width:150, title: '跟单主题',templet:'<div><a href="/documentary/selectTheme.do?theme={{d.theme}}">{{d.theme}}</a></div>'}/*d代表当前行*/
-                ,{field:'username', width:150, title: '跟单人', sort: true}
-                ,{field:'detail', width:150, title: '详细内容'}
+                {field:'documentarytime', width:150, title: '跟单时间', sort: true,templet:'<div>{{d.documentary.documentarytime}}</div>'}
+                ,{field:'theme', width:150, title: '跟单主题',templet:'<div><a href="/documentary/selectTheme.do?theme={{d.theme}}" style="color: #1E9FFF">{{d.business.businessname}}-{{d.documentary.documentaryclass}}</a></div>'}/*d代表当前行*/
+                ,{field:'username', width:150, title: '跟单人', sort: true,templet:'<div>{{d.user.username}}</div>'}
+                ,{field:'detail', width:150, title: '详细内容',sort: true,templet:'<div>{{d.documentary.detail}}</div>'}
                 ,{field:'attachment',templet:function(d){
-                        return'<div><img style="height: 50px;width: 50px" src='+d.attachment+'></div>'
+                        return'<div><img style="height: 50px;width: 50px" src='+d.documentary.attachment+'></div>'
                     }, title: '附件', width: 150,sort: true}
             ]]
             ,page: true

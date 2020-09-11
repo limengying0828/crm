@@ -42,11 +42,22 @@ public class Remits implements Serializable {
     @ApiModelProperty(value = "登记人")
     private Integer userid;
 
-    @ApiModelProperty(value = "用户编号")
-    private Integer customerid;
+    @ApiModelProperty(value = "合同编号")
+    private String customername;
+
+    @ApiModelProperty(value = "合同编号")
+    private String customerid;
 
     @ApiModelProperty(value = "合同编号")
     private String contractid;
+
+    public String getContractid() {
+        return contractid;
+    }
+
+    public void setContractid(String contractid) {
+        this.contractid = contractid;
+    }
 
     @ApiModelProperty(value = "合同说明")
     private String incomestatement;
@@ -100,21 +111,6 @@ public class Remits implements Serializable {
     public void setUserid(Integer userid) {
         this.userid = userid;
     }
-    public Integer getCustomerid() {
-        return customerid;
-    }
-
-    public void setCustomerid(Integer customerid) {
-        this.customerid = customerid;
-    }
-
-    public String getContractid() {
-        return contractid;
-    }
-
-    public void setContractid(String contractid) {
-        this.contractid = contractid;
-    }
 
     public String getIncomestatement() {
         return incomestatement;
@@ -124,20 +120,36 @@ public class Remits implements Serializable {
         this.incomestatement = incomestatement;
     }
 
+    public String getCustomername() {
+        return customername;
+    }
+
+    public void setCustomername(String customername) {
+        this.customername = customername;
+    }
+
+    public String getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(String customerid) {
+        this.customerid = customerid;
+    }
 
     @Override
     public String toString() {
         return "Remits{" +
-            "remitsid=" + remitsid +
-            ", incometime=" + incometime +
-            ", incomeclass=" + incomeclass +
-            ", incomemoney=" + incomemoney +
-            ", capital=" + capital +
-            ", paymentterm=" + paymentterm +
-            ", userid=" + userid +
-            ", customerid=" + customerid +
-            ", contractid=" + contractid +
-            ", incomestatement=" + incomestatement +
-        "}";
+                "remitsid=" + remitsid +
+                ", incometime='" + incometime + '\'' +
+                ", incomeclass='" + incomeclass + '\'' +
+                ", incomemoney=" + incomemoney +
+                ", capital='" + capital + '\'' +
+                ", paymentterm='" + paymentterm + '\'' +
+                ", userid=" + userid +
+                ", customername='" + customername + '\'' +
+                ", customerid='" + customerid + '\'' +
+                ", contractid='" + contractid + '\'' +
+                ", incomestatement='" + incomestatement + '\'' +
+                '}';
     }
 }
