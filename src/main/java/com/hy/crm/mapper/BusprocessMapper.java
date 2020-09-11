@@ -2,6 +2,7 @@ package com.hy.crm.mapper;
 
 import com.hy.crm.pojo.Busprocess;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hy.crm.pojo.Documentary;
 import com.hy.crm.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -18,4 +19,8 @@ import org.springframework.stereotype.Repository;
 public interface BusprocessMapper extends BaseMapper<Busprocess> {
     @Select("select * from busprocess where businessid=#{businessid} order by disposetime desc limit 1")
     public Busprocess seltodaystate(Busprocess busprocess);
+
+
+    @Select("select * from documentary where processid=#{processid} order by documentarytime desc limit 1")
+    public Documentary seldocumentarytime(Documentary documentary);
 }

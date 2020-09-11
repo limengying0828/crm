@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
@@ -70,9 +71,9 @@ public class BusinessController {
      */
     @GetMapping("/businessQueryall.do")
     @ResponseBody
-    public LayuiUtils businessQueryall(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum, HttpSession session) {
+    public LayuiUtils businessQueryall(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String businessname, String todaystate, String userId, String makemoney, String overdate, String post,String status) {
         IPage<Business> page=new Page<>(pg,size);
-        List<BusinessBo> list1=iBusinessService.businessQueryall(page,businessname,todaystate,userId,makemoney,documentarytime,forum);
+        List<BusinessBo> list1=iBusinessService.businessQueryall(page,businessname,todaystate,userId,makemoney,overdate,post,status);
         LayuiUtils layuiUtils=new LayuiUtils();
         layuiUtils.setCode(0);
         layuiUtils.setMsg("查询成功");
@@ -87,7 +88,12 @@ public class BusinessController {
      * @return
      */
     @GetMapping("/save.do")
-    public String save(Business business){
+    public String save(Business business, HttpServletRequest request){
+        HttpSession session=request.getSession();
+        User user=(User) session.getAttribute("user");
+        business.setUserId(user.getUserid());
+        SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        business.setAddbusinesstime(df1.format(new Date()));
         iBusinessService.save(business);
         QueryWrapper queryWrapper=new QueryWrapper();
         queryWrapper.eq("businessname",business.getBusinessname());
@@ -104,7 +110,9 @@ public class BusinessController {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         busprocess.setDisposetime(df.format(new Date()));
         busprocess.setTodaystate("初期沟通");
+        busprocess.setAuditstatus("待处理");
         iBusprocessService.save(busprocess);
+
         return "redirect:/html/ykz/business.html";
     }
 
@@ -125,7 +133,53 @@ public class BusinessController {
         Customer customer=iCustomerService.getOne(queryWrapper1);
         model.addAttribute("business",business);
         model.addAttribute("customer",customer);
-        return "/ykz/businesscheck.html";
+        return "/html/ykz/businesscheck.html";
+    }
+
+
+    /**
+     * 根据id查商机信息
+     * @param model
+     * @param businessid
+     * @return
+     */
+    @GetMapping("/queryall1.do")
+    public String queryall1(Model model, int businessid){
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("businessid",businessid);
+        Business business=iBusinessService.getOne(queryWrapper);
+
+        QueryWrapper queryWrapper1=new QueryWrapper();
+        queryWrapper1.eq("customerid",business.getCustomerid());
+        Customer customer=iCustomerService.getOne(queryWrapper1);
+
+        Busprocess busprocess1=new Busprocess();
+        busprocess1.setBusinessid(businessid);
+        Busprocess busprocess=iBusprocessService.seltodaystate(busprocess1);
+
+        model.addAttribute("business",business);
+        model.addAttribute("customer",customer);
+        model.addAttribute("busprocess",busprocess);
+        return "/html/ykz/businessupdate.html";
+    }
+
+    /**
+     * 修改
+     */
+    @GetMapping("/businessupdate.do")
+    public String businessupdate(Business business,String todaystate,HttpServletRequest request){
+        iBusinessService.updateById(business);
+        Busprocess busprocess=new Busprocess();
+        busprocess.setBusinessid(business.getBusinessid());
+        HttpSession session=request.getSession();
+        User user=(User) session.getAttribute("user");
+        busprocess.setUserid(user.getUserid());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        busprocess.setDisposetime(df.format(new Date()));
+        busprocess.setTodaystate(todaystate);
+        busprocess.setAuditstatus("待处理");
+        iBusprocessService.save(busprocess);
+        return "redirect:/html/ykz/business.html";
     }
 
 }

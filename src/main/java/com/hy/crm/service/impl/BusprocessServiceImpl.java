@@ -4,6 +4,7 @@ import com.hy.crm.pojo.Busprocess;
 import com.hy.crm.mapper.BusprocessMapper;
 import com.hy.crm.service.IBusprocessService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BusprocessServiceImpl extends ServiceImpl<BusprocessMapper, Busprocess> implements IBusprocessService {
 
+    @Autowired
+    private BusprocessMapper busprocessMapper;
+
+    @Override
+    public Busprocess seltodaystate(Busprocess busprocess) {
+        return busprocessMapper.seltodaystate(busprocess);
+    }
 }

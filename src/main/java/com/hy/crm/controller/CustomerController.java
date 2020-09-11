@@ -101,9 +101,9 @@ public class CustomerController {
             @ApiResponse(code = 500, message = "系统错误"),
             @ApiResponse(code = 200, message = "0 成功", response = LayuiUtils.class) })
     @ApiOperation(httpMethod = "GET", value = "查询所有客户信息")//swagger 当前接口注解
-    public LayuiUtils find(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String condition,String keyword) {
+    public LayuiUtils find(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String condition,String keyword,String customerclass) {
         IPage<Customer> page=new Page<>(pg,size);
-        List<CbcaBo> list1=iCustomerService.queryAll(page,condition,keyword);
+        List<CbcaBo> list1=iCustomerService.queryAll(page,condition,keyword,customerclass);
         LayuiUtils layuiUtils=new LayuiUtils();
         layuiUtils.setCode(0);
         layuiUtils.setMsg("查询成功");
@@ -122,7 +122,7 @@ public class CustomerController {
         Finance finance=iFinanceService.getOne(queryWrapper);
         model.addAttribute("customer",customer);
         model.addAttribute("finance",finance);
-        return "/ykz/customerupdate.html";
+        return "/html/ykz/customerupdate.html";
     }
 
 
@@ -173,21 +173,6 @@ public class CustomerController {
         iCustomerService.removeById(customerid);
         iFinanceService.removeById(financeId);
         return "redirect:/html/ykz/customer.html";
-    }
-
-    /**
-     *查商机
-     */
-    @GetMapping("/businessQueryall.do")
-    @ResponseBody
-    public LayuiUtils businessQueryall(String businessname,String todaystate,String userId,String makemoney,String documentarytime,String forum) {
-        List<BusinessBo> list1=iCustomerService.businessQueryall(businessname,todaystate,userId,makemoney,documentarytime,forum);
-        LayuiUtils layuiUtils=new LayuiUtils();
-        layuiUtils.setCode(0);
-        layuiUtils.setMsg("查询成功");
-        layuiUtils.setCount(list1.size());
-        layuiUtils.setData(list1);
-        return layuiUtils;
     }
 
 
