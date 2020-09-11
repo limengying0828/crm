@@ -9,7 +9,8 @@
 
     <script type="text/javascript">
         var a1=function(){
-            window.location.href="/html/ykz/businessupdate.html"
+            var businessid=$("#businessid").val();
+            window.location.href="/business/queryall1.do?businessid="+businessid
         }
 
         var a2=function(){
@@ -38,6 +39,7 @@
             <tr>
                 <td>商机名称</td>
                 <td>
+                    <input type="hidden" id="businessid" th:value="${business.businessid}">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
                             <input type="text" th:value="${business.businessname}"  name="businessname" style="width: 290px;" required lay-verify="" placeholder="请输入"

@@ -35,6 +35,9 @@ public class Busprocess implements Serializable {
     @ApiModelProperty(value = "当前状态")
     private String todaystate;
 
+    @ApiModelProperty(value = "审核状态")
+    private String auditstatus;
+
     public Integer getBusprocessid() {
         return busprocessid;
     }
@@ -71,14 +74,23 @@ public class Busprocess implements Serializable {
         this.todaystate = todaystate;
     }
 
+    public String getAuditstatus() {
+        return auditstatus;
+    }
+
+    public void setAuditstatus(String auditstatus) {
+        this.auditstatus = auditstatus;
+    }
+
     @Override
     public String toString() {
         return "Busprocess{" +
-            "busprocessid=" + busprocessid +
-            ", businessid=" + businessid +
-            ", userid=" + userid +
-            ", disposetime=" + disposetime +
-            ", todaystate=" + todaystate +
-        "}";
+                "busprocessid=" + busprocessid +
+                ", businessid=" + businessid +
+                ", userid=" + userid +
+                ", disposetime='" + disposetime + '\'' +
+                ", todaystate='" + todaystate + '\'' +
+                ", auditstatus='" + auditstatus + '\'' +
+                '}';
     }
 }

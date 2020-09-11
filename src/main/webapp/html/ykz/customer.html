@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>客户信息统计</title>
     <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script src="/js/jquery-3.4.1.js"></script>
 
     <script type="text/javascript">
         var a1=function(){
@@ -13,6 +14,44 @@
         var a2=function(){
             window.location.href=""
         }
+
+        /*var one=function () {
+            table.reload('demo',{
+                url :'/customer/customerAll.do',
+                where: {
+                    customerclass:1
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+
+        var two=function () {
+            table.reload('demo',{
+                url :'/customer/customerAll.do',
+                where: {
+                    customerclass:2
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        var three=function () {
+            table.reload('demo',{
+                url :'/customer/customerAll.do',
+                where: {
+                    customerclass:3
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }*/
+
     </script>
     <style>
         .box1{
@@ -31,9 +70,9 @@
 <div class="box1">
     <div style="float: left;">
         <br><br><br><br>
-        <div><a href="#" onclick="ctwo('分类一')"><img src="/html/ykz/img/u214.png">客户分类一</a></div><br>
-        <div><a href="#" onclick="ctwo('分类二')"><img src="/html/ykz/img/u214.png">客户分类二</a></div><br>
-        <div><a href="#" onclick="cthree('分类三')"><img src="/html/ykz/img/u214.png">客户分类三</a></div><br>
+        <div><a href="#" onclick="one()" ><img src="/html/ykz/img/u214.png">客户分类一</a></div><br>
+        <div><a href="#" onclick="two()"><img src="/html/ykz/img/u214.png">客户分类二</a></div><br>
+        <div><a href="#" onclick="three()"><img src="/html/ykz/img/u214.png">客户分类三</a></div><br>
     </div>
 </div>
 <div class="box2" >
@@ -80,37 +119,10 @@
 
 <script src="/layui/layui.js"></script>
 <script>
-    layui.use(['table', 'form'], function () {
+    layui.use(['table', 'form','jquery'], function () {
         var table = layui.table;
         var form = layui.form;
-
-        window.cone=function(data){
-            console.log(data)
-            table.reload('',{
-                url :'/customer/customerAll.do',
-                where:{
-                    status : data
-                }
-            });
-        }
-        window.ctwo=function(data){
-            console.log(data)
-            table.reload('',{
-                url :'/customer/customerAll.do',
-                where:{
-                    status : data
-                }
-            });
-        }
-        window.cthree=function(data){
-            console.log(data)
-            table.reload('',{
-                url :'/customer/customerAll.do',
-                where:{
-                    status : data
-                }
-            });
-        }
+        var $=layui.jquery;
 
         //第一个实例
         table.render({
@@ -134,6 +146,46 @@
                 , {field: 'average', title: '服务均分', width: 120, sort: true}
             ]]
         });
+
+
+        window.one=function () {
+            table.reload('demo',{
+                url :'/customer/customerAll.do',
+                where: {
+                    customerclass:1
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+
+        window.two=function () {
+            table.reload('demo',{
+                url :'/customer/customerAll.do',
+                where: {
+                    customerclass:2
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.three=function () {
+            table.reload('demo',{
+                url :'/customer/customerAll.do',
+                where: {
+                    customerclass:3
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+
 
         //监听提交   模糊查询
         form.on('submit(formDemo)', function (data) {

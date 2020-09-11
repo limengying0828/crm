@@ -43,19 +43,19 @@
                     </ul>
                     <div style="width: 200px"><font color="silver">——————————————</font></div>
                     <ul>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">本周新增</a></li>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">上周新增</a></li>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">本月新增</a></li>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">上月新增</a></li>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">本季度新增</a></li>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">上季度新增</a></li>
+                        <li><a href="#" onclick="thisweek('本周')"><img src="/html/ykz/img/u214.png">本周新增</a></li>
+                        <li><a href="#" onclick="lastweek('上周')"><img src="/html/ykz/img/u214.png">上周新增</a></li>
+                        <li><a href="#" onclick="thismonth('本月')"><img src="/html/ykz/img/u214.png">本月新增</a></li>
+                        <li><a href="#" onclick="lastmonth('上月')"><img src="/html/ykz/img/u214.png">上月新增</a></li>
+                        <li><a href="#" onclick="thiseomonth('本季')"><img src="/html/ykz/img/u214.png">本季度新增</a></li>
+                        <li><a href="#" onclick="lasteomonth('上季')"><img src="/html/ykz/img/u214.png">上季度新增</a></li>
 
                     </ul>
                     <div style="width: 200px"><font color="silver">——————————————</font></div>
                     <ul>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">已成交的商机</a></li>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">已丢单的商机</a></li>
-                        <li><a href="#" onclick=""><img src="/html/ykz/img/u214.png">已搁置的商机</a></li>
+                        <li><a href="#" onclick="make('成交')"><img src="/html/ykz/img/u214.png">已成交的商机</a></li>
+                        <li><a href="#" onclick="place('丢单')"><img src="/html/ykz/img/u214.png">已丢单的商机</a></li>
+                        <li><a href="#" onclick="shelve('搁置')"><img src="/html/ykz/img/u214.png">已搁置的商机</a></li>
                     </ul>
                 </div>
             </div>
@@ -91,9 +91,10 @@
                     <tr>
                         <td>商机负责人</td>
                         <td>
+                            <input type="hidden" name="userId" id="userId">
                             <div class="layui-form-item" align="center">
                                 <div class="layui-input-block">
-                                    <input type="text" name="userId"  style="width: 290px;" required lay-verify="" placeholder="请输入"
+                                    <input type="text" id="username"  style="width: 290px;" required lay-verify="" placeholder="请输入"
                                            autocomplete="off" class="layui-input">
                                 </div>
                             </div>
@@ -123,7 +124,7 @@
                         <td align="right">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="text" name="overdate" required lay-verify="date" style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
+                                    <input type="text" name="overdate"  style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
                                 </div>
                             </div>
                         </td>
@@ -175,10 +176,118 @@
                 , {field: 'todaystate', title: '商机阶段', width: 130 , sort: true}
                 , {field: 'makemoney', title: '预计成交金额', width: 151, sort: true}
                 , {field: 'userId', title: '商机负责人', width: 150 , sort: true}
-                , {field: 'documentarytime', title: '最后跟单时间', width: 160 , sort: true }
-                , {field: 'forum', title: '讨论版', width: 140, sort: true }
+                , {field: 'documentarytime', title: '最后跟单时间', width: 160 ,templet:'<div><a href="#" style="color: #0000FF">{{d.documentarytime}}</a></div>', sort: true }
+                , {field: 'forum', title: '讨论版', width: 140,templet:'<div><a href="#" style="color: #0000FF">{{d.forum}}</a></div>', sort: true }
             ]]
         });
+
+        window.thisweek=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.lastweek=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.thismonth=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.lastmonth=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.thiseomonth=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.lasteomonth=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.make=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.place=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
+
+        window.shelve=function (data) {
+            table.reload('demo',{
+                url :'/business/businessQueryall.do',
+                where: {
+                    status:data
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        }
 
         //监听提交   模糊查询
         form.on('submit(formDemo)', function (data) {
@@ -198,6 +307,28 @@
             }); //只重载数据
             return false;
         });
+
+
+        $(function () {
+            $("#username").blur(function(){
+                var username=$("#username").val();
+                $.ajax( {
+                    url : "/user/queryname.do?username="+username,
+                    type : "GET",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.userid==null){
+                            $("#userId").val("0");
+                        }else{
+                            $("#userId").val(data.userid);
+                        }
+                    }
+                })
+            });
+        });
+
+
+
 
         //时间
         laydate.render({

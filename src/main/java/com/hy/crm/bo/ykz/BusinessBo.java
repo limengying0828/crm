@@ -25,7 +25,7 @@ public class BusinessBo {
     private String documentarytime;
 
     //讨论版
-    private String forum;
+    private Integer forum;
 
     public Integer getBusinessid() {
         return businessid;
@@ -75,11 +75,11 @@ public class BusinessBo {
         this.documentarytime = documentarytime;
     }
 
-    public String getForum() {
+    public Integer getForum() {
         return forum;
     }
 
-    public void setForum(String forum) {
+    public void setForum(Integer forum) {
         this.forum = forum;
     }
 

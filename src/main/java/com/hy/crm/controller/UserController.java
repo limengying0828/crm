@@ -17,12 +17,9 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
@@ -90,7 +87,6 @@ public class UserController {
             QueryWrapper queryWrapper=new QueryWrapper();
             queryWrapper.eq("username",username);
             User user=iUserService.getOne(queryWrapper);
-            System.out.println(user);
             sub.getSession().setAttribute("user",user);
             return "/html/host.html";
 
@@ -165,6 +161,15 @@ public class UserController {
                 return "/html/ykz/login.html";
             }
         }
+    }
+
+
+    @GetMapping("/queryname.do")
+    @ResponseBody
+    public User queryname(String username){
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("username",username);
+        return iUserService.getOne(queryWrapper);
     }
 
     /**

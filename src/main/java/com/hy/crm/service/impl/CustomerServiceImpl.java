@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hy.crm.bo.ykz.BusinessBo;
 import com.hy.crm.bo.ykz.CbcaBo;
 import com.hy.crm.mapper.BusinessMapper;
+import com.hy.crm.mapper.BusprocessMapper;
 import com.hy.crm.pojo.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hy.crm.bo.ykz.CbcaBo;
@@ -33,9 +34,6 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     private CustomerMapper customerMapper;
 
     @Autowired
-    private BusinessMapper businessMapper;
-
-    @Autowired
     private IBusinessService iBusinessService;
 
     @Autowired
@@ -47,34 +45,36 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     @Autowired
     private IRemitsService iRemitsService;
 
-    @Autowired
-    private IBusprocessService iBusprocessService;
-
-    @Autowired
-    private IUserService iUserService;
-
-    @Autowired
-    private IDocumentaryService iDocumentaryService;
-
-    @Autowired
-    private IInvitationService iInvitationService;
     /**
      * 查询所有
      * @return
      * RowBounds rowBounds
      */
     @Override
-    public List<CbcaBo> queryAll(IPage<Customer> page, String condition,String keyword){
+    public List<CbcaBo> queryAll(IPage<Customer> page, String condition,String keyword,String customerclass){
         List<CbcaBo> list1=new ArrayList<>();
         QueryWrapper queryWrapper=new QueryWrapper();
         List<Customer> list=null;
         if(StringUtils.isNullOrEmpty(condition) || StringUtils.isNullOrEmpty(keyword)){
-            IPage iPage=customerMapper.selectPage(page,null);//查询所有
-            list=iPage.getRecords();
+            if(!StringUtils.isNullOrEmpty(customerclass)){
+                queryWrapper.eq("customerclass",customerclass);
+                IPage iPage=customerMapper.selectPage(page,queryWrapper);//查询所有
+                list=iPage.getRecords();
+            }else {
+                IPage iPage=customerMapper.selectPage(page,null);//查询所有
+                list=iPage.getRecords();
+            }
         }else {
-            queryWrapper.like(condition,keyword);
-            IPage iPage=customerMapper.selectPage(page,queryWrapper);
-            list=iPage.getRecords();
+            if(StringUtils.isNullOrEmpty(customerclass)){
+                queryWrapper.like(condition,keyword);
+                IPage iPage=customerMapper.selectPage(page,queryWrapper);
+                list=iPage.getRecords();
+            }else{
+                queryWrapper.eq("customerclass",customerclass);
+                queryWrapper.like(condition,keyword);
+                IPage iPage=customerMapper.selectPage(page,queryWrapper);//查询所有
+                list=iPage.getRecords();
+            }
         }
         CbcaBo cbcaBo=null;
         for(Customer lid:list){
@@ -125,8 +125,12 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             Float score=0.0f;
             Float score1=0.0f;
             for(Aftersale lf:listaftersale){
-                score+=Float.parseFloat(lf.getServicesscore());
-                score1=Float.parseFloat(String.valueOf(score/aftersaleNumbre));
+                if(StringUtils.isNullOrEmpty(lf.getServicesscore())){
+                    score1=0.0f;
+                }else{
+                    score+=Float.parseFloat(lf.getServicesscore());
+                    score1=Float.parseFloat(String.valueOf(score/aftersaleNumbre));
+                }
             }
             cbcaBo.setCustomerid(cuid);
             cbcaBo.setCustomername(cuname);
@@ -139,70 +143,7 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         return list1;
     }
 
-    /**
-     * 查商机
-     * @param businessname
-     * @param todaystate
-     * @param userId
-     * @param makemoney
-     * @param documentarytime
-     * @param forum
-     * @return
-     */
-    @Override
-    public List<BusinessBo> businessQueryall( String businessname, String todaystate, String userId, String makemoney, String documentarytime, String forum) {
-        List<BusinessBo> boList = new ArrayList<>();
-        List<Business> list = iBusinessService.list();
 
-        QueryWrapper queryWrapper5=new QueryWrapper();
-        if(businessname !="" && businessname !=null){
-
-        }else if(todaystate !="" && todaystate !=null){
-
-        }else if(userId !="" && userId !=null){
-
-        }else if(makemoney !="" && makemoney!=null ){
-
-        }else if(documentarytime !="" && documentarytime!=null ){
-
-        }else if(forum !="" && forum!=null ){
-
-        }
-
-
-        for (Business li : list) {
-            BusinessBo businessBo = new BusinessBo();
-            Integer buid = li.getBusinessid();
-            String bname = li.getBusinessname();
-            businessBo.setBusinessname(bname);//商机名称
-            businessBo.setMakemoney(String.valueOf(li.getMakemoney()));//预计成交金额
-            QueryWrapper queryWrapper = new QueryWrapper();
-            queryWrapper.eq("businessid", buid);
-            List<Busprocess> busprocessList = iBusprocessService.list(queryWrapper);
-            for (Busprocess lp : busprocessList) {
-                businessBo.setTodaystate(lp.getTodaystate());//商机阶段
-            }
-            int uid=li.getUserId();
-            QueryWrapper queryWrapper1=new QueryWrapper();
-            queryWrapper1.eq("userid",uid);
-            List<User> listuser=iUserService.list(queryWrapper1);
-            for(User lu:listuser){
-                businessBo.setUserId(lu.getUsername());//商机负责人
-            }
-            QueryWrapper queryWrapper2=new QueryWrapper();
-            queryWrapper2.eq("processid",buid);
-            List<Documentary> documentaryList=iDocumentaryService.list(queryWrapper2);
-            for(Documentary ld:documentaryList){
-                businessBo.setDocumentarytime(ld.getDocumentarytime());//最后跟单时间
-            }
-            QueryWrapper queryWrapper3=new QueryWrapper();
-            queryWrapper3.eq("processid",buid);
-            List<Invitation> invitationList=iInvitationService.list(queryWrapper3);
-            businessBo.setForum(String.valueOf(invitationList.size()));//讨论版
-            boList.add(businessBo);
-        }
-        return boList;
-    }
     @Override
     public Customer queryAllByName(String customername) {
         return customerMapper.queryAllByName(customername);
