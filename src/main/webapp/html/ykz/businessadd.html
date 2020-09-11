@@ -259,16 +259,16 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${session.user.getDeptname()}"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input type="text" th:value="${session.user.deptname}"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
                 <td align="center">商机负责人</td>
                 <td align="center">
-                    <input type="hidden" name="userId" th:value="${}">
+                    <input type="hidden" name="userId" th:value="${session.user.userid}">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" required="" th:value="${session.user.getUsername()}"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  >
+                            <input type="text" required="" th:value="${session.user.username}"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  >
                         </div>
                     </div>
                 </td>
