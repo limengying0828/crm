@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增帖子</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <script src="../../../js/jquery-3.4.1.js"></script>
+    <script src="../../../layui/layui.js"></script>
+</head>
+<script type="text/javascript">
+    goback=function () {
+        window.location.href="../html/pml/invitation/queryinvitation.html";
+    }
+    refresh=function () {
+        window.location.href="";
+    }
+</script>
+<body>
+<form class="layui-form" action="/invitation/addInvitation.do" method="post">
+    <center>
+        <table width="80%">
+
+            <tr>
+                <td width="20%" align="right">
+                    <button type="button" class="layui-btn layui-btn-primary" onclick="goback()"><i class="layui-icon layui-icon-return">返回</i></button>
+                    <button type="button" class="layui-btn layui-btn-primary" onclick="refresh()"><i class="layui-icon layui-icon-refresh">刷新</i></button>
+                </td>
+            </tr>
+
+            <tr bgcolor="#fafad2">
+                <td height="50px"><h2>新增帖子</h2></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td height="5px"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>分类</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <select id="invitationclass" name="invitationclass" lay-verify="industry" lay-filter="industry">
+                                <option value=请选择"">请选择</option>
+                                <option value="商机讨论板">商机讨论板</option>
+                                <option value="技术交流">技术交流</option>
+                                <option value="企业文化">企业文化</option>
+                                <option value="生活娱乐">生活娱乐</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+                <td align="center">标签</td>
+                <td align="right">
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name="tagging" id="tagging"   required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>主题</td>
+                <td>
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name="theme" id="theme"   required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>相关附件</td>
+                <td colspan="3">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="card"><i class="layui-icon layui-icon-upload-drag"></i>上传图片</i></button>
+                    </div>
+                    <input type="hidden" name="attachment" id="attachment" lay-verify="photo">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">文本域</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" id="releasematter" name="releasematter" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                </td>
+            </tr>
+        </table><br><br>
+        <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
+            <div class="layui-input-block">
+                <p>
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" onclick="goback()">取消</button>
+                </p>
+            </div>
+        </div>
+    </center>
+
+</form>
+<script>
+
+    layui.use(['form', 'layer', 'upload', 'laydate','jquery'], function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $=layui.jquery;
+        var laydate = layui.laydate;
+
+
+        //时间选择器
+        laydate.render({
+            elem: '#documentarytime'
+        });
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#card'
+            ,url: '/aftersale/upload.do' //改成您自己的上传接口
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#idcard').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code == 0){
+                    $("#attachment").val(res.data)
+                    layer.msg('上传成功', {icon: 6});
+                }else{
+                    layer.msg('上传失败', {icon: 5});
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -14,6 +14,6 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface RemitsMapper extends BaseMapper<Remits> {
 
-    @Select("select * from remits where contractid = #{contractid}")
-    public Remits queryAll(String contractid);
+    @Select("select remitsid,incometime,incomeclass,incomemoney,capital,paymentterm,userid,customername,contractid,incomestatement from remits where contractid = #{contractid}")
+     Remits queryAll(String contractid);
 }

@@ -2,6 +2,7 @@ package com.hy.crm.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hy.crm.bo.pml.DocumentaryBo;
+import com.hy.crm.bo.pml.DocumentaryBos;
 import com.hy.crm.pojo.Documentary;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public interface IDocumentaryService extends IService<Documentary> {
      * @param
      * @return
      */
-    public List<DocumentaryBo> queryAll(String classification,String key,Integer page,Integer limit);
+    //public List<DocumentaryBo> queryAll(String classification,String key,Integer page,Integer limit);
+    public List<DocumentaryBos> queryAllDoc(String classification, String key, Integer page, Integer limit);
 
 
     public List<DocumentaryBo> select();
@@ -36,4 +38,7 @@ public interface IDocumentaryService extends IService<Documentary> {
     public List<DocumentaryBo> selectTheme(String theme);
 
     public DocumentaryBo selectUpdate(String theme);
+
+    List<DocumentaryBo> queryAllMy(String classification,String key,Integer page, Integer limit, Integer userid);
+    List<DocumentaryBos> queryAllMyDoc(String classification,String key,Integer page, Integer limit, Integer userid);
 }

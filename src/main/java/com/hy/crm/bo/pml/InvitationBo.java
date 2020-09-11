@@ -30,6 +30,10 @@ public class InvitationBo {
         this.replies = replies;
     }
 
+    public InvitationBo(Invitation invitation) {
+        this.invitation = invitation;
+    }
+
     public void setInvitation(Invitation invitation) {
         this.invitation = invitation;
     }

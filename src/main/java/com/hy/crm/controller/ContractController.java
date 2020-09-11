@@ -3,6 +3,7 @@ package com.hy.crm.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hy.crm.bo.pml.ContractBo;
 import com.hy.crm.pojo.Contract;
+import com.hy.crm.pojo.User;
 import com.hy.crm.service.IContractService;
 import com.hy.crm.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -54,6 +56,20 @@ public class ContractController {
         return msgUtils;
     }
 
+    @GetMapping("/selectContractMy.do")
+    @ResponseBody
+    public MsgUtils selectContractMy(Integer page, Integer limit, String classification, String key, HttpSession session){
+        User use= (User) session.getAttribute("user");
+        List<ContractBo> contractBoList=contractService.queryContractMy(classification,key,page,limit,use.getUsername());
+        MsgUtils msgUtils=new MsgUtils();
+        msgUtils.setCode(0);
+        msgUtils.setMsg("查询成功");
+        msgUtils.setCount(contractBoList.size());
+        msgUtils.setData(contractBoList);
+        return msgUtils;
+    }
+
+
     /**
      * 查询所有合同信息
      * @return
@@ -70,7 +86,9 @@ public class ContractController {
      * @return
      */
     @PostMapping("/addContract.do")
-    public String addContract(Contract contract){
+    public String addContract(Contract contract,HttpSession session){
+        User user= (User) session.getAttribute("user");
+        contract.setAssociatedpersons(user.getUsername());
         contractService.save(contract);
         return "/html/pml/contract/queryContract.html";
     }
