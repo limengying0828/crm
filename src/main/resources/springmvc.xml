@@ -26,8 +26,8 @@
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <!--配置编码-->
         <property name="characterEncoding" value="utf-8"></property>
-        <!--指定模板引擎的路径-->
-        <property name="prefix" value="html"></property>
+        <!--&lt;!&ndash;指定模板引擎的路径&ndash;&gt;
+        <property name="prefix" value="html"></property>-->
         <!--   &lt;!&ndash;过滤请求，处理以.html结尾的请求&ndash;&gt;
            <property name="suffix" value=".html"></property>-->
         <!--是否缓存页面，开发时设置为false，这样就可以在不重启服务器的情况下刷新页面即可查看修改效果；-->

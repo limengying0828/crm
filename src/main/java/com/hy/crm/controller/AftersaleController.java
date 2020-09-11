@@ -11,6 +11,7 @@ import com.hy.crm.service.ICustomerService;
 import com.hy.crm.service.IUserService;
 import com.hy.crm.utils.MsgUtils;
 import com.hy.crm.utils.MyMsgUtils;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -110,10 +111,16 @@ public class AftersaleController {
     @RequestMapping("/queryAfterSale.do")
     @ResponseBody
     public MsgUtils queryAfterSale(Integer page,Integer limit, String classification, String key,String status){
+        if(null==page){
+            page=1;
+        }
+        if(!StringUtils.isNullOrEmpty(key) && !StringUtils.isNullOrEmpty(classification)){
+            page=1;
+        }
         List<Aftersale> list=aftersaleService.queryAfterSale(classification,key,page,limit,status);
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
-        msgUtils.setCount(aftersaleService.queryCount(status));
+        msgUtils.setCount(aftersaleService.queryCount(classification,key,page,limit,status));
         msgUtils.setMsg("");
         msgUtils.setData(list);
         return msgUtils;
@@ -157,10 +164,11 @@ public class AftersaleController {
                 +"  【合同状态】："+afterSaleUserBo.getTodaystate()+"  【服务期至】："+afterSaleUserBo.getServiceto();
         model.addAttribute("afterSale",afterSaleUserBo);
         model.addAttribute("info",str);
-        return "/lmy/aftersale/aftersaleinfo.html";
+        return "/html/lmy/aftersale/aftersaleinfo.html";
     }
 
-    @PostMapping("/updateStatusById.do")
+    @GetMapping("/updateStatusById.do")
+    @ResponseBody
     public String updateStatusByTheme(After after){
         after.setUserid(1001);//需要动态获取session的id
         after.setStatus("已结束");
@@ -172,7 +180,7 @@ public class AftersaleController {
         if(b){
             boolean bo=aftersaleService.updateAfterSaleStatus(after.getServiceid(),dateFormat.format(date));
             if(bo){
-                return "/lmy/aftersale/aftersale.html";
+                return "yes";
             }else{
                 return "no";
             }

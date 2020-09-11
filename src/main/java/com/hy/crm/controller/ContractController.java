@@ -81,7 +81,7 @@ public class ContractController {
         queryWrapper.eq("contractid",contractid);
         Contract contractList=contractService.getOne(queryWrapper);
         model.addAttribute("contractList",contractList);
-        return "/pml/contract/updateContract.html";
+        return "/html/pml/contract/updateContract.html";
     }
 
     @RequestMapping("/selectContractById.do")
@@ -90,12 +90,12 @@ public class ContractController {
         queryWrapper.eq("contractid",contractid);
         Contract contractList=contractService.getOne(queryWrapper);
         model.addAttribute("contractList",contractList);
-        return "/pml/makeapply/addmakeapply.html";
+        return "/html/pml/makeapply/addmakeapply.html";
     }
 
     @PostMapping("/updateContractById.do")
     public String updateContractById(Contract  contract){
         contractService.updateById(contract);
-        return "/pml/contract/queryContract.html";
+        return "/html/pml/contract/queryContract.html";
     }
 }

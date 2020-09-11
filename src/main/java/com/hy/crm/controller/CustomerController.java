@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hy.crm.bo.ykz.BusinessBo;
 import com.hy.crm.bo.ykz.CbcaBo;
-import com.hy.crm.pojo.Business;
 import com.hy.crm.pojo.Customer;
 import com.hy.crm.pojo.Finance;
 import com.hy.crm.service.ICustomerService;
@@ -122,7 +121,7 @@ public class CustomerController {
         Finance finance=iFinanceService.getOne(queryWrapper);
         model.addAttribute("customer",customer);
         model.addAttribute("finance",finance);
-        return "/ykz/customerupdate.html";
+        return "/html/ykz/customerupdate.html";
     }
 
 

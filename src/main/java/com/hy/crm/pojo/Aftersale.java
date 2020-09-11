@@ -106,13 +106,7 @@ public class Aftersale implements Serializable {
     public void setStep(String step) {
         this.step = step;
     }
-    public Integer getUserid() {
-        return userid;
-    }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
     public String getParticipant() {
         return participant;
     }
@@ -234,6 +228,14 @@ public class Aftersale implements Serializable {
 
     public void setRealstatus(String realstatus) {
         this.realstatus = realstatus;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     @Override

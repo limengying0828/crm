@@ -27,7 +27,7 @@ public class MakeapplyController {
     @PostMapping("/addMakeapply.do")
     public String addMakeapply(Makeapply makeapply){
         iMakeapplyService.save(makeapply);
-        return "/pml/contract/queryContract.html";
+        return "/html/pml/contract/queryContract.html";
     }
 
 }

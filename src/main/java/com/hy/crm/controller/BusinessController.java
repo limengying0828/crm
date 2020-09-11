@@ -9,7 +9,6 @@ import com.hy.crm.bo.ykz.BusinessBo;
 import com.hy.crm.pojo.Business;
 import com.hy.crm.pojo.Busprocess;
 import com.hy.crm.pojo.Customer;
-import com.hy.crm.pojo.User;
 import com.hy.crm.service.IBusinessService;
 import com.hy.crm.service.IBusprocessService;
 import com.hy.crm.service.ICustomerService;
@@ -17,10 +16,12 @@ import com.hy.crm.yuutils.LayuiUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -125,7 +126,7 @@ public class BusinessController {
         Customer customer=iCustomerService.getOne(queryWrapper1);
         model.addAttribute("business",business);
         model.addAttribute("customer",customer);
-        return "/ykz/businesscheck.html";
+        return "/html/ykz/businesscheck.html";
     }
 
 }

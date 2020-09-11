@@ -31,6 +31,6 @@ public class RemitsController {
         queryWrapper.eq("contractid",contractid);
         Remits remits =iRemitsService.getOne(queryWrapper);
         model.addAttribute("remits",remits);
-        return "/pml/remits/updateRemits.html";
+        return "/html/pml/remits/updateRemits.html";
     }
 }

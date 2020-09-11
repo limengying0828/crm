@@ -72,9 +72,6 @@ public class AfterSaleUserBo {
     @ApiModelProperty(value = "附件")
     private String attachment;
 
-    @ApiModelProperty(value = "用户名")
-    private String username;
-
     @ApiModelProperty(value = "密码")
     private String password;
 
@@ -83,6 +80,9 @@ public class AfterSaleUserBo {
 
     @ApiModelProperty(value = "角色")
     private String role;
+
+    @ApiModelProperty(value = "用户名")
+    private String username;
 
     @ApiModelProperty(value = "用户头像")
     private String image;

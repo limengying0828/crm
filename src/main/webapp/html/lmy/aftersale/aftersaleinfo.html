@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>新增售后服务</title>
+    <title>售后服务详情</title>
     <link rel="stylesheet" href="../../../layui/css/layui.css">
     <script src="../../../js/jquery-3.4.1.js"></script>
     <script src="../../../layui/layui.js"></script>
@@ -319,12 +319,12 @@
         form.on('submit(serviceOver)', function(data){
             var s=$("#serviceid").val();
             $.ajax({
-                type: 'post',
+                type: 'get',
                 url: '/aftersale/updateStatusById.do?serviceid='+s, // ajax请求路径
                 success: function(res){
                     if(res=='yes'){
                         layer.msg('处理成功');
-                        location.href="aftersale.html"
+                        self.close();
                     }else if(data=='no'){
                         layer.msg('处理失败');
                     }

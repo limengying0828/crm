@@ -35,7 +35,7 @@ public class InvitationController {
         Date date=new Date();
         invitation.setReleasetime(String.valueOf(date.getTime()));
         iInvitationService.save(invitation);
-        return "/host.html";
+        return "/html/host.html";
     }
 
     @RequestMapping("/queryInvitation.do")
@@ -55,7 +55,7 @@ public class InvitationController {
     public String selectInvitationById(Integer invitationid, Model model){
         InvitationBo invitationBo=iInvitationService.queryInvitationById(invitationid);
         model.addAttribute("invitationBo",invitationBo);
-        return "/pml/invitation/lookInvitation.html";
+        return "/html/pml/invitation/lookInvitation.html";
     }
 
 }

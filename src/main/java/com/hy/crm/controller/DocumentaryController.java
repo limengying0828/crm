@@ -86,7 +86,7 @@ public class DocumentaryController {
     public String selectTheme(String theme,Integer documentaryid, Model model){
        List<DocumentaryBo> documentaryBo = iDocumentaryService.selectTheme(theme);
        model.addAttribute("documentaryBo",documentaryBo);
-       return "/pml/documentary/updateDocumentary.html";
+       return "/html/pml/documentary/updateDocumentary.html";
     }
 
     @RequestMapping("/pictureUpload.do")
