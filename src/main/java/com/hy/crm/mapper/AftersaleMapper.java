@@ -28,13 +28,13 @@ public interface AftersaleMapper extends BaseMapper<Aftersale> {
     public List<Aftersale> queryAfterSaleProcessBo(@Param("classification") String classification, @Param("key")String key, @Param("page")Integer page, @Param("limit")Integer limit,@Param("status") String status);
 
     @SelectProvider(type = AfterSaleSql.class,method ="querySumCount")
-    public Integer queryCount(String status);
+    public Integer queryCount(@Param("classification")String classification, @Param("key")String key,@Param("page")Integer page, @Param("limit")Integer limit,@Param("status")String status);
 
     @Select("select * from `user` u,aftersale af,customer c,contract con,contractprocess cp where u.userid=af.userid and c.customerid=af.customerid  and cp.contractid=con.contractid and af.saleid=#{saleid}  ")
     public AfterSaleUserBo queryAfterSaleUserBoByTheme(Integer saleid);
 
     @Update("update aftersale set realstatus='已结束',overtime=#{overtime} where saleid=#{serviceid}")
-    public boolean updateAfterSaleStatus(Integer serviceid,String overtime);
+    public boolean updateAfterSaleStatus(@Param("serviceid") Integer serviceid,@Param("overtime") String overtime);
 
 
 

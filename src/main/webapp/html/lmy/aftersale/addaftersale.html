@@ -62,9 +62,9 @@
                 <td>
                     <div class="layui-form-item" style="margin-left: 40px;">
                         步  骤:<input type="text" style="border: 0px"  value="服务登记" name="step"><br/>
-                        责任人:<input type="text" style="border: 0px"  id="username" name="username"><br/>
-                        <input type="hidden" style="border: 0px"  id="userid" name="userid">
-                        参与人:<input type="text" style="border: 0px"  value="" name="participant">
+                        责任人:<input type="text" style="border: 0px"  id="username" name="username" readonly ><br/>
+                        <input type="hidden" style="border: 0px"  id="userid" name="userid" >
+                        参与人:<input type="text" style="border: 0px"   name="participant">
                     </div>
                 </td>
             </tr>
@@ -95,7 +95,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <select id="contractid" name="contractid" lay-verify="contract" >
+                            <select id="contractid" name="contractid" lay-verify="contract" lay-filter="contractid">
                                 <option value="">请选择</option>
                             </select>
                         </div>
@@ -157,7 +157,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
-                            <select name="typeservices" lay-verify="typeservices">
+                            <select name="typeservices" >
                                 <option value="">请选择</option>
                                 <option value="故障申报">故障申报</option>
                                 <option value="业务咨询">业务咨询</option>
@@ -172,7 +172,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block" >
-                            <select id="servicemode" name="servicemode" lay-verify="servicemode">
+                            <select id="servicemode" name="servicemode">
                                 <option value="">请选择</option>
                                 <option value="故障申报">故障申报</option>
                                 <option value="业务咨询">业务咨询</option>
@@ -231,11 +231,11 @@
                 </td>
             </tr>
             <tr>
-                <td><font color="red">*</font>服务人员</td>
+                <td><font color="red"></font>服务人员</td>
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="servicespeople"  required lay-verify="servicespeople" placeholder="请输入"
+                            <input type="text" name="servicespeople"  required lay-verify="servicespeople"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -421,7 +421,7 @@
                 success: function(res){
                     if(res=='yes'){
                         layer.msg('添加成功');
-                        location.href="aftersale.html"
+                        window.close();
                     }else if(data=='no'){
                         layer.msg('添加失败');
                     }
@@ -458,11 +458,6 @@
                     return '请选择客户名称';
                 }
             }
-            ,typeservices:function (value, item) {
-                if(value.trim().length==0 || null==value){
-                    return '请选择服务类型';
-                }
-            }
             ,begintime:function (value, item) {
                 if(value.trim().length==0 || null==value){
                     return '请选择服务开始时间';
@@ -471,11 +466,6 @@
             ,servicescontent:function (value, item) {
                 if(value.trim().length==0 || null==value){
                     return '请输入服务内容';
-                }
-            }
-            ,servicespeople:function (value, item) {
-                if(value.trim().length==0 || null==value){
-                    return '请输入服务人员';
                 }
             }
             ,contract:function (value, item) {

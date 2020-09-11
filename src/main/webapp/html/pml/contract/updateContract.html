@@ -17,7 +17,7 @@
     }
 </script>
 <body>
-<form class="layui-form" action="/contract/addContract.do" method="post">
+<form class="layui-form" action="/contract/updateContractById.do" method="post">
     <center>
         <table width="80%">
             <tr>
@@ -110,7 +110,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contractname" id="contractname" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="contractname" id="contractname" th:value="${contractList.customername}" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                 <td align="right">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contractid" id="contractid" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="contractid" id="contractid" th:value="${contractList.contractid}" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contractmoney" id="contractmoney" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="contractmoney" id="contractmoney" th:value="${contractList.contractmoney}" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="signingdate" name="signingdate" placeholder="yyyy-MM-dd" lay-key="1">
+                                    <input type="date" class="layui-input" id="signingdate" th:value="${contractList.signingdate}" name="signingdate" placeholder="yyyy-MM-dd" lay-key="1">
                                 </div>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="takedate" name="takedate" placeholder="yyyy-MM-dd" lay-key="1">
+                                    <input type="date" class="layui-input" id="takedate" name="takedate" th:value="${contractList.takedate}" placeholder="yyyy-MM-dd" lay-key="1">
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="serviceto" name="serviceto" placeholder="yyyy-MM-dd" lay-key="1">
+                                    <input type="date" class="layui-input" id="serviceto" th:value="${contractList.serviceto}" name="serviceto" placeholder="yyyy-MM-dd" lay-key="1">
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="sidelinkman" id="sidelinkman" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="sidelinkman" id="sidelinkman" th:value="${contractList.sidelinkman}" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                 <td align="right">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="officephone" id="officephone" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="officephone" id="officephone" th:value="${contractList.officephone}" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="telephone" id="telephone" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="telephone" id="telephone" th:value="${contractList.telephone}" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                 <td align="right">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="email" id="email" required lay-verify="" placeholder="请输入"
+                            <input type="text" name="email" id="email" th:value="${contractList.email}" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="technicalterms" id="technicalterms" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="technicalterms" id="technicalterms" th:value="${contractList.technicalterms}" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -234,7 +234,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="businessterms" id="businessterms" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
+                            <textarea name="businessterms" id="businessterms" th:value="${contractList.businessterms}" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
                         </div>
                     </div>
                 </td>
@@ -246,7 +246,7 @@
                         <button type="button" class="layui-btn" id="card"><i class="layui-icon layui-icon-upload-drag"></i>上传图片</i></button>
                         <div class="layui-upload-list">
                             <label class="layui-form-label">预览附件</label>
-                            <img class="layui-upload-img" id="idcard" style="width: 100px;height: 100px;">
+                            <img class="layui-upload-img" id="idcard" th:src="${contractList.attachment}" style="width: 100px;height: 100px;">
                         </div>
                     </div>
                     <input type="hidden" name="attachment" id="attachment" lay-verify="photo">
@@ -259,6 +259,15 @@
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
                             <input type="text" name="department" id="department" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td align="center">关联人员</td>
+                <td align="right">
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name="associatedpersons" th:value="${contractList.associatedpersons}" id="associatedpersons" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -314,7 +323,7 @@
         <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
             <div class="layui-input-block">
                 <p>
-                    <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="formDemo">保存</button>
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
                     <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">提交主管审核</button>
                     <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="serviceOver" formmethod="get">组织多人评审</button>
                     <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="serviceOver" formmethod="get">登记完成转执行</button>
@@ -349,21 +358,6 @@
         var laydate = layui.laydate;
 
 
-        /*form.on('input(customername)', function(data){
-            $.ajax({
-                type:'get',
-                url: '/customer/queryAllByName.do?customername='+data.value,
-                datatype: 'json',
-                success:function(cus){
-                    $("#customername").val(cus.customername);
-                    $("#industry").val(cus.industry);
-                    $("#city").val(cus.city);
-                    $("#address").val(cus.address);
-                }
-            });
-        })*/
-
-
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#card'
@@ -385,21 +379,13 @@
             }
         });
 
-        /*form.on('submit(formDemo)', function(doc){
-            $.ajax({
-                type: 'post',
-                url: '/contract/addContract.do', // ajax请求路径
-                data: data.field,
-                success: function(res){
-                    if(res=='yes'){
-                        layer.msg('添加成功');
-                    }else if(data=='no'){
-                        layer.msg('添加失败');
-                    }
-                }
-            });
-            return false;//禁止跳转，否则会提交两次，且页面会刷新
+
+       /* //监听提交
+        form.on('submit(formDemo)', function(data){
+            alert("修改")
+            location.href="";
         });*/
+
 
     });
 </script>

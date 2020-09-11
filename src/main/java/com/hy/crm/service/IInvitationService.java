@@ -3,6 +3,7 @@ package com.hy.crm.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hy.crm.bo.pml.InvitationBo;
+import com.hy.crm.bo.pml.InvitationBos;
 import com.hy.crm.pojo.Invitation;
 
 import java.util.List;
@@ -18,5 +19,8 @@ import java.util.List;
 public interface IInvitationService extends IService<Invitation> {
     public List<InvitationBo> queryInvitation(Page page, String classification, String key);
 
-    InvitationBo queryInvitationById(Integer invitationid);
+    InvitationBos queryInvitationById(Invitation invitation);
+
+
+
 }

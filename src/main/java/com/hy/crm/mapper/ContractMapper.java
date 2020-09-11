@@ -28,4 +28,7 @@ public interface ContractMapper extends BaseMapper<Contract> {
      */
     @SelectProvider(type = SqlDocumentary.class,method = "queryContract")
     public List<ContractBo> queryContract(@Param("classification")String classification, @Param("key")String key, @Param("page") Integer page, @Param("limit") Integer limit);
+
+    @SelectProvider(type = SqlDocumentary.class,method = "queryContractMy")
+    public List<ContractBo> queryContractMy(@Param("classification")String classification, @Param("key")String key, @Param("page") Integer page, @Param("limit") Integer limit,@Param("associatedpersons")String associatedpersons);
 }

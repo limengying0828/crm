@@ -62,7 +62,7 @@ public class UserController {
         String text = (String) request.getSession().getAttribute("text");
         if (!text.equalsIgnoreCase(imageText)) {
             model.addAttribute("msg","验证码输入错误!");
-            return "/ykz/error.html";
+            return "/html/ykz/error.html";
         }else {
             UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(username,password);
             //开启记住密码
@@ -82,13 +82,13 @@ public class UserController {
                 model.addAttribute("msg","密码异常！");
             }
             if(count>0){
-                return "/ykz/error.html";
+                return "/html/ykz/error.html";
             }
             QueryWrapper queryWrapper=new QueryWrapper();
             queryWrapper.eq("username",username);
             User user=iUserService.getOne(queryWrapper);
             sub.getSession().setAttribute("user",user);
-            return "/host.html";
+            return "/html/host.html";
 
         }
     }
@@ -143,14 +143,14 @@ public class UserController {
         user.setUsername(username);
         if(iUserService.selusername(user)!=null){
             request.setAttribute("msg", "账号已存在!");
-            return "/ykz/register.html";
+            return "/html/ykz/register.html";
         }else{
             String imageText = request.getParameter("verimage");
             // 图片的验证码
             String text = (String) request.getSession().getAttribute("text");
             if (!text.equalsIgnoreCase(imageText)) {
                 request.setAttribute("msg", "验证码输入错误!");
-                return "/ykz/error1.html";
+                return "/html/ykz/error1.html";
             }else {
                 User user1=new User();
                 user1.setUsername(username);
@@ -158,7 +158,7 @@ public class UserController {
                 user1.setImage(image);
                 user1.setDeptname(deptname);
                 iUserService.save(user1);
-                return "/ykz/login.html";
+                return "/html/ykz/login.html";
             }
         }
     }

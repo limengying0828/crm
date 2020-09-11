@@ -1,14 +1,17 @@
 package com.hy.crm.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hy.crm.bo.pml.InvitationBo;
+import com.hy.crm.bo.pml.InvitationBos;
 import com.hy.crm.mapper.BusinessMapper;
 import com.hy.crm.mapper.InvitationMapper;
 import com.hy.crm.mapper.ReplyMapper;
 import com.hy.crm.mapper.UserMapper;
 import com.hy.crm.pojo.Business;
 import com.hy.crm.pojo.Invitation;
+import com.hy.crm.pojo.Reply;
 import com.hy.crm.pojo.User;
 import com.hy.crm.service.IInvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +56,34 @@ public class InvitationServiceImpl extends ServiceImpl<InvitationMapper, Invitat
     }
 
     @Override
-    public InvitationBo queryInvitationById(Integer invitationid) {
-       return invitationMapper.queryInvitationById(invitationid);
+    public InvitationBos queryInvitationById(Invitation invitation) {
+        System.out.println("实现类"+invitation);
+        List<User> userList = new ArrayList<>();
+        List<Reply> replyList = new ArrayList<>();
+        Integer replies = 0;
+        if (invitation.getClickcount() != null && !invitation.getClickcount().equals("")) {
+            invitation.setClickcount(invitation.getClickcount() + 1);
+            boolean updateClick = invitationMapper.updateClick(invitation);
+            if (updateClick) {
+                invitation = invitationMapper.queryInvitationById(invitation.getInvitationid());
+                QueryWrapper queryWrapper=new QueryWrapper<>();
+                //queryWrapper.eq("userid",invitation.getUserid());
+                userList = userMapper.selectList(null);
+                replyList = replyMapper.queryIdByInvitationid(invitation.getInvitationid());
+                replies = replyMapper.countreply(invitation.getInvitationid());
+            }
+        } else {
+            if (invitation.getInvitationid() != null && !invitation.getInvitationid().equals("")) {
+                invitation = invitationMapper.queryInvitationById(invitation.getInvitationid());
+                QueryWrapper queryWrapper=new QueryWrapper<>();
+                //queryWrapper.eq("userid",invitation.getUserid());
+                userList = userMapper.selectList(null);
+                replyList = replyMapper.queryIdByInvitationid(invitation.getInvitationid());
+                replies = replyMapper.countreply(invitation.getInvitationid());
+            }
+        }
+        System.out.println("打印"+invitation);
+        InvitationBos invitationBos = new InvitationBos(invitation, replyList, userList, replies);
+        return invitationBos;
     }
 }

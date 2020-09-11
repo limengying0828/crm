@@ -1,14 +1,12 @@
 package com.hy.crm.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hy.crm.pojo.Remits;
 import com.hy.crm.service.IRemitsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
 
 /**
  * <p>
@@ -27,10 +25,8 @@ public class RemitsController {
 
     @RequestMapping("/queryRemits.do")
     public String queryRemits(String contractid, Model model){
-        QueryWrapper queryWrapper=new QueryWrapper<>();
-        queryWrapper.eq("contractid",contractid);
-        Remits remits =iRemitsService.getOne(queryWrapper);
+        Remits remits =iRemitsService.queryAll(contractid);
         model.addAttribute("remits",remits);
-        return "/pml/remits/updateRemits.html";
+        return "/html/pml/remits/updateRemits.html";
     }
 }

@@ -10,6 +10,7 @@ import com.hy.crm.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -258,55 +259,99 @@ public class StatisticalService {
 
     public MsgUtils queryFunnel(String time){
         FunnelBo oneFunnelBo=statisticalMapper.queryFunnel("初期沟通",time);
-        oneFunnelBo.setCountPercent(1);
-        oneFunnelBo.setMoneyPercent(1);
+        if(0!=oneFunnelBo.getCount()){
+            oneFunnelBo.setCountPercent(1);
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            System.out.println(oneFunnelBo.getCountPercent());
+            oneFunnelBo.setCountp(format.format(oneFunnelBo.getCountPercent()));
+        }else {
+            oneFunnelBo.setCountPercent(1);
+            oneFunnelBo.setCountp("0%");
+        }
+        if(0!=oneFunnelBo.getMoney()){
+            oneFunnelBo.setMoneyPercent(1);
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            oneFunnelBo.setMoneyp(format.format(oneFunnelBo.getMoneyPercent()));
+        }else{
+            oneFunnelBo.setMoneyPercent(0);
+            oneFunnelBo.setMoneyp("0%");
+        }
+
         FunnelBo twoFunnelBo=statisticalMapper.queryFunnel("方案和报价",time);
         if(0!=twoFunnelBo.getCount() && oneFunnelBo.getCount()!=0){
             twoFunnelBo.setCountPercent(twoFunnelBo.getCount()/oneFunnelBo.getCount());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            twoFunnelBo.setCountp(format.format(twoFunnelBo.getCountPercent()));
         }else{
             twoFunnelBo.setCountPercent(0);
+            twoFunnelBo.setCountp("0%");
         }
         if(0!=twoFunnelBo.getMoney() && oneFunnelBo.getMoney()!=0){
             twoFunnelBo.setMoneyPercent(twoFunnelBo.getMoney()/oneFunnelBo.getMoney());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            twoFunnelBo.setMoneyp(format.format(twoFunnelBo.getMoneyPercent()));
         }else{
-            twoFunnelBo.setMoneyPercent(0);
+             twoFunnelBo.setMoneyp("0%");
         }
 
         FunnelBo threeFunnelBo=statisticalMapper.queryFunnel("竞争或投标",time);
         if(0!=threeFunnelBo.getCount() && oneFunnelBo.getCount()!=0){
             threeFunnelBo.setCountPercent(threeFunnelBo.getCount()/oneFunnelBo.getCount());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            threeFunnelBo.setCountp(format.format(threeFunnelBo.getCountPercent()));
         }else{
             threeFunnelBo.setCountPercent(0);
+            threeFunnelBo.setCountp("0%");
         }
         if(0!=threeFunnelBo.getMoney() && oneFunnelBo.getMoney()!=0){
             threeFunnelBo.setMoneyPercent(threeFunnelBo.getMoney()/oneFunnelBo.getMoney());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            threeFunnelBo.setMoneyp(format.format(threeFunnelBo.getMoneyPercent()));
         }else{
-            twoFunnelBo.setMoneyPercent(0);
+            threeFunnelBo.setMoneyp("0%");
         }
 
         FunnelBo fourFunnelBo=statisticalMapper.queryFunnel("商务谈判",time);
         if(0!=fourFunnelBo.getCount() && oneFunnelBo.getCount()!=0){
             fourFunnelBo.setCountPercent(fourFunnelBo.getCount()/oneFunnelBo.getCount());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            fourFunnelBo.setCountp(format.format(fourFunnelBo.getCountPercent()));
         }else{
-            threeFunnelBo.setCountPercent(0);
+            fourFunnelBo.setCountp("0%");
         }
         if(0!=fourFunnelBo.getMoney() && oneFunnelBo.getMoney()!=0){
             fourFunnelBo.setMoneyPercent(fourFunnelBo.getMoney()/oneFunnelBo.getMoney());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            fourFunnelBo.setMoneyp(format.format(fourFunnelBo.getMoneyPercent()));
         }else{
-            fourFunnelBo.setMoneyPercent(0);
+            fourFunnelBo.setMoneyp("0%");
         }
 
 
         FunnelBo fiveFunnelBo=statisticalMapper.queryFunnel("成交",time);
         if(0!=fiveFunnelBo.getCount() && oneFunnelBo.getCount()!=0){
             fiveFunnelBo.setCountPercent(fiveFunnelBo.getCount()/oneFunnelBo.getCount());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            fiveFunnelBo.setCountp(format.format(fiveFunnelBo.getCountPercent()));
         }else{
-            threeFunnelBo.setCountPercent(0);
+            fiveFunnelBo.setCountp("0%");
         }
         if(0!=fiveFunnelBo.getMoney() && oneFunnelBo.getMoney()!=0){
             fiveFunnelBo.setMoneyPercent(fiveFunnelBo.getMoney()/oneFunnelBo.getMoney());
+            NumberFormat format = NumberFormat.getPercentInstance();
+            format.setMaximumFractionDigits(2);//设置保留几位小数
+            fiveFunnelBo.setMoneyp(format.format(fiveFunnelBo.getMoneyPercent()));
         }else{
-            fiveFunnelBo.setMoneyPercent(0);
+            fiveFunnelBo.setMoneyp("0%");
         }
 
 

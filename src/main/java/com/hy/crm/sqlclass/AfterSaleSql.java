@@ -49,13 +49,17 @@ public class AfterSaleSql {
         if(!StringUtils.isNullOrEmpty(status)&&status.equals("上季度")){
             buffer.append(" and QUARTER(a.begintime)=QUARTER(DATE_SUB(now(),interval 1 QUARTER)) and  YEAR (a.begintime)=YEAR(DATE_SUB(now(),interval 1 QUARTER))");
         }
+        System.out.println("page数："+page);
         buffer.append(" limit "+((page-1)*limit)+","+limit);
         return buffer.toString();
     }
 
-    public String querySumCount(String status){
+    public String querySumCount(@Param("classification")String classification, @Param("key")String key,@Param("page")Integer page, @Param("limit")Integer limit,@Param("status")String status){
         StringBuffer buffer=new StringBuffer("select count(*) from aftersale a where 1=1  ");
-        if(!StringUtils.isNullOrEmpty(status)&& status.equals("处理中")){
+        if(!StringUtils.isNullOrEmpty(classification) && !StringUtils.isNullOrEmpty(key)){
+            buffer.append(" and "+classification+" like '%"+key+"%'");
+        }
+        if(!StringUtils.isNullOrEmpty(status) && status.equals("处理中")){
             buffer.append(" and a.realstatus='处理中'");
         }
         if(!StringUtils.isNullOrEmpty(status)&& status.equals("已结束")){

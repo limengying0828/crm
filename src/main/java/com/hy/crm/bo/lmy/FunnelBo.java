@@ -11,6 +11,8 @@ import lombok.Data;
 public class FunnelBo {
     private Integer count;
     private float countPercent;
+    private String countp;
     private float money;
     private float moneyPercent;
+    private String moneyp;
 }

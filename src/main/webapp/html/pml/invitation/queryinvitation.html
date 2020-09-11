@@ -14,7 +14,6 @@
     }
 </script>
 <body>
-<i class="layui-icon layui-icon-service" style="font-size: 50px;margin-top: 100px;"><font size="5" color="#00bfff">我的合同</font></i>
 <div id="bigDiv" style="width:1500px">
     <div style="float: left;margin-left: 20px;">
         <form class="layui-form">
@@ -43,7 +42,8 @@
             <div class="layui-inline" style="width: 30px;"></div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <button type="button" class="layui-btn layui-btn-primary" onclick="addContract()"><i class="layui-icon layui-icon-add-circle" >社区发帖</i></button>
+                    <button type="button" class="layui-btn layui-btn-primary" onclick="addContract()"><i class="layui-icon layui-icon-add-circle" >
+                        <a href="/html/pml/invitation/addinvitation.html"></a>社区发帖</i></button>
                 </div>
             </div>
         </form>
@@ -65,7 +65,7 @@
             ,limit:5
             ,url: '/invitation/queryInvitation.do' //数据接口
             ,cols: [[ //表头
-                ,{field: 'theme', title: '主题', width:180, sort: true, fixed: 'left',templet:'<div><a href="/invitation/selectInvitationById.do?invitationid={{d.invitation.invitationid}}">{{d.invitation.theme}}</a></div>'}
+                ,{field: 'theme', title: '主题', width:180, sort: true, fixed: 'left',templet:'<div><a href="/invitation/selectInvitationById.do?invitationid={{d.invitation.invitationid}}" style="color: #1E9FFF">{{d.invitation.theme}}</a></div>'}
                 ,{field: 'userid', title: '作者', width:180,sort: true,templet:'<div>{{d.user.username}}</div>'}
                 ,{field: 'processid', title: '所属商机', width:280, sort: true,templet:'<div>{{d.business.businessname}}</div>'}
                 ,{field: 'clickcount', title: '点击', width:180, sort: true,templet:'<div>{{d.invitation.clickcount}}</div>'}

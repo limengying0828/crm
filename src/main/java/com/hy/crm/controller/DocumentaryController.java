@@ -1,7 +1,9 @@
 package com.hy.crm.controller;
 
 import com.hy.crm.bo.pml.DocumentaryBo;
+import com.hy.crm.bo.pml.DocumentaryBos;
 import com.hy.crm.pojo.Documentary;
+import com.hy.crm.pojo.User;
 import com.hy.crm.service.IBusinessService;
 import com.hy.crm.service.IDocumentaryService;
 import com.hy.crm.utils.MsgUtils;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -39,6 +42,24 @@ public class DocumentaryController {
     @Autowired
     private IBusinessService iBusinessService;
 
+   /* *//**
+     * 查询所有跟单
+     * @param
+     * @param
+     * @return
+     *//*
+    @ResponseBody
+    @GetMapping("/queryAll.do")
+    public MsgUtils queryAll(String classification,String key,Integer page,Integer limit){
+        List<DocumentaryBo> list =iDocumentaryService.queryAll(classification,key,page,limit);
+        MsgUtils msgUtils=new MsgUtils();
+        msgUtils.setCode(0);
+        msgUtils.setMsg("查询成功");
+        msgUtils.setCount(list.size());
+        msgUtils.setData(list);
+        return msgUtils;
+    }
+*/
     /**
      * 查询所有跟单
      * @param
@@ -46,9 +67,29 @@ public class DocumentaryController {
      * @return
      */
     @ResponseBody
-    @GetMapping("/queryAll.do")
-    public MsgUtils queryAll(String classification,String key,Integer page,Integer limit){
-        List<DocumentaryBo> list =iDocumentaryService.queryAll(classification,key,page,limit);
+    @GetMapping("/queryAllDoc.do")
+    public MsgUtils queryAllDoc(String classification,String key,Integer page,Integer limit){
+        List<DocumentaryBos> list =iDocumentaryService.queryAllDoc(classification,key,page,limit);
+        MsgUtils msgUtils=new MsgUtils();
+        msgUtils.setCode(0);
+        msgUtils.setMsg("查询成功");
+        msgUtils.setCount(list.size());
+        msgUtils.setData(list);
+        return msgUtils;
+    }
+
+    /**
+     * 查询我的跟单
+     * @param
+     * @param
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/queryAllMyDoc.do")
+    public MsgUtils queryAllMyDoc(String classification, String key, Integer page, Integer limit, HttpSession session){
+        User us= (User) session.getAttribute("user");
+        System.out.println("用户编号"+us.getUserid());
+        List<DocumentaryBos> list =iDocumentaryService.queryAllMyDoc(classification,key,page,limit,us.getUserid());
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
         msgUtils.setMsg("查询成功");
@@ -72,7 +113,9 @@ public class DocumentaryController {
      * @param documentary
      */
     @RequestMapping("/savaDocumentary.do")
-    public String savaDocumentary(Documentary documentary){
+    public String savaDocumentary(Documentary documentary,HttpSession session){
+        User user= (User) session.getAttribute("user");
+        documentary.setUserid(user.getUserid());
         iDocumentaryService.save(documentary);
         return "redirect:/html/pml/documentary/queryDocumentary.html";
     }
@@ -86,7 +129,7 @@ public class DocumentaryController {
     public String selectTheme(String theme,Integer documentaryid, Model model){
        List<DocumentaryBo> documentaryBo = iDocumentaryService.selectTheme(theme);
        model.addAttribute("documentaryBo",documentaryBo);
-       return "/pml/documentary/updateDocumentary.html";
+       return "/html/pml/documentary/updateDocumentary.html";
     }
 
     @RequestMapping("/pictureUpload.do")

@@ -29,4 +29,9 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
     public List<ContractBo> queryContract(@Param("classification")String classification, @Param("key")String key, @Param("page") Integer page, @Param("limit") Integer limit) {
         return contractMapper.queryContract(classification, key,page,limit);
     }
+
+    @Override
+    public List<ContractBo> queryContractMy(String classification, String key, Integer page, Integer limit, String associatedpersons) {
+        return contractMapper.queryContractMy(classification,key,page,limit,associatedpersons);
+    }
 }

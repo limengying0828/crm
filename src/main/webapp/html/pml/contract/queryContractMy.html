@@ -87,7 +87,7 @@
             ,height: 500
             ,page:true
             ,limit:5
-            ,url: '/contract/selectContract.do' //数据接口
+            ,url: '/contract/selectContractMy.do' //数据接口
             ,cols: [[ //表头
                 ,{field: 'contractname', title: '合同名称', width:270, sort: true, fixed: 'left',templet:'<div><a href="/contract/updateContract.do?contractid={{d.contractid}}" style="color: #1E9FFF">{{d.contractname}}</a></div>'}
                 ,{field: 'contractid', title: '合同编号', width:180}

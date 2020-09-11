@@ -3,25 +3,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>售后服务详情</title>
+    <title>开票申请单</title>
     <link rel="stylesheet" href="../../../layui/css/layui.css">
     <script src="../../../js/jquery-3.4.1.js"></script>
     <script src="../../../layui/layui.js"></script>
 </head>
 <script type="text/javascript">
     goback=function () {
-        window.close();
+        window.location.href="../html/pml/contract/queryContract.html";
     }
     refresh=function () {
         window.location.href="";
     }
 </script>
 <body>
-<form class="layui-form" action="" method="post">
+<form class="layui-form" action="/makeapply/addMakeapply.do" method="post">
     <center>
         <table width="80%">
             <tr>
-                <td width="20%"><font size="5">售后服务详情</font></td>
+                <td width="20%"><font size="5">开票申请单</font></td>
                 <td width="20%"></td>
                 <td width="20%"></td>
                 <td width="20%" align="right">
@@ -36,7 +36,7 @@
                 <td></td>
             </tr>
             <tr bgcolor="#fafad2">
-                <td height="50px"><h2>基本信息</h2></td>
+                <td height="50px"><h2>新增售后服务</h2></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -48,11 +48,23 @@
                 <td></td>
             </tr>
             <tr>
-                <td>主题</td>
+                <td><font color="red">*</font>主题</td>
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="theme" required="" lay-verify="required" th:value="${afterSale.theme}" autocomplete="off" class="layui-input" readonly style="width: 280px">
+                            <input type="text" name="theme" id="theme" required="" lay-verify="theme" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">结束时间</td>
+                <td align="right">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="date" class="layui-input" id="overtime" name="overtime" lay-verify="begintime" placeholder="yyyy-MM-dd" lay-key="1">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </td>
@@ -61,15 +73,24 @@
                 <td></td>
                 <td>
                     <div class="layui-form-item" style="margin-left: 40px;">
-                        步  骤:<input type="text" style="border: 0px" th:value="${afterSale.realstatus}" name="step" readonly width="240px;"><br/>
-                        责任人:<input type="text" style="border: 0px"  id="username" name="username" th:value="${afterSale.username}" readonly><br/>
+                        步  骤:<input type="text" style="border: 0px"  value="服务登记" name="step"><br/>
+                        责任人:<input type="text" style="border: 0px"  id="username" name="username"> readonly ><br/>
                         <input type="hidden" style="border: 0px"  id="userid" name="userid">
-                        参与人:<input type="text" style="border: 0px"  value="" name="participant" th:value="${afterSale.participant}" readonly>
+                        参与人:<input type="text" style="border: 0px"  value="" name="participant">
+                    </div>
+                </td>
+                <td align="center">详细地址</td>
+                <td align="right">
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name="detailedaddress"  id="detailedaddress" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
+                        </div>
                     </div>
                 </td>
             </tr>
             <tr bgcolor="#fafad2">
-                <td height="50px"><h2>售后服务信息</h2></td>
+                <td height="50px"><h2>申请信息</h2></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -81,120 +102,33 @@
                 <td></td>
             </tr>
             <tr>
-                <td>客户名称</td>
-                <td>
-                    <input type="hidden" id="serviceid"  th:value="${afterSale.saleid}">
-                    <div class="layui-form-item">
-                        <div class="layui-input-block" >
-                            <select name="customerid" id="customerid"   lay-filter="customername" lay-verify="required"  readonly="readonly">
-                                <option th:value="${afterSale.customerid}" selected>[[${afterSale.customername}]]</option>
-                            </select>
-                        </div>
-                    </div>
-                </td>
-                <td align="center">合同编号</td>
-                <td align="right">
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <select id="contractid" name="contractid" lay-verify="required" lay-filter="contractid" readonly="readonly">
-                                <option th:value="${afterSale.contractid}" selected>[[${afterSale.contractname}]]</option>
-                            </select>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>合同主要信息</td>
-                <td colspan="3">
-                    <div align="center" class="layui-form-item">
-                        <div class="layui-input-block">
-                            <textarea name="info" id="info" class="layui-input" readonly th:text="${info}"  autocomplete="off" lay-verify="">                            </textarea>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>对方联系人</td>
+                <td><font color="red">*</font>申请人姓名</td>
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="contactperson" id="contactperson" required lay-verify="" readonly th:value="${afterSale.contactperson}"
-                                   autocomplete="off" class="layui-input">
+                            <input type="text" name="username" id="username" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input" onblur="selectUser(this.value)">
                         </div>
                     </div>
                 </td>
-                <td align="center">固定电话</td>
+                <td align="center">所属部门</td>
                 <td align="right">
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <input type="text" name="officephone" id="officephone"  required lay-verify="" readonly th:value="${afterSale.officephone}"
-                                   autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>移动电话</td>
-                <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="telephone" id="telephone" required lay-verify=""  readonly th:value="${afterSale.telephone}"
-                                   autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </td>
-                <td align="center">邮件/QQ</td>
-                <td align="right">
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <input type="text" name="email" id="email" required lay-verify="" th:value="${afterSale.email}"
+                            <input type="text" name="userid" id="userid" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>服务类型</td>
+                <td>申请日期</td>
                 <td>
-                    <div class="layui-form-item">
-                        <div class="layui-input-block" >
-                            <select name="typeservices" lay-verify="required" readonly="readonly">
-                                <option th:value="${afterSale.typeservices}">[[${afterSale.typeservices}]]</option>
-                            </select>
-                        </div>
-                    </div>
-                </td>
-                <td align="center">服务方式</td>
-                <td align="right">
-                    <div class="layui-form-item">
-                        <div class="layui-input-block" >
-                            <select id="servicemode" name="servicemode" lay-verify="required" readonly="readonly">
-                                <option th:value="${afterSale.servicemode}">[[${afterSale.servicemode}]]</option>
-                            </select>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>开始时间</td>
-                <td>
-                    <div class="layui-form">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <div class="layui-input-inline">
-                                <input type="date" class="layui-input" id="begintime" name="begintime" readonly lay-key="1" th:value="${afterSale.begintime}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </td>
-                <td align="center">结束时间</td>
-                <td align="right">
                     <div class="layui-form">
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="date" class="layui-input" id="overtime" name="overtime" readonly lay-key="1" th:value="${afterSale.overtime}">
+                                    <input type="date" class="layui-input" id="begintime" name="appletime" lay-verify="appletime" placeholder="yyyy-MM-dd" lay-key="1">
                                 </div>
                             </div>
                         </div>
@@ -202,57 +136,113 @@
                 </td>
             </tr>
             <tr>
-                <td>服务内容</td>
+                <td>主要技术条款</td>
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="servicescontent" class="layui-input" required="" readonly autocomplete="off" th:text="${afterSale.servicescontent}">                            </textarea>
+                            <textarea name="technicalterms" id="technicalterms" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">                            </textarea>
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>客户反馈</td>
-                <td colspan="3">
-                    <div align="center" class="layui-form-item">
-                        <div class="layui-input-block">
-                            <textarea name="customerfeedback" class="layui-input" required="" readonly autocomplete="off" th:text="${afterSale.customerfeedback}">                            </textarea>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>服务人员</td>
+                <td>对方单位名称</td>
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="servicespeople"  required readonly th:value="${afterSale.servicespeople}"
+                            <input type="text" name="telephone" id="telephone" required lay-verify="" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
-                <td align="center">服务评分</td>
+                <td align="center">关联合同</td>
                 <td align="right">
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="radio" value="5" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='5' ? true :false}" title="5分">
-                            <input type="radio" value="4" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='4' ? true :false}" title="4分">
-                            <input type="radio" value="3" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='3' ? true :false}" title="3分">
-                            <input type="radio" value="2" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='2' ? true :false}" title="2分">
-                            <input type="radio" value="1" readonly name="servicesscore" th:checked="${afterSale.servicesscore=='1' ? true :false}" title="1分">
+                            <input type="text" name="contractid" th:value="${contractList.contractid}" id="contractid" required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>附件</td>
+                <td>开票种类</td>
                 <td>
-                    <div class="layui-upload">
-                        <div class="layui-upload-list">
-                            <label class="layui-form-label">附件</label>
-                            <img class="layui-upload-img" id="idcard" style="width: 100px;height: 100px;" th:src="${afterSale.attachment}">
+                    <div class="layui-form-item" align="center">
+                        <div class="layui-input-block">
+                            <input type="text" name="makekind" id="makekind"  required lay-verify="" placeholder="请输入"
+                                   autocomplete="off" class="layui-input">
                         </div>
                     </div>
+                </td>
+                <td align="center">纳税人识别号</td>
+                <td align="right">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="username" id="username"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><font color="red">*</font>开户行及账号</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="username" id="username"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">地址和电话</td>
+                <td align="right">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="username" id="username"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><font color="red">*</font>开票金额</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="makemoney" id="makemoney" th:value="${contractList.makecount}"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">开票日期</td>
+                <td align="right">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="date" class="layui-input" id="makedate" name="makedate" placeholder="yyyy-MM-dd" lay-key="1" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>发票号码</td>
+                <td>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="text" name="invoicenumber" id="invoicenumber"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </td>
+                <td align="center">附件</td>
+                <td align="right">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="card"><i class="layui-icon layui-icon-upload-drag"></i>上传图片</i></button>
+                    <div class="layui-upload-list">
+                        <label class="layui-form-label">预览附件</label>
+                        <img class="layui-upload-img" id="idcard" style="width: 100px;height: 100px;">
+                    </div>
+                </div>
+                <input type="hidden" name="attachment" id="attachment" lay-verify="photo">
                 </td>
             </tr>
             <tr>
@@ -302,9 +292,10 @@
             </div>
         </div>
         <div class="layui-form-item" style="width: 80%;margin-left: 20px;">
-            <div class="layui-input-block" th:if="${afterSale.realstatus=='处理中'}==true">
+            <div class="layui-input-block">
                 <p>
-                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="serviceOver" >本次服务完成</button>
+                    <button class="layui-btn layui-btn-radius layui-btn-primary" lay-submit lay-filter="formDemo">保存</button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">提交财务处理</button>
                     <button type="button" class="layui-btn layui-btn-radius layui-btn-primary" onclick="goback()">取消</button>
                 </p>
             </div>
@@ -315,23 +306,44 @@
 <script>
     layui.use(['form', 'layer', 'upload', 'laydate'], function () {
         var form = layui.form;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $=layui.jquery;
 
-        form.on('submit(serviceOver)', function(data){
-            var s=$("#serviceid").val();
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#card'
+            ,url: '/aftersale/upload.do' //改成您自己的上传接口
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#idcard').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code == 0){
+                    $("#attachment").val(res.data)
+                    layer.msg('上传成功', {icon: 6});
+                }else{
+                    layer.msg('上传失败', {icon: 5});
+                }
+            }
+        });
+
+        function selectCustomer(d){
             $.ajax({
-                type: 'get',
-                url: '/aftersale/updateStatusById.do?serviceid='+s, // ajax请求路径
-                success: function(res){
-                    if(res=='yes'){
-                        layer.msg('处理成功');
-                        self.close();
-                    }else if(data=='no'){
-                        layer.msg('处理失败');
-                    }
+                type:'get',
+                url: '/customer/queryAllByName.do?customername='+d,
+                datatype: 'json',
+                success:function(customer){
+                    $("#industry").val(customer.industry);
+                    $("#city").val(customer.city);
+                    $("#address").val(customer.address);
+                    $("#department").val(customer.department);
                 }
             });
-            return false;//禁止跳转，否则会提交两次，且页面会刷新
-        });
+        }
 
 
     });
