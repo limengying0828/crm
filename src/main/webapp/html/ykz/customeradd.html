@@ -61,7 +61,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="spell" style="width: 290px;" required lay-verify="required" placeholder="请输入客户拼音"
+                            <input type="text" name="spell" style="width: 290px;"  placeholder="请输入客户拼音"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                 <td align="center">
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
-                            <select name="customerclass" id="" lay-verify="required">
+                            <select name="customerclass" id="" >
                                 <option value=""></option>
                                 <option value="1">客户分类1</option>
                                 <option value="2">客户分类2</option>
@@ -85,10 +85,21 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
-                            <select name="customersource"  lay-verify="required">
+                            <select name="customersource"  >
                                 <option value=""></option>
                                 <option value="老客户">老客户</option>
                                 <option value="代理商">代理商</option>
+                                <option value="互联网">互联网</option>
+                                <option value="独立开发">独立开发</option>
+                                <option value="客户介绍">客户介绍</option>
+                                <option value="合作伙伴">合作伙伴</option>
+                                <option value="促销活动">促销活动</option>
+                                <option value="媒体宣传">媒体宣传</option>
+                                <option value="电话访问">电话访问</option>
+                                <option value="客户来电">客户来电</option>
+                                <option value="二次销售">二次销售</option>
+                                <option value="公开招标">公开招标</option>
+                                <option value="研讨会和展会">研讨会和展会</option>
                                 <option value="其他">其他</option>
                             </select>
                         </div>
@@ -100,11 +111,20 @@
                 <td align="center">
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
-                            <select name="industry"  lay-verify="required">
+                            <select name="industry"  >
                                 <option value=""></option>
-                                <option value="IT">IT</option>
-                                <option value="银行">银行</option>
-                                <option value="保险">保险</option>
+                                <option value="IT|互联网|通信|电子">IT|互联网|通信|电子</option>
+                                <option value="金融|银行|保险">金融|银行|保险</option>
+                                <option value="房产|建筑建设|物业">房产|建筑建设|物业</option>
+                                <option value="广告|传媒|印刷出版">广告|传媒|印刷出版</option>
+                                <option value="消费零食|贸易|交通物流">消费零食|贸易|交通物流</option><option value="IT">IT</option>
+                                <option value="加工制造|仪表设备">加工制造|仪表设备</option>
+                                <option value="管理咨询|教育科研|中介服务">管理咨询|教育科研|中介服务</option>
+                                <option value="医疗生物|医疗保健">医疗生物|医疗保健</option>
+                                <option value="酒店旅游">酒店旅游</option>
+                                <option value="能源矿产|石油化工">能源矿产|石油化工</option>
+                                <option value="政府|非赢利机构|科研">政府|非赢利机构|科研</option>
+                                <option value="其他">其他</option>
                             </select>
                         </div>
                     </div>
@@ -113,7 +133,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="customerurl" style="width: 290px;" required lay-verify="required" placeholder="请输入客户网址"
+                            <input type="text" name="customerurl" style="width: 290px;"  placeholder="请输入客户网址"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -124,7 +144,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="state" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="state" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -133,7 +153,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="city" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="city" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -144,7 +164,7 @@
                 <td colspan="3" align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="address" style="width: 902px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="address" style="width: 902px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -156,7 +176,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="postalcode" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="postalcode" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -165,7 +185,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="fax" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="fax" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -176,7 +196,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="linkman" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="linkman" style="width: 290px;" required lay-verify="required"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -185,7 +205,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="department" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="department" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -196,7 +216,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="post" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="post" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -205,7 +225,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="officephone" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="officephone" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -216,7 +236,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="telephone" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="telephone" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -225,7 +245,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="email" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="email" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -236,7 +256,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="corporate" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="corporate" style="width: 290px;"  placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -245,7 +265,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="registered" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="registered" style="width: 290px;" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -256,7 +276,7 @@
                 <td colspan="3" align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="additional" style="width: 902px;height: 100px" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <textarea name="additional" style="width: 902px;height: 100px"  placeholder="请输入" autocomplete="off" class="layui-input">
                             </textarea>
                         </div>
                     </div>
@@ -279,7 +299,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="bankaccount" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="bankaccount" style="width: 290px;" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -288,7 +308,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="accountname" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="accountname" style="width: 290px;" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -299,7 +319,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="accountbank" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="accountbank" style="width: 290px;" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -308,7 +328,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="bankurl" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="bankurl" style="width: 290px;" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -319,7 +339,7 @@
                 <td>
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
-                            <input type="text" name="dutyparagraph" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="dutyparagraph" style="width: 290px;" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -328,7 +348,7 @@
                 <td align="right">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" name="phone" style="width: 290px;" required lay-verify="required" placeholder="请输入"
+                            <input type="text" name="phone" style="width: 290px;" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>

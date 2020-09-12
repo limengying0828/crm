@@ -39,7 +39,7 @@
             <tr>
                 <td>商机名称</td>
                 <td>
-                    <input type="hidden" id="businessid" th:value="${business.businessid}">
+                    <input readonly="readonly" type="hidden" id="businessid" th:value="${business.businessid}">
                     <div class="layui-form-item" align="center">
                         <div class="layui-input-block">
                             <input type="text" th:value="${business.businessname}"  name="businessname" style="width: 290px;" required lay-verify="" placeholder="请输入"
@@ -51,9 +51,23 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             优先级
-                            <input type="radio" value="1" name="" title="低">
-                            <input type="radio" value="2" name="" title="中">
-                            <input type="radio" value="3" name="" title="高">
+                            <span th:if="${business.contractpriority}==1">
+                                <input type="radio" checked="checked" value="1" name="contractpriority" title="低">
+                                <input type="radio" value="2" name="contractpriority" title="中">
+                                <input type="radio" value="3" name="contractpriority" title="高">
+                            </span>
+
+                            <span th:if="${business.contractpriority}==2">
+                                <input type="radio" value="1" name="contractpriority" title="低">
+                                <input type="radio" checked="checked" value="2" name="contractpriority" title="中">
+                                <input type="radio" value="3" name="contractpriority" title="高">
+                            </span>
+
+                            <span th:if="${business.contractpriority}==3">
+                                <input type="radio" value="1" name="contractpriority" title="低">
+                                <input type="radio" value="2" name="contractpriority" title="中">
+                                <input type="radio" checked="checked" value="3" name="contractpriority" title="高">
+                            </span>
                         </div>
                     </div>
                 </td>
@@ -81,7 +95,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.customername}" name="customerid" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly"  type="text" th:value="${customer.customername}" name="customerid" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -90,10 +104,19 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
                             <select name="industry"  lay-verify="required" >
-                                <option value=""></option>
-                                <option value="">IT</option>
-                                <option value="">银行</option>
-                                <option value="">保险</option>
+                                <option value="0" th:selected="${customer.industry=='0' ? true:false}"></option>
+                                <option value="IT|互联网|通信|电子" disabled th:selected="${customer.industry=='IT|互联网|通信|电子' ? true:false}">IT|互联网|通信|电子</option>
+                                <option value="金融|银行|保险" disabled th:selected="${customer.industry=='金融|银行|保险' ? true:false}">金融|银行|保险</option>
+                                <option value="房产|建筑建设|物业" disabled th:selected="${customer.industry=='房产|建筑建设|物业' ? true:false}">房产|建筑建设|物业</option>
+                                <option value="广告|传媒|印刷出版" disabled  th:selected="${customer.industry=='广告|传媒|印刷出版' ? true:false}">广告|传媒|印刷出版</option>
+                                <option value="消费零食|贸易|交通物流" disabled th:selected="${customer.industry=='消费零食|贸易|交通物流' ? true:false}">消费零食|贸易|交通物流</option><option value="IT">IT</option>
+                                <option value="加工制造|仪表设备" disabled th:selected="${customer.industry=='加工制造|仪表设备' ? true:false}">加工制造|仪表设备</option>
+                                <option value="管理咨询|教育科研|中介服务" disabled th:selected="${customer.industry=='管理咨询|教育科研|中介服务' ? true:false}">管理咨询|教育科研|中介服务</option>
+                                <option value="医疗生物|医疗保健" disabled th:selected="${customer.industry=='医疗生物|医疗保健' ? true:false}">医疗生物|医疗保健</option>
+                                <option value="酒店旅游" disabled th:selected="${customer.industry=='酒店旅游' ? true:false}">酒店旅游</option>
+                                <option value="能源矿产|石油化工" disabled th:selected="${customer.industry=='能源矿产|石油化工' ? true:false}">能源矿产|石油化工</option>
+                                <option value="政府|非赢利机构|科研" disabled th:selected="${customer.industry=='政府|非赢利机构|科研' ? true:false}">政府|非赢利机构|科研</option>
+                                <option value="其他" disabled th:selected="${customer.industry=='其他' ? true:false}">其他</option>
                             </select>
                         </div>
                     </div>
@@ -105,7 +128,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.city}" name="title" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.city}" name="title" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -113,7 +136,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.address}" name="title" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.address}" name="title" required="" lay-verify="required" placeholder="请输入主题" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -131,7 +154,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${business.businessname}" name="businessname" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${business.businessname}" name="businessname" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -140,10 +163,21 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="width: 290px;">
                             <select name="customersource"  lay-verify="required">
-                                <option value=""></option>
-                                <option value="">老客户</option>
-                                <option value="">代理商</option>
-                                <option value="">其他</option>
+                                <option value="0" disabled th:selected="${customer.customersource=='0' ? true:false}"></option>
+                                <option value="老客户" disabled th:selected="${customer.customersource=='老客户' ? true:false}">老客户</option>
+                                <option value="代理商" disabled th:selected="${customer.customersource=='代理商' ? true:false}">代理商</option>
+                                <option value="互联网" disabled th:selected="${customer.customersource=='互联网' ? true:false}">互联网</option>
+                                <option value="独立开发" disabled th:selected="${customer.customersource=='独立开发' ? true:false}">独立开发</option>
+                                <option value="客户介绍" disabled th:selected="${customer.customersource=='客户介绍' ? true:false}">客户介绍</option>
+                                <option value="合作伙伴" disabled th:selected="${customer.customersource=='合作伙伴' ? true:false}">合作伙伴</option>
+                                <option value="促销活动" disabled th:selected="${customer.customersource=='促销活动' ? true:false}">促销活动</option>
+                                <option value="媒体宣传" disabled th:selected="${customer.customersource=='媒体宣传' ? true:false}">媒体宣传</option>
+                                <option value="电话访问" disabled th:selected="${customer.customersource=='电话访问' ? true:false}">电话访问</option>
+                                <option value="客户来电" disabled th:selected="${customer.customersource=='客户来电' ? true:false}">客户来电</option>
+                                <option value="二次销售" disabled th:selected="${customer.customersource=='二次销售' ? true:false}">二次销售</option>
+                                <option value="公开招标" disabled th:selected="${customer.customersource=='公开招标' ? true:false}">公开招标</option>
+                                <option value="研讨会和展会" disabled th:selected="${customer.customersource=='研讨会和展会' ? true:false}">研讨会和展会</option>
+                                <option value="其他" disabled th:selected="${customer.customersource=='其他' ? true:false}">其他</option>
                             </select>
                         </div>
                     </div>
@@ -155,7 +189,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${business.makemoney}" name="makemoney" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${business.makemoney}" name="makemoney" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -163,7 +197,7 @@
                 <td align="right">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input type="text" th:value="${business.overdate}" name="overdate" required lay-verify="date" style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
+                            <input readonly="readonly" type="text" th:value="${business.overdate}" name="overdate" required lay-verify="date" style="width: 290px;" class="layui-input" id="date1" placeholder="yyyy-MM-dd">
                         </div>
                     </div>
                 </td>
@@ -174,7 +208,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.linkman}"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.linkman}"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -182,7 +216,7 @@
                 <td align="center">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.department}" name="post" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.department}" name="post" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -193,7 +227,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.post}" name="" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.post}" name="" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -201,7 +235,7 @@
                 <td align="center">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.officephone}" name="officephone" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.officephone}" name="officephone" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -212,7 +246,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.telephone}" name="telephone" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.telephone}" name="telephone" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -220,7 +254,7 @@
                 <td align="center">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${customer.email}" name="email" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${customer.email}" name="email" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -238,7 +272,7 @@
                 <td colspan="3">
                     <div align="center" class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea name="businessdemand" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">
+                            <textarea readonly="readonly" name="businessdemand" class="layui-input" required="" placeholder="请输入" autocomplete="off" lay-verify="">
                                 [[${business.businessdemand}]]
                             </textarea>
                         </div>
@@ -262,7 +296,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -270,7 +304,7 @@
                 <td align="center">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${business.userId}" name="userId" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${business.userId}" name="userId" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -281,7 +315,7 @@
                 <td>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${business.participate}" name="participate" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${business.participate}" name="participate" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -289,7 +323,7 @@
                 <td align="center">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <input type="text" th:value="${business.focuspeople}" name="focuspeople" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+                            <input readonly="readonly" type="text" th:value="${business.focuspeople}" name="focuspeople" required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
