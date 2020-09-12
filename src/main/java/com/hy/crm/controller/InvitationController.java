@@ -61,7 +61,7 @@ public class InvitationController {
         InvitationBos invitationBos=iInvitationService.queryInvitationById(iInvitationService.getById(invitationid));
         System.out.println("controller层："+invitationBos);
         model.addAttribute("invitationBos",invitationBos);
-        return "/pml/invitation/lookInvitation.html";
+        return "/html/pml/invitation/lookInvitation.html";
     }
 
 }

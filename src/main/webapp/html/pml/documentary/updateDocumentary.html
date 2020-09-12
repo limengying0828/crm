@@ -64,7 +64,6 @@
                     </div>
                 </div>
         </div>
-
 </div>
 
 <form class="layui-form" action="/documentary/updateDocumentary.do" method="post">
@@ -73,6 +72,19 @@
             <tr>
                 <td height="50px" style="background-color: burlywood"><h1>修改跟单记录</h1></td>
             </tr>
+
+<tr>
+    <td>
+        <div class="layui-form-item" style="width: 50%;">
+            <label class="layui-form-label">跟单主题</label>
+            <div class="layui-input-block">
+                <select name="processid" id="processid" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </td>
+</tr>
 
             <tr>
                 <td>跟单时间</td>
@@ -97,14 +109,6 @@
                                 <option value="客户招待">客户招待</option>
                                 <option value="其他">其他</option>
                             </select>
-                        </div>
-                    </div>
-                </td>
-                <td>跟单人</td>
-                <td>
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <input type="text" name="username" id="username"  required="" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                         </div>
                     </div>
                 </td>
@@ -162,6 +166,22 @@
         var upload = layui.upload;
         var $=layui.jquery;
         var laydate = layui.laydate;
+
+        $(function () {
+            $.ajax({
+                type:'get',
+                url: '/business/seletName.do',
+                datatype: 'json',
+                success:function(obj){
+                    var s="<option value=''>请选择</option>";
+                    for (var i = 0; i < obj.length; i++) {
+                        s+="<option value='"+obj[i].businessid+"'>"+obj[i].businessname+"</option>";
+                    }
+                    $("#processid").html(s);
+                    form.render();
+                }
+            });
+        })
 
         //监听提交
         form.on('submit(formDemo)', function(data){

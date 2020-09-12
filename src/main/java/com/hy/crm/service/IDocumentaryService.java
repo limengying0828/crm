@@ -37,8 +37,12 @@ public interface IDocumentaryService extends IService<Documentary> {
      */
     public List<DocumentaryBo> selectTheme(String theme);
 
+    //根据商机id查询一条
+    public List<DocumentaryBo> queryByIdDoc(Integer processid);
+
     public DocumentaryBo selectUpdate(String theme);
 
     List<DocumentaryBo> queryAllMy(String classification,String key,Integer page, Integer limit, Integer userid);
+
     List<DocumentaryBos> queryAllMyDoc(String classification,String key,Integer page, Integer limit, Integer userid);
 }

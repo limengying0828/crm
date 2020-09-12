@@ -33,8 +33,8 @@ public interface DocumentaryMapper extends BaseMapper<Documentary> {
     public List<Documentary> queryAllDoc(@Param("classification")String classification, @Param("key")String key, @Param("page")Integer page, @Param("limit") Integer limit);
 
 
-    @Select("select * from documentary d,user u where d.userid=u.userid")
-    public List<DocumentaryBo> query();
+    @Select("select * from documentary d,user u where d.userid=u.userid and d.processid=#{processid}")
+    public List<DocumentaryBo> queryByIdDoc(Integer processid);
 
     @Select("select * from documentary d,user u where d.theme =#{theme} and d.userid=u.userid")
     public List<DocumentaryBo> selectTheme(String theme);
