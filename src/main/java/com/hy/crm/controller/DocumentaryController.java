@@ -122,12 +122,12 @@ public class DocumentaryController {
 
     /**
      * 根据跟单主题查询跟单信息
-     * @param theme
+     * @param
      * @return
      */
-    @RequestMapping("/selectTheme.do")
-    public String selectTheme(String theme,Integer documentaryid, Model model){
-       List<DocumentaryBo> documentaryBo = iDocumentaryService.selectTheme(theme);
+    @RequestMapping("/queryByIdDoc.do")
+    public String queryByIdDoc(Integer processid, Model model){
+        List<DocumentaryBo> documentaryBo = iDocumentaryService.queryByIdDoc(processid);
        model.addAttribute("documentaryBo",documentaryBo);
        return "/html/pml/documentary/updateDocumentary.html";
     }
@@ -158,7 +158,9 @@ public class DocumentaryController {
     }
 
     @RequestMapping("/updateDocumentary.do")
-    public String updateDocumentary(Documentary documentaryBo){
+    public String updateDocumentary(Documentary documentaryBo,HttpSession session){
+        User user= (User) session.getAttribute("user");
+        documentaryBo.setUserid(user.getUserid());
         iDocumentaryService.save(documentaryBo);
         return "redirect:/html/pml/documentary/queryDocumentary.html";
     }

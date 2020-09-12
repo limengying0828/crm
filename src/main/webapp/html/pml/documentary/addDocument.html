@@ -99,19 +99,20 @@
 
         $(function () {
             alert("进入异步查询")
-            /*$.ajax({
+            $.ajax({
                 type:'get',
                 url: '/business/seletName.do',
                 datatype: 'json',
                 success:function(obj){
                     var s="<option value=''>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
-                        s+="<option value='"+obj[i].processid+"'>"+obj[i].businessname+"</option>";
+                        s+="<option value='"+obj[i].businessid+"'>"+obj[i].businessname+"</option>";
                     }
                     $("#processid").html(s);
+                    form.render();
                 }
-            });*/
-            $.ajax({
+            });
+            /*$.ajax({
                 type:'get',
                 url: '/business/seletName.do',
                 datatype: 'json',
@@ -119,8 +120,9 @@
                     for (var i = 0; i < bus.length; i++) {
                         $('#processid').append(new Option(bus[i].businessname, bus[i].processid))
                     }
+                    form.render();
                 }
-            });
+            });*/
 
 
 

@@ -62,13 +62,23 @@ public class DocumentaryServiceImpl extends ServiceImpl<DocumentaryMapper, Docum
     }
 
     @Override
+    public List<DocumentaryBo> select() {
+        return null;
+    }
+
+/*    @Override
     public List<DocumentaryBo> select(){
        return documentaryMapper.query();
-    }
+    }*/
 
     @Override
     public List<DocumentaryBo> selectTheme(String theme) {
         return documentaryMapper.selectTheme(theme);
+    }
+
+    @Override
+    public List<DocumentaryBo> queryByIdDoc(Integer processid) {
+        return documentaryMapper.queryByIdDoc(processid);
     }
 
     @Override

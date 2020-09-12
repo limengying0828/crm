@@ -1,10 +1,14 @@
 package com.hy.crm.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hy.crm.bo.pml.ContractBo;
+import com.hy.crm.bo.pml.ContractBos;
 import com.hy.crm.pojo.Contract;
+import com.hy.crm.pojo.Makeapply;
+import com.hy.crm.pojo.Remits;
 import com.hy.crm.pojo.User;
 import com.hy.crm.service.IContractService;
+import com.hy.crm.service.IMakeapplyService;
+import com.hy.crm.service.IRemitsService;
 import com.hy.crm.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +34,10 @@ import java.util.List;
 public class ContractController {
     @Autowired
     private IContractService contractService;
+    @Autowired
+    private IMakeapplyService iMakeapplyService;
+    @Autowired
+    private IRemitsService iRemitsService;
 
     /**
      * 查询
@@ -44,10 +52,10 @@ public class ContractController {
         return contractService.list(wrapper);
     }
 
-    @GetMapping("/selectContract.do")
+    @GetMapping("/queryContractCon.do")
     @ResponseBody
-    public MsgUtils selectContract(Integer page, Integer limit, String classification, String key){
-        List<ContractBo> contractBoList=contractService.queryContract(classification,key,page,limit);
+    public MsgUtils queryContractCon(Integer page, Integer limit, String classification, String key){
+        List<ContractBos> contractBoList=contractService.queryContractCon(classification,key,page,limit);
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
         msgUtils.setMsg("查询成功");
@@ -56,11 +64,11 @@ public class ContractController {
         return msgUtils;
     }
 
-    @GetMapping("/selectContractMy.do")
+    @GetMapping("/queryContractMyCon.do")
     @ResponseBody
     public MsgUtils selectContractMy(Integer page, Integer limit, String classification, String key, HttpSession session){
         User use= (User) session.getAttribute("user");
-        List<ContractBo> contractBoList=contractService.queryContractMy(classification,key,page,limit,use.getUsername());
+        List<ContractBos> contractBoList=contractService.queryContractMyCon(classification,key,page,limit,use.getUsername());
         MsgUtils msgUtils=new MsgUtils();
         msgUtils.setCode(0);
         msgUtils.setMsg("查询成功");
@@ -89,8 +97,22 @@ public class ContractController {
     public String addContract(Contract contract,HttpSession session){
         User user= (User) session.getAttribute("user");
         contract.setAssociatedpersons(user.getUsername());
-        contractService.save(contract);
-        return "/html/pml/contract/queryContract.html";
+        boolean b=contractService.save(contract);
+        System.out.println("b"+b);
+        if (b){
+            System.out.println("添加开票===");
+            Makeapply makeapply =new Makeapply();
+            makeapply.setMakemoney(0.0f);
+            makeapply.setUserid(user.getUserid());
+            makeapply.setContractid(contract.getContractid());
+            iMakeapplyService.save(makeapply);
+            Remits remits=new Remits();
+            remits.setIncomemoney(0.0f);
+            remits.setUserid(user.getUserid());
+            remits.setContractid(contract.getContractid());
+            iRemitsService.save(remits);
+        }
+        return "redirect:/html/pml/contract/queryContract.html";
     }
 
     @RequestMapping("/updateContract.do")

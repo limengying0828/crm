@@ -29,7 +29,7 @@ public class ReplyController {
     @RequestMapping("/addRrply.do")
     public String addRrply(Reply reply, HttpSession session){
         User user = (User) session.getAttribute("user");
-        reply.setReplyid(user.getUserid());
+        reply.setUserid(user.getUserid());
         Date date=new Date();
         reply.setReplytime(String.valueOf(date.getTime()));
         iReplyService.save(reply);
