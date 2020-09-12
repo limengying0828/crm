@@ -68,13 +68,29 @@ public class BusinessController {
     }
 
     /**
-     *查商机
+     *查全部商机
      */
     @GetMapping("/businessQueryall.do")
     @ResponseBody
     public LayuiUtils businessQueryall(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String businessname, String todaystate, String userId, String makemoney, String overdate, String post,String status) {
         IPage<Business> page=new Page<>(pg,size);
         List<BusinessBo> list1=iBusinessService.businessQueryall(page,businessname,todaystate,userId,makemoney,overdate,post,status);
+        LayuiUtils layuiUtils=new LayuiUtils();
+        layuiUtils.setCode(0);
+        layuiUtils.setMsg("查询成功");
+        layuiUtils.setCount(Integer.parseInt(String.valueOf(page.getTotal())));
+        layuiUtils.setData(list1);
+        return layuiUtils;
+    }
+
+    /**
+     *查我的商机
+     */
+    @GetMapping("/mybusinessQueryall.do")
+    @ResponseBody
+    public LayuiUtils mybusinessQueryall(@RequestParam("page") Integer pg, @RequestParam("limit") Integer size, String businessname, String todaystate, String userId, String makemoney, String overdate, String post,String status,HttpServletRequest request) {
+        IPage<Business> page=new Page<>(pg,size);
+        List<BusinessBo> list1=iBusinessService.mybusinessQueryall(page,businessname,todaystate,userId,makemoney,overdate,post,status,request);
         LayuiUtils layuiUtils=new LayuiUtils();
         layuiUtils.setCode(0);
         layuiUtils.setMsg("查询成功");
@@ -118,6 +134,40 @@ public class BusinessController {
     }
 
     /**
+     * 商机添加
+     * @param business
+     * @return
+     */
+    @GetMapping("/mysave.do")
+    public String mysave(Business business, HttpServletRequest request){
+        HttpSession session=request.getSession();
+        User user=(User) session.getAttribute("user");
+        business.setUserId(user.getUserid());
+        SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        business.setAddbusinesstime(df1.format(new Date()));
+        iBusinessService.save(business);
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("businessname",business.getBusinessname());
+        List<Business> list=iBusinessService.list(queryWrapper);
+        int businessid=0;
+        int uid=0;
+        for(Business c:list){
+            businessid=c.getBusinessid();
+            uid=c.getUserId();
+        }
+        Busprocess busprocess=new Busprocess();
+        busprocess.setBusinessid(businessid);
+        busprocess.setUserid(uid);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        busprocess.setDisposetime(df.format(new Date()));
+        busprocess.setTodaystate("初期沟通");
+        busprocess.setAuditstatus("待处理");
+        iBusprocessService.save(busprocess);
+
+        return "redirect:/html/ykz/mybusiness.html";
+    }
+
+    /**
      * 根据id查商机信息
      * @param model
      * @param businessid
@@ -135,6 +185,26 @@ public class BusinessController {
         model.addAttribute("business",business);
         model.addAttribute("customer",customer);
         return "/html/ykz/businesscheck.html";
+    }
+
+    /**
+     * 根据id查商机信息
+     * @param model
+     * @param businessid
+     * @return
+     */
+    @GetMapping("/myqueryall.do")
+    public String myqueryall(Model model, int businessid){
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("businessid",businessid);
+        Business business=iBusinessService.getOne(queryWrapper);
+
+        QueryWrapper queryWrapper1=new QueryWrapper();
+        queryWrapper1.eq("customerid",business.getCustomerid());
+        Customer customer=iCustomerService.getOne(queryWrapper1);
+        model.addAttribute("business",business);
+        model.addAttribute("customer",customer);
+        return "/html/ykz/mybusinesscheck.html";
     }
 
 
@@ -165,6 +235,32 @@ public class BusinessController {
     }
 
     /**
+     * 根据id查商机信息
+     * @param model
+     * @param businessid
+     * @return
+     */
+    @GetMapping("/myqueryall1.do")
+    public String myqueryall1(Model model, int businessid){
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("businessid",businessid);
+        Business business=iBusinessService.getOne(queryWrapper);
+
+        QueryWrapper queryWrapper1=new QueryWrapper();
+        queryWrapper1.eq("customerid",business.getCustomerid());
+        Customer customer=iCustomerService.getOne(queryWrapper1);
+
+        Busprocess busprocess1=new Busprocess();
+        busprocess1.setBusinessid(businessid);
+        Busprocess busprocess=iBusprocessService.seltodaystate(busprocess1);
+
+        model.addAttribute("business",business);
+        model.addAttribute("customer",customer);
+        model.addAttribute("busprocess",busprocess);
+        return "/html/ykz/mybusinessupdate.html";
+    }
+
+    /**
      * 修改
      */
     @GetMapping("/businessupdate.do")
@@ -181,6 +277,25 @@ public class BusinessController {
         busprocess.setAuditstatus("待处理");
         iBusprocessService.save(busprocess);
         return "redirect:/html/ykz/business.html";
+    }
+
+    /**
+     * 修改
+     */
+    @GetMapping("/mybusinessupdate.do")
+    public String mybusinessupdate(Business business,String todaystate,HttpServletRequest request){
+        iBusinessService.updateById(business);
+        Busprocess busprocess=new Busprocess();
+        busprocess.setBusinessid(business.getBusinessid());
+        HttpSession session=request.getSession();
+        User user=(User) session.getAttribute("user");
+        busprocess.setUserid(user.getUserid());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        busprocess.setDisposetime(df.format(new Date()));
+        busprocess.setTodaystate(todaystate);
+        busprocess.setAuditstatus("待处理");
+        iBusprocessService.save(busprocess);
+        return "redirect:/html/ykz/mybusiness.html";
     }
 
 }

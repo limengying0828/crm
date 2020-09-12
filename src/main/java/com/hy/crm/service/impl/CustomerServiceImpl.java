@@ -88,7 +88,11 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             int businessNumber=listbusiness.size();
             Float feta = 0.0f;
             for(Business lb:listbusiness){
-                feta +=lb.getMakemoney();
+                if(lb.getMakemoney() !=null && lb.getMakemoney()!=0){
+                    feta +=lb.getMakemoney();
+                }else{
+                    feta = 0.0f;
+                }
             }
             cbcaBo.setExpectedTransactionAmount(feta);//预计成交金额
             //拿到客户id,根据客户id去合同表查询有几条合同

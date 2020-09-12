@@ -68,7 +68,6 @@ public class UserController {
             //开启记住密码
             if(rememberme !=null && rememberme==1){
                 usernamePasswordToken.setRememberMe(true);
-                System.out.println("已开启记住密码！");
             }
             Subject sub= SecurityUtils.getSubject();
             int count=0;
@@ -119,7 +118,6 @@ public class UserController {
             file.mkdirs();
         }
         multipartFile.transferTo(new File(file +"/"+ uuid + extName));
-        System.out.println("图片===================="+file +"/"+ uuid + extName);
         String str=uuid + extName;
         LayuiUtilsPrice layuiUtilsPrice=new LayuiUtilsPrice();
         layuiUtilsPrice.setFileName(str);
@@ -146,7 +144,7 @@ public class UserController {
             return "/html/ykz/register.html";
         }else{
             String imageText = request.getParameter("verimage");
-            // 图片的验证码
+            //图片的验证码
             String text = (String) request.getSession().getAttribute("text");
             if (!text.equalsIgnoreCase(imageText)) {
                 request.setAttribute("msg", "验证码输入错误!");

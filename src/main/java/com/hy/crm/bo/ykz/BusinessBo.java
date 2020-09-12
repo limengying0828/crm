@@ -19,7 +19,7 @@ public class BusinessBo {
     private String userId;
 
     //预计成交金额
-    private String makemoney;
+    private float makemoney;
 
     //最后跟单时间
     private String documentarytime;
@@ -59,11 +59,11 @@ public class BusinessBo {
         this.userId = userId;
     }
 
-    public String getMakemoney() {
+    public float getMakemoney() {
         return makemoney;
     }
 
-    public void setMakemoney(String makemoney) {
+    public void setMakemoney(float makemoney) {
         this.makemoney = makemoney;
     }
 
