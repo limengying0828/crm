@@ -88,14 +88,16 @@
             ,page:true
             ,limit:5
             ,url: '/contract/selectContractMy.do' //数据接口
-            ,cols: [[ //表头
+            ,cols: [
+                [ //表头
                 ,{field: 'contractname', title: '合同名称', width:270, sort: true, fixed: 'left',templet:'<div><a href="/contract/updateContract.do?contractid={{d.contractid}}" style="color: #1E9FFF">{{d.contractname}}</a></div>'}
                 ,{field: 'contractid', title: '合同编号', width:180}
                 ,{field: 'contractmoney', title: '合同金额', width:150, sort: true}
                 ,{field: 'remittancecount', title: '汇款额', width:150,sort:true,templet:'<div><a href="/remits/queryRemits.do?contractid={{d.contractid}}" style="color: #1E9FFF">{{d.remittancecount}}</a></div>'}
                 ,{field: 'makemoney', title: '开票额', width: 120,sort:true,templet:'<div><a href="/contract/selectContractById.do?contractid={{d.contractid}}" style="color: #1E9FFF">{{d.makemoney}}</a></div>'}
                 ,{field: 'signingdate', title: '签约日期', width: 120}
-            ]]
+            ]
+            ]
         });
 
 
