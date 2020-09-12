@@ -5,9 +5,13 @@ import com.hy.crm.mapper.UserMapper;
 import com.hy.crm.pojo.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class CustomRealm extends AuthorizingRealm {
     @Autowired
@@ -16,22 +20,19 @@ public class CustomRealm extends AuthorizingRealm {
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
         //1、先拿到用户名
-        Object object=principalCollection.getPrimaryPrincipal();
-        System.out.println("用户名=============="+object);
-        
-        //2、根据用户名查询数据库得到角色和权限
-        //角色
-
-        //权限
-
-        //3、返回授权的信息类
-        /*SimpleAuthorizationInfo authorizationInfo=new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles();
-        authorizationInfo.addStringPermissions();
-        return authorizationInfo;*/
-        return null;
+        Object username=principalCollection.getPrimaryPrincipal();
+        //2.查看当前用户下的角色权限
+        QueryWrapper queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("username",username);
+        User user=userMapper.selectOne(queryWrapper);
+        System.out.println("--------------"+user.getRole());
+        SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
+        /*simpleAuthorizationInfo.addRole(user.getRole());*/
+        Set<String> set=new HashSet<>();
+        set.add(user.getRole());
+        simpleAuthorizationInfo.setRoles(set);
+        return simpleAuthorizationInfo;
 
     }
 
