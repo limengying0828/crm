@@ -43,17 +43,13 @@ public class CustomRealm extends AuthorizingRealm {
         UsernamePasswordToken usernamePasswordToken=(UsernamePasswordToken)authenticationToken;
         String username=usernamePasswordToken.getUsername();
         QueryWrapper queryWrapper=new QueryWrapper();
-        System.out.println(username);
         queryWrapper.eq("username",username);
         User user=userMapper.selectOne(queryWrapper);
-
-        System.out.println(user.getPassword());
+        String passwordByMd5 = Md5.JM(user.getPassword());
         if(user==null){
             throw new UnknownAccountException("用户不存在！！！");
         }
-
-        SimpleAuthenticationInfo simpleAuthenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),getName());
-        System.out.println("验证成功！");
+        SimpleAuthenticationInfo simpleAuthenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),passwordByMd5,getName());
         return simpleAuthenticationInfo;
     }
 }

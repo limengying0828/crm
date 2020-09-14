@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hy.crm.pojo.User;
 import com.hy.crm.service.IUserService;
 import com.hy.crm.yuutils.LayuiUtilsPrice;
+import com.hy.crm.yuutils.Md5;
 import com.hy.crm.yuutils.VerifyCode;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -150,9 +151,10 @@ public class UserController {
                 request.setAttribute("msg", "验证码输入错误!");
                 return "/html/ykz/error1.html";
             }else {
+                String passwordByMd5 = Md5.JM(password);
                 User user1=new User();
                 user1.setUsername(username);
-                user1.setPassword(password);
+                user1.setPassword(passwordByMd5);
                 user1.setImage(image);
                 user1.setDeptname(deptname);
                 iUserService.save(user1);
