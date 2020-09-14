@@ -46,9 +46,9 @@
             <value>
                 /html/ykz/login.html=anon
                 /html/lmy/**=roles[admin]
-                <!--/html/lmy/aftersale/*=roles[admin]-->
-               <!-- /html/*=authc-->
-
+                /html/pml/documentary/queryDocumentary.html=roles[admin]
+                /html/pml/contract/queryContract.html=roles[admin]
+                /html/ykz/business.html=roles[admin]
             </value>
         </property>
     </bean>
